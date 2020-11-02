@@ -4,7 +4,7 @@
             [reitit.core :as reitit]
             [com.darklimericks.db.artists :as artists]
             [com.darklimericks.db.albums :as albums]
-            [com.darklimericks.db.limericks :as limericks]
+            [com.darklimericks.db.limericks :as db.limericks]
             [com.darklimericks.linguistics.core :as linguistics]
             [com.owoga.prhyme.limerick :as limerick]
             [com.owoga.prhyme.data.dictionary :as dict]
@@ -60,7 +60,7 @@
 (defn get-artist-and-album-for-new-limerick [db]
   (let [artist (artists/most-recent-artist db)
         albums (albums/artist-albums db (:artist/id artist))
-        limericks (limericks/album-limericks db (:album/id (first albums)))]
+        limericks (db.limericks/album-limericks db (:album/id (first albums)))]
     (cond
       (< (count limericks) 10)
       [(:artist/id artist) (:album/id (first albums))]
@@ -102,3 +102,15 @@
           (println "Exception" e)
           (swap! db update-in [:tasks task-id] assoc :status :failed)
           (swap! db assoc-in [:tasks task-id] {:text (.getMessage e)}))))))
+
+(defn generate-limerick-worker [db scheme]
+  (let [limerick (limerick/rhyme-from-scheme
+               dict/prhyme-dict
+               darklyrics-markov-2
+               scheme)
+        [artist-id album-id] (get-artist-and-album-for-new-limerick db)]
+    (db.limericks/insert-limerick
+     db
+     (get-limerick-name limerick)
+     (string/join "\n" limerick)
+     album-id)))

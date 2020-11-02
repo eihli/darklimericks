@@ -27,7 +27,7 @@ docker build -t db .
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle run.sh :tangle-mode (identity #o755)
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -euo pipefail
 
 PGDATA=${PGDATA:-"$(pwd)/data/dev"}

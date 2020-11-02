@@ -1,3 +1,4 @@
-/db/data/dev
+/db/data
 .nrepl-port
 .cpcache
+/kv/data

@@ -1,0 +1,20 @@
+#+TITLE: Persistent KV Store
+
+There's really nothing to build right now.
+
+#+BEGIN_SRC sh :tangle run.sh :tangle-mode (identity #o755)
+#!/usr/bin/env sh
+set -euo pipefail
+
+KVDATA=${KVDATA:-"$(pwd)/data/dev"}
+
+docker run \
+    -p 127.0.0.1:6379:6379 \
+    -v $KVDATA:/data \
+    --name darklimericks-kv \
+    redis --appendonly yes
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle start.sh :tangle-mode (identity #o755)
+docker start darklimericks-kv
+#+END_SRC

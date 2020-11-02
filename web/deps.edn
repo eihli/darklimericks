@@ -5,6 +5,7 @@
    :sha "d492e97259c013ba401c5238842cd3445839d020"}
   hiccup {:mvn/version "1.0.5"}
   com.taoensso/timbre {:mvn/version "5.1.0"}
+  com.taoensso/carmine {:mvn/version "3.0.1"}
   http-kit {:mvn/version "2.5.0"}
   integrant {:mvn/version "0.8.0"}
   integrant/repl {:mvn/version "0.3.2"}

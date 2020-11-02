@@ -1,19 +1,41 @@
 (ns com.darklimericks.server.system
   (:require [integrant.core :as ig]
-            [clojure.java.io :as io]
             [taoensso.timbre :as timbre]
             [org.httpkit.server :as kit]
             [next.jdbc :as jdbc]
             [environ.core :refer [env]]
+            [taoensso.carmine.message-queue :as car-mq]
             [reitit.http :as http]
             [reitit.ring :as ring]
             [reitit.coercion.spec]
-            [reitit.ring.coercion :as coercion]
             [reitit.interceptor.sieppari :as sieppari]
             [reitit.http.interceptors.parameters :refer [parameters-interceptor]]
             [com.darklimericks.server.handlers :as handlers]
+            [com.darklimericks.server.limericks :as limericks]
             [com.darklimericks.server.interceptors :as interceptors]
             [com.darklimericks.server.db :as db]))
+
+(defmethod ig/init-key :worker/limerick-gen [_ {:keys [db kv]}]
+  (car-mq/worker
+   kv
+   "limericks"
+   {:handler
+    (fn [{:keys [message attempt]}]
+      (timbre/info "Received" message)
+      (limericks/generate-limerick-worker db message))}))
+
+(defmethod ig/prep-key :database.kv/connection [_ config]
+  (let [pass (or (env :redis-pass) "dev")]
+    (assoc-in
+     config
+     [:spec :uri]
+     (format "redis://localhost:6379/"))))
+
+;; Point of this? We aren't and maintaining a connection here.
+;; I guess carmine does that behind the scenes with it's "pool"
+;; option. But it's nice to have all boundary config in one place.
+(defmethod ig/init-key :database.kv/connection [_ config]
+  config)
 
 (defmethod ig/prep-key :database.sql/connection [_ _]
   {:jdbcUrl (str "jdbc:postgresql://localhost:5432/?user="

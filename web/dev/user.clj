@@ -2,6 +2,8 @@
   (:require [clojure.tools.deps.alpha.repl :refer [add-lib]]
             [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [integrant.repl :as repl]
+            [taoensso.carmine :as car]
+            [taoensso.carmine.message-queue :as car-mq]
             [integrant.repl.state :as state]
             [migratus.core :as migratus]
             [com.darklimericks.server.handlers :as handlers]
@@ -59,11 +61,25 @@
 (comment
   (init)
   (auto-reset)
+  (-> state/system :worker/limerick-gen)
+  (car/wcar
+   (-> state/system :database.kv/connection)
+   (car-mq/enqueue "limericks" '((A 9) (A 9) (B 5) (B 5) (A 9))))
+
+  (car/wcar
+   (-> state/system :database.kv/connection)
+   (car/ping)
+   (car/set "foo" "bar")
+   (car/set "baz" "buzz")
+   (car/get "baz"))
   (limericks/get-artist-and-album-for-new-limerick (-> state/system :database.sql/connection))
-  (let [handler (handlers/limerick-generation-post-handler
-                 (-> state/system :database.sql/connection)
-                 (-> state/system :app/cache))]
-    (handler {:params {:scheme "A9 A9 B5 B5 A9" #_'((A 9) (A 9) (B 5) (B 5) (A 9))}}))
+  (repeatedly
+   50
+   (fn []
+     (let [handler (handlers/limerick-generation-post-handler
+                    (-> state/system :database.sql/connection)
+                    (-> state/system :app/cache))]
+       (handler {:params {:scheme "A9 A9 B5 B5 A9" #_'((A 9) (A 9) (B 5) (B 5) (A 9))}}))))
 
   (reitit/match-by-path
    (-> state/system :app/router)
