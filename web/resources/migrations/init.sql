@@ -1,0 +1,17 @@
+CREATE TABLE artist (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(64)
+);
+
+CREATE TABLE album (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(64),
+  artist_id INTEGER NOT NULL REFERENCES artist
+);
+
+CREATE TABLE limerick (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(64),
+  text VARCHAR(1024),
+  album_id INTEGER NOT NULL REFERENCES album
+);

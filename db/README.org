@@ -1,0 +1,48 @@
+#+TITLE: Database setup
+
+This directory contains necessities for initializing and running a database
+locally inside a docker container.
+
+We want our develpment environment to use the same tech stack that production
+uses. So rather than suppord a development configuration that uses SQLite and a
+production configuration that uses PostgreSQL, just use PostgreSQL for both.
+With Docker, it's easy.
+
+
+Building requires the following environment variables.
+
+- `POSTGRES_DB`
+- `POSTGRES_USER`
+- `POSTGRES_PASSWORD`
+
+Running requires the following environment variables.
+
+- `PGDATA`
+- `POSTGRES_USER`
+- `POSTGRES_PASSWORD`
+
+
+#+BEGIN_SRC sh
+docker build -t db .
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle run.sh :tangle-mode (identity #o755)
+#!/usr/bin/env bash
+set -euo pipefail
+
+PGDATA=${PGDATA:-"$(pwd)/data/dev"}
+POSTGRES_USER=${POSTGRES_USER:-"dev"}
+POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-"dev"}
+
+docker run \
+    --name db \
+    -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
+    -e POSTGRES_USER=$POSTGRES_USER \
+    -v $PGDATA:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    db
+#+END_SRC
+
+#+BEGIN_SRC sh
+docker start db
+#+END_SRC

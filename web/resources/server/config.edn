@@ -1,0 +1,6 @@
+{:app/logging {:min-level :debug}
+ :app/server {:port 8000 :handler #ig/ref :app/handler}
+ :app/cache {}
+ :database.sql/connection {}
+ :app/router {:db #ig/ref :database.sql/connection :cache #ig/ref :app/cache}
+ :app/handler {:router #ig/ref :app/router}}
