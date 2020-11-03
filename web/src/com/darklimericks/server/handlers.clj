@@ -2,7 +2,6 @@
   (:require [taoensso.timbre :as timbre]
             [hiccup.core :as hiccup]
             [reitit.ring :as ring]
-            [reitit.core :as reitit]
             [clojure.string :as string]
             [clojure.core.async :as async]
             [com.darklimericks.server.util :as util]
@@ -12,11 +11,24 @@
             [com.darklimericks.server.views :as views]
             [com.darklimericks.server.limericks :as limericks]))
 
-(defn home-handler [request]
-  (timbre/info "home-handler")
-  {:status 200
-   :headers {"Content-Type" "text/html; charset=utf-8"}
-   :body (hiccup/html (views/home request))})
+(defn home-handler
+  [db]
+  (fn [request]
+    (let [recent-albums (db.albums/most-recent-albums db)
+          artists-by-album (into
+                            {}
+                            (map
+                             (fn [{:album/keys [id artist_id]}]
+                               (vector id (db.artists/artist db artist_id)))
+                             recent-albums))]
+      (timbre/info recent-albums artists-by-album)
+      (timbre/info "home-handler")
+      {:status 200
+       :headers {"Content-Type" "text/html; charset=utf-8"}
+       :body (hiccup/html (views/home
+                           request
+                           recent-albums
+                           artists-by-album))})))
 
 (def resource-handler (ring/create-resource-handler {:allow-symlinks? true}))
 
@@ -37,21 +49,14 @@
              album-id))))
       {:status 301
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/page "Dark Limericks"
-                   [:h1 "Creating your limerick..."]
-                   [:div "Submission processing..."]
-                   [:h1 "Current limericks"]
-                   (views/limerick-tasks tasks))})))
+       :body (views/wrapper
+              db
+              {}
+              [:h1 "Creating your limerick..."]
+              [:div "Submission processing..."]
+              [:h1 "Current limericks"]
+              (views/limerick-tasks tasks))})))
 
-(comment
-  (let [c (async/thread
-            (Thread/sleep 1000)
-            200)]
-    (async/go
-      (let [val (async/<! c)]
-        (println (+ 20 val)))))
- 
-  )
 (defn limericks-get-handler [db cache]
   (fn [request]
     (let [artist-id (get-in request [:parameters :path :artist-id])
@@ -61,8 +66,9 @@
           limericks (db.limericks/album-limericks db album-id)]
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/page
-              "Dark Limericks"
+       :body (views/wrapper
+              db
+              {}
               [:div.flex.items-center.flex-column
                [:div.f3.pt4.light-yellow
                 (->> artist
@@ -128,8 +134,9 @@
     (let [artists (db.artists/artists-by-letter db (string/upper-case letter))]
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/page
-              "Dark Limericks"
+       :body (views/wrapper
+              db
+              {}
               (when artists
                 (let [[right-hand-side-artists
                        left-hand-side-artists]
@@ -150,13 +157,6 @@
                       [:a.washed-yellow
                        {:href "#"}
                        (:artist/name artist)])]])))})))
-
-(comment
-  (let [artists ["a"]]
-    (partition 1 1 nil artists))
-  ((juxt #(take 1 %) #(drop 1 %)) [1 2 3 4])
-  (into [] (take 1) [1 2 3])
-  )
 
 (defn artist-get-handler [db]
   (fn [request]

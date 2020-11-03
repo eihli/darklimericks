@@ -13,7 +13,7 @@
     (concat [s] params)))
 
 (defn insert-artist [db name]
-  (jdbc/execute! db (insert-artist-sql name)))
+  (jdbc/execute-one! db (insert-artist-sql name)))
 
 (defn most-recent-artist-sql []
   (-> {:select [:*]
@@ -40,3 +40,11 @@
     {:select [:*]
      :from [:artist]
      :where [:= :id id]})))
+
+(defn num-artists [db]
+  (:count
+   (jdbc/execute-one!
+    db
+    (honey.sql/format
+     {:select [:%count.*]
+      :from [:artist]}))))

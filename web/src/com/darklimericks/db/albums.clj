@@ -14,7 +14,7 @@
     (concat [s] params)))
 
 (defn insert-album [db name artist-id]
-  (jdbc/execute! db (insert-album-sql name artist-id)))
+  (jdbc/execute-one! db (insert-album-sql name artist-id)))
 
 (defn artist-albums-sql [artist-id]
   (honey.sql/format
@@ -41,3 +41,24 @@
 
 (defn album [db id]
   (jdbc.sql/get-by-id db :album id))
+
+(defn most-recent-albums [db]
+  (->> {:select [:*]
+        :from [:album]
+        :order-by [[:album.id :desc]]}
+       honey.sql/format
+       (jdbc/execute! db)))
+
+(defn num-albums [db]
+  (:count
+   (jdbc/execute-one!
+    db
+    (honey.sql/format
+     {:select [:%count.*]
+      :from [:album]}))))
+
+(comment
+  (honey.sql/format
+   {:select :*
+    :from [:album]
+    :order-by [[:album.id :desc]]}))

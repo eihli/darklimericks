@@ -3,6 +3,7 @@
   org.clojure/tools.deps.alpha
   {:git/url "https://github.com/clojure/tools.deps.alpha.git"
    :sha "d492e97259c013ba401c5238842cd3445839d020"}
+  digest {:mvn/version "1.4.9"}
   hiccup {:mvn/version "1.0.5"}
   com.taoensso/timbre {:mvn/version "5.1.0"}
   com.taoensso/carmine {:mvn/version "3.0.1"}

@@ -15,14 +15,23 @@
             [com.darklimericks.server.interceptors :as interceptors]
             [com.darklimericks.server.db :as db]))
 
+(def worker (atom nil))
+
 (defmethod ig/init-key :worker/limerick-gen [_ {:keys [db kv]}]
-  (car-mq/worker
-   kv
-   "limericks"
-   {:handler
-    (fn [{:keys [message attempt]}]
-      (timbre/info "Received" message)
-      (limericks/generate-limerick-worker db message))}))
+  (when (nil? @worker)
+    (reset!
+     worker
+     (car-mq/worker
+      kv
+      "limericks"
+      {:handler
+       (fn [{:keys [message attempt]}]
+         (timbre/info "Received" message)
+         (limericks/generate-limerick-worker db message)
+         {:status :success})}))))
+
+(defmethod ig/halt-key! :worker/limerick-gen [_ worker]
+  #_(.stop worker))
 
 (defmethod ig/prep-key :database.kv/connection [_ config]
   (let [pass (or (env :redis-pass) "dev")]
@@ -62,7 +71,7 @@
 
 (defmethod ig/init-key :app/router [_ {:keys [db cache]}]
   (let [routes [["/" {:name ::home
-                      :get {:handler handlers/home-handler}}]
+                      :get {:handler (handlers/home-handler db)}}]
                 ["/{letter}.html"
                  {:name ::artists-by-letter
                   :handler (handlers/artists-by-letter db)}]
