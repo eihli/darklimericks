@@ -5,6 +5,7 @@
             [next.jdbc :as jdbc]
             [environ.core :refer [env]]
             [taoensso.carmine.message-queue :as car-mq]
+            [ring.middleware.session :refer [wrap-session]]
             [reitit.http :as http]
             [reitit.ring :as ring]
             [reitit.coercion.spec]
@@ -46,6 +47,9 @@
 (defmethod ig/init-key :database.kv/connection [_ config]
   config)
 
+(defmethod ig/init-key :app/session-store [_ {:keys [cache]}]
+  {})
+
 (defmethod ig/prep-key :database.sql/connection [_ _]
   {:jdbcUrl (str "jdbc:postgresql://localhost:5432/?user="
                  (or (env :postgres-user)
@@ -79,14 +83,17 @@
                  {:name ::limerick-generation-task
                   :post {:handler (handlers/limerick-generation-post-handler db cache)}
                   :get {:handler (handlers/limerick-generation-get-handler db cache)}}]
+                ["/submit"
+                 {:name ::submit
+                  :get {:handler (handlers/submit-limericks-get-handler db)}}]
                 ["/limericks"
-                 ["/:artist-id/:album-id"
+                 ["/{artist-name}-{artist-id}/{album-name}-{album-id}"
                   {:name ::album
                    :coercion reitit.coercion.spec/coercion
                    :parameters {:path {:artist-id int?
                                        :album-id int?}}
                    :get {:handler (handlers/limericks-get-handler db cache)}}]
-                 ["/:artist-id"
+                 ["/{artist-name}-{artist-id}"
                   {:name ::artist
                    :coercion reitit.coercion.spec/coercion
                    :parameters {:path {:artist-id int?}}
@@ -94,7 +101,8 @@
                 ["/assets/*" handlers/resource-handler]]]
     (http/router
      routes
-     {:data {:interceptors [interceptors/coerce-request-interceptor
+     {:data {:interceptors [(interceptors/session-interceptor cache)
+                            interceptors/coerce-request-interceptor
                             interceptors/logging-interceptor
                             interceptors/format-interceptor
                             (parameters-interceptor)

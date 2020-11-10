@@ -1,5 +1,6 @@
 (ns com.darklimericks.server.util
-  (:require [reitit.core :as reitit]))
+  (:require [reitit.core :as reitit]
+            [clojure.string :as string]))
 
 (defn route-name->path
   ([request name]
@@ -8,3 +9,8 @@
    (->> name
         (#(reitit/match-by-name (::reitit/router request) % params))
         reitit/match->path)))
+
+(defn slug [s]
+  (-> s
+      (string/replace #"\s+" "_")
+      string/lower-case))

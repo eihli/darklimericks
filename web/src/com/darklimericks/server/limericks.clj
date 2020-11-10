@@ -5,6 +5,7 @@
             [com.darklimericks.db.artists :as artists]
             [com.darklimericks.db.albums :as albums]
             [com.darklimericks.db.limericks :as db.limericks]
+            [com.darklimericks.util.identicon :as identicon]
             [com.darklimericks.linguistics.core :as linguistics]
             [com.owoga.prhyme.limerick :as limerick]
             [com.owoga.prhyme.data.dictionary :as dict]
@@ -18,6 +19,8 @@
                 "Expected a letter followed by an integer.")
         (let [text (re-find #"[a-zA-Z]+" (first tokens))
               count (Integer/parseInt (re-find #"\d+" (first tokens)))]
+          (assert (and (< 5 count) (< count 14))
+                  "Expected syllable counts between 5 and 14.")
           [(rest tokens) (conj ctx [text count])]))
 
     (or (= 4 (count tokens))
@@ -77,7 +80,7 @@
                   (nil? album-id))
           (throw (ex-info "Nil artist or album" {:artist artist
                                                  :album album-id})))
-        [(:artist/id artist) album-id])
+        ^:new-album [(:artist/id artist) album-id])
 
       :else
       (let [artist-name (linguistics/gen-artist)
@@ -88,7 +91,7 @@
                 (nil? album-id))
           (throw (ex-info "Nil artist or album" {:artist artist-id
                                                  :album album-id})))
-        [artist-id album-id]))))
+        ^:new-album ^:new-artist [artist-id album-id]))))
 
 (defn get-limerick-name [lines]
   (->> lines
@@ -118,10 +121,16 @@
 
 (defn generate-limerick-worker [db scheme]
   (let [limerick (limerick/rhyme-from-scheme
-               dict/prhyme-dict
-               darklyrics-markov-2
-               scheme)
-        [artist-id album-id] (get-artist-and-album-for-new-limerick db)]
+                  dict/prhyme-dict
+                  darklyrics-markov-2
+                  scheme)
+        album-artist (get-artist-and-album-for-new-limerick db)
+        [artist-id album-id] album-artist
+        album (albums/album db album-id)]
+    (when (:new-album (meta album-artist))
+      (identicon/generate (-> (:album/name album)
+                              string/lower-case
+                              (string/replace #" " "-")) 128))
     (db.limericks/insert-limerick
      db
      (get-limerick-name limerick)

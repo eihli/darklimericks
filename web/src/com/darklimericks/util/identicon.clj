@@ -116,7 +116,8 @@
     (fill-background draw size)
     (.setColor draw color)
     (draw-it draw tile-size 0 (to-bools md5))
-    (ImageIO/write icon "png" (File. (file-name identifier size)))))
+    (ImageIO/write icon "png" (File. (file-name identifier size)))
+    file-name))
 
 (comment
   (generate "foobar-bazz" 128))

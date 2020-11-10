@@ -4,6 +4,8 @@
             [reitit.ring :as ring]
             [clojure.string :as string]
             [clojure.core.async :as async]
+            [taoensso.carmine :as car]
+            [taoensso.carmine.message-queue :as car-mq]
             [com.darklimericks.server.util :as util]
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.db.limericks :as db.limericks]
@@ -26,6 +28,7 @@
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (hiccup/html (views/home
+                           db
                            request
                            recent-albums
                            artists-by-album))})))
@@ -35,27 +38,16 @@
 (defn limerick-generation-post-handler
   [db cache]
   (fn [{{:keys [scheme]} :params :as request}]
-    (let [tasks (:tasks @cache)]
-      (let [task-id (java.util.UUID/randomUUID)
-            limerick-chan (limericks/generate-limerick cache scheme task-id)]
-        (swap! cache assoc-in [:tasks task-id] {:status :pending})
-        (async/go
-          (let [limerick (async/<! limerick-chan)
-                [artist-id album-id] (limericks/get-artist-and-album-for-new-limerick db)]
-            (db.limericks/insert-limerick
-             db
-             (limericks/get-limerick-name limerick)
-             (string/join "\n" limerick)
-             album-id))))
+    (let [scheme (limericks/parse-scheme scheme)
+          mid (car/wcar db (car-mq/enqueue "limericks" scheme))]
       {:status 301
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
               db
+              request
               {}
               [:h1 "Creating your limerick..."]
-              [:div "Submission processing..."]
-              [:h1 "Current limericks"]
-              (views/limerick-tasks tasks))})))
+              [:div "Submission processing... " mid])})))
 
 (defn limericks-get-handler [db cache]
   (fn [request]
@@ -68,6 +60,7 @@
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
               db
+              request
               {}
               [:div.flex.items-center.flex-column
                [:div.f3.pt4.light-yellow
@@ -90,7 +83,9 @@
                           request
                           :com.darklimericks.server.system/album
                           {:artist-id (:artist/id artist)
-                           :album-id (:album/id album)})
+                           :artist-name (util/slug (:artist/name artist))
+                           :album-id (:album/id album)
+                           :album-name (util/slug (:album/name album))})
                          i)]
                     [:a.db.light-yellow
                      {:href limerick-url}
@@ -125,8 +120,10 @@
     (let [tasks (:tasks @cache)]
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/page
-              "Dark Limericks"
+       :body (views/wrapper
+              db
+              request
+              {}
               (views/limerick-tasks tasks))})))
 
 (defn artists-by-letter [db]
@@ -136,6 +133,7 @@
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
               db
+              req
               {}
               (when artists
                 (let [[right-hand-side-artists
@@ -146,11 +144,12 @@
                   [:div.bg-near-black.br4.flex
                    [:div.fl.w-50.pa2
                     (for [artist right-hand-side-artists]
-                      [:a.washed-yellow
+                      [:a.washed-yellow.link
                        {:href (util/route-name->path
                                req
                                :com.darklimericks.server.system/artist
-                               {:artist-id (:artist/id artist)})}
+                               {:artist-id (:artist/id artist)
+                                :artist-name (:artist/name artist)})}
                        (:artist/name artist)])]
                    [:div.fl.w-50.pa2
                     (for [artist left-hand-side-artists]
@@ -170,8 +169,10 @@
                               albums))]
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/page
-              "Dark Limericks"
+       :body (views/wrapper
+              db
+              request
+              {}
               [:div
                [:div.f3.pt3.light-yellow
                 (->> artist
@@ -188,10 +189,26 @@
                                    request
                                    :com.darklimericks.server.system/album
                                    {:artist-id (:artist/id artist)
-                                    :album-id (:album/id album)})]
+                                    :artist-name (util/slug (:artist/name artist))
+                                    :album-id (:album/id album)
+                                    :album-name (util/slug (:album/name album))})]
                     (map-indexed
                      (fn [index limerick]
                        [:a.f5.washed-yellow.db
                         {:href (format "%s#%s" album-url (inc index))}
                         (:limerick/name limerick)])
                      (get limericks (:album/id album))))])])})))
+
+(defn submit-limericks-get-handler [db]
+  (fn [request]
+    {:status 200
+     :headers {"Content-Type" "text/html; charset=uft-8"}
+     :session (if (empty? (:session request))
+                {:session-id (java.util.UUID/randomUUID)}
+                (:session request))
+     :body (views/wrapper
+            db
+            request
+            {}
+            (views/submit-limericks request))}))
+

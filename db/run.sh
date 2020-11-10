@@ -10,5 +10,5 @@ docker run \
     -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD \
     -e POSTGRES_USER=$POSTGRES_USER \
     -v $PGDATA:/var/lib/postgresql/data \
-    -p 5432:5432 \
+    -p 127.0.0.1:5432:5432 \
     darklimericks-db

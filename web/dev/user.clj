@@ -49,7 +49,7 @@
 
 (defn init []
   (repl/halt)
-  (-> "server/config.edn"
+  (-> "config.edn"
       io/resource
       slurp
       ig/read-string
@@ -62,6 +62,7 @@
 (defn reset []
   (repl/halt))
 
+
 (comment
   (init)
   (auto-reset)
@@ -73,14 +74,12 @@
          (map string/lower-case)
          (map #(identicon/generate % 128))))
 
-  (do
-    (repeatedly
-     5
-     (fn []
-       (car/wcar
-        (-> state/system :database.kv/connection)
-        (car-mq/enqueue "limericks" '((A 8) (A 8) (B 4) (B 4) (A 8))))))
-    nil)
+  (repeatedly
+   5
+   (fn []
+     (car/wcar
+      (-> state/system :database.kv/connection)
+      (car-mq/enqueue "limericks" '((A 8) (A 8) (B 4) (B 4) (A 8))))))
 
   (car/wcar
    (-> state/system :database.kv/connection)
