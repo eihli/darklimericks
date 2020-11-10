@@ -1,6 +1,9 @@
 (ns com.darklimericks.server.handlers
   (:require [taoensso.timbre :as timbre]
             [hiccup.core :as hiccup]
+            [next.jdbc :as jdbc]
+            [honeysql.core]
+            [honeysql.helpers]
             [reitit.ring :as ring]
             [reitit.http :as http]
             [reitit.interceptor.sieppari :as sieppari]
@@ -45,21 +48,32 @@
 (defn limerick-generation-post-handler
   [db cache]
   (fn [{{:keys [scheme]} :params
-        {:keys [session-id]} :session
+        session-id :session/key
         :as request}]
-    (let [scheme (limericks/parse-scheme scheme)
-          mid (car/wcar db (car-mq/enqueue
-                            "limericks"
-                            {:scheme scheme
-                             :session-id session-id}))]
-      {:status 301
+    (if-let [session-id (-> session-id
+                            (string/split #":")
+                            (nth 2)
+                            java.util.UUID/fromString)]
+      (let [scheme (limericks/parse-scheme scheme)
+            mid (car/wcar db (car-mq/enqueue
+                              "limericks"
+                              {:scheme scheme
+                               :session-id session-id}))]
+        {:status 301
+         :headers {"Content-Type" "text/html; charset=utf-8"}
+         :body (views/wrapper
+                db
+                request
+                {}
+                [:h1 "Creating your limerick..."]
+                [:div "Submission processing... " mid])})
+      {:status 400
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
               db
               request
               {}
-              [:h1 "Creating your limerick..."]
-              [:div "Submission processing... " mid])})))
+              [:div "Enable cookies to submit limericks"])})))
 
 (defn limericks-get-handler [db cache]
   (fn [request]
@@ -213,14 +227,25 @@
 
 (defn submit-limericks-get-handler [db]
   (fn [request]
-    {:status 200
-     :headers {"Content-Type" "text/html; charset=uft-8"}
-     :session (if (empty? (:session request))
-                {:session-id (java.util.UUID/randomUUID)}
-                (:session request))
-     :body (views/wrapper
-            db
-            request
-            {}
-            (views/submit-limericks request))}))
-
+    (if-let [session-key (:session/key request)]
+      (let [session-key (-> session-key
+                            (string/split #":")
+                            (nth 2)
+                            java.util.UUID/fromString)
+            limericks (db.limericks/limericks-by-session db session-key)]
+        (println session-key)
+        (println limericks)
+        {:status 200
+         :headers {"Content-Type" "text/html; charset=uft-8"}
+         :body (views/wrapper
+                db
+                request
+                {}
+                (views/submit-limericks request limericks))})
+      {:status 200
+       :headers {"Content-Type" "text/html; charset=uft-8"}
+       :body (views/wrapper
+              db
+              request
+              {}
+              [:div "Enable cookies to submit limericks."])})))

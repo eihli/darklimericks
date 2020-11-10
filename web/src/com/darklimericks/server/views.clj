@@ -157,7 +157,7 @@
        [:div line])]))
 
 (defn submit-limericks
-  [{{:keys [session-id]} :session :as request}]
+  [request limericks]
   [:div
    [:h1 "Submit Limericks"]
    (form/form-to
@@ -166,6 +166,9 @@
             :com.darklimericks.server.router/limerick-generation-task)]
     (form/text-field "scheme")
     (form/submit-button "Generate dark limerick"))
-   [:div
-    "Currently processing "
-    session-id]])
+   [:div "Session " (:session/key request)]
+   (for [limerick limericks]
+     [:div
+      [:h3 (:limerick/name limerick)]
+      (for [line (string/split (:limerick/text limerick) #"\n")]
+        [:div line])])])

@@ -13,6 +13,7 @@
             [com.darklimericks.util.identicon :as identicon]
             [com.darklimericks.server.limericks :as limericks]
             [com.darklimericks.db.albums :as db.albums]
+            [com.darklimericks.db.limericks :as db.limericks]
             [com.darklimericks.server.util :as util]
             [com.darklimericks.server.system]
             [reitit.core :as reitit]))
@@ -62,8 +63,12 @@
 
 
 (comment
-  ((-> state/system
-       :app/server))
+  (require '[com.darklimericks.db.limericks :as db.limericks])
+  (let [session
+        (java.util.UUID/fromString "4605f687-4e91-47de-abdf-458ef7d47b7e")]
+    (db.limericks/limericks-by-session
+     (-> state/system :com.darklimericks.db.core/connection)
+     session))
   (init)
   (auto-reset)
   (let [db (-> state/system :database.sql/connection)

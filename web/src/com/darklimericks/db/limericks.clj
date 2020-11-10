@@ -57,6 +57,15 @@
      :select :*
      :from :limerick))))
 
+(defn limericks-by-session [db session]
+  (->> (honey.sql/build
+        :select :*
+        :from :limerick
+        :join [:session_limerick [:= :session_limerick.limerick_id :limerick.id]]
+        :where [:= :session_limerick.session_id session])
+       honey.sql/format
+       (jdbc/execute! db)))
+
 (defn album-limericks-sql [album-id]
   (honey.sql/format
    (honey.sql/build

@@ -16,7 +16,7 @@
                 ["/limerick-generation-task"
                  {:name ::limerick-generation-task
                   :post {:handler (handlers/limerick-generation-post-handler db cache)}
-                  :get {:handler (handlers/limerick-generation-get-handler db cache)}}]
+                  :get {:handler (handlers/submit-limericks-get-handler db)}}]
                 ["/submit"
                  {:name ::submit
                   :get {:handler (handlers/submit-limericks-get-handler db)}}]
