@@ -2,8 +2,10 @@
   (:require [taoensso.timbre :as timbre]
             [hiccup.core :as hiccup]
             [reitit.ring :as ring]
+            [reitit.http :as http]
+            [reitit.interceptor.sieppari :as sieppari]
+            [integrant.core :as ig]
             [clojure.string :as string]
-            [clojure.core.async :as async]
             [taoensso.carmine :as car]
             [taoensso.carmine.message-queue :as car-mq]
             [com.darklimericks.server.util :as util]
@@ -12,6 +14,12 @@
             [com.darklimericks.db.artists :as db.artists]
             [com.darklimericks.server.views :as views]
             [com.darklimericks.server.limericks :as limericks]))
+
+(defmethod ig/init-key ::handler [_ {:keys [router]}]
+  (http/ring-handler
+   router
+   (ring/create-default-handler)
+   {:executor sieppari/executor}))
 
 (defn home-handler
   [db]
@@ -23,7 +31,6 @@
                              (fn [{:album/keys [id artist_id]}]
                                (vector id (db.artists/artist db artist_id)))
                              recent-albums))]
-      (timbre/info recent-albums artists-by-album)
       (timbre/info "home-handler")
       {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
@@ -37,9 +44,14 @@
 
 (defn limerick-generation-post-handler
   [db cache]
-  (fn [{{:keys [scheme]} :params :as request}]
+  (fn [{{:keys [scheme]} :params
+        {:keys [session-id]} :session
+        :as request}]
     (let [scheme (limericks/parse-scheme scheme)
-          mid (car/wcar db (car-mq/enqueue "limericks" scheme))]
+          mid (car/wcar db (car-mq/enqueue
+                            "limericks"
+                            {:scheme scheme
+                             :session-id session-id}))]
       {:status 301
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
@@ -81,7 +93,7 @@
                          "%s#%s"
                          (util/route-name->path
                           request
-                          :com.darklimericks.server.system/album
+                          :com.darklimericks.server.router/album
                           {:artist-id (:artist/id artist)
                            :artist-name (util/slug (:artist/name artist))
                            :album-id (:album/id album)
@@ -147,7 +159,7 @@
                       [:a.washed-yellow.link
                        {:href (util/route-name->path
                                req
-                               :com.darklimericks.server.system/artist
+                               :com.darklimericks.server.router/artist
                                {:artist-id (:artist/id artist)
                                 :artist-name (:artist/name artist)})}
                        (:artist/name artist)])]
@@ -187,7 +199,7 @@
                         (format "album: \"%s\""))]
                   (let [album-url (util/route-name->path
                                    request
-                                   :com.darklimericks.server.system/album
+                                   :com.darklimericks.server.router/album
                                    {:artist-id (:artist/id artist)
                                     :artist-name (util/slug (:artist/name artist))
                                     :album-id (:album/id album)

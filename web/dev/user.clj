@@ -6,17 +6,14 @@
             [taoensso.carmine :as car]
             [taoensso.carmine.message-queue :as car-mq]
             [integrant.repl.state :as state]
-            [migratus.core :as migratus]
             [com.darklimericks.server.handlers :as handlers]
             [integrant.core :as ig]
             [hawk.core :as hawk]
             [clojure.java.io :as io]
             [com.darklimericks.util.identicon :as identicon]
-            [com.darklimericks.linguistics.core :as linguistics]
             [com.darklimericks.server.limericks :as limericks]
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.server.util :as util]
-            [com.owoga.prhyme.limerick :as limerick]
             [com.darklimericks.server.system]
             [reitit.core :as reitit]))
 
@@ -26,7 +23,7 @@
       (reitit/routes))
  )
 
-(set-refresh-dirs "src" "dev" "resources")
+(set-refresh-dirs "src" "resources")
 
 (defn add-project-dep
   ([lib-name lib-version]
@@ -48,22 +45,25 @@
                  :handler auto-reset-handler}]))
 
 (defn init []
-  (repl/halt)
-  (-> "config.edn"
-      io/resource
-      slurp
-      ig/read-string
-      ig/prep
-      constantly
-      repl/set-prep!)
-  (repl/prep)
-  (repl/init))
+  (let [config (-> "config.edn"
+                   io/resource
+                   slurp
+                   ig/read-string)]
+    (ig/load-namespaces config)
+    (-> config
+        ig/prep
+        constantly
+        repl/set-prep!)
+    (repl/go)))
 
 (defn reset []
   (repl/halt))
 
 
+
 (comment
+  ((-> state/system
+       :app/server))
   (init)
   (auto-reset)
   (let [db (-> state/system :database.sql/connection)

@@ -28,7 +28,7 @@
          [:a.washed-yellow.pl1
           {:href (util/route-name->path
                   request
-                  :com.darklimericks.server.system/submit)}
+                  :com.darklimericks.server.router/submit)}
           "SUBMIT LIMERICKS"]
          [:span.dark-yellow
           (format
@@ -76,7 +76,7 @@
          [:a.washed-yellow.pr1
           {:href (util/route-name->path
                   request
-                  :com.darklimericks.server.system/submit)}
+                  :com.darklimericks.server.router/submit)}
           "SUBMIT LIMERICKS"]
          [:span.dark-yellow
           (format
@@ -114,7 +114,7 @@
         [:a.light-yellow.f5
          {:href (util/route-name->path
                  request
-                 :com.darklimericks.server.system/artist
+                 :com.darklimericks.server.router/artist
                  {:artist-id (:album/artist_id album)
                   :artist-name (-> album
                                    :album/id
@@ -126,7 +126,7 @@
         [:a.link.washed-yellow.f6
          {:href (util/route-name->path
                  request
-                 :com.darklimericks.server.system/album
+                 :com.darklimericks.server.router/album
                  {:artist-id (:album/artist_id album)
                   :artist-name (-> album
                                    :album/id
@@ -163,7 +163,7 @@
    (form/form-to
     [:post (util/route-name->path
             request
-            :com.darklimericks.server.system/limerick-generation-task)]
+            :com.darklimericks.server.router/limerick-generation-task)]
     (form/text-field "scheme")
     (form/submit-button "Generate dark limerick"))
    [:div

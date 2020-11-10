@@ -102,25 +102,9 @@
        (map string/capitalize)
        (string/join " ")))
 
-(defn generate-limerick [db scheme task-id]
-  (let [scheme (parse-scheme scheme)]
-    (async/thread
-      (try
-        (let [rhyme-id (java.util.UUID/randomUUID)
-              rhyme (limerick/rhyme-from-scheme
-                     dict/prhyme-dict
-                     darklyrics-markov-2
-                     scheme)]
-          (swap! db update-in [:tasks task-id] assoc :status :finished)
-          (swap! db assoc-in [:limericks rhyme-id] {:text rhyme :task-id task-id})
-          rhyme)
-        (catch Throwable e
-          (println "Exception" e)
-          (swap! db update-in [:tasks task-id] assoc :status :failed)
-          (swap! db assoc-in [:tasks task-id] {:text (.getMessage e)}))))))
-
-(defn generate-limerick-worker [db scheme]
-  (let [limerick (limerick/rhyme-from-scheme
+(defn generate-limerick-worker [db message]
+  (let [{:keys [scheme session-id]} message
+        limerick (limerick/rhyme-from-scheme
                   dict/prhyme-dict
                   darklyrics-markov-2
                   scheme)
@@ -131,8 +115,9 @@
       (identicon/generate (-> (:album/name album)
                               string/lower-case
                               (string/replace #" " "-")) 128))
-    (db.limericks/insert-limerick
+    (db.limericks/insert-user-limerick
      db
+     session-id
      (get-limerick-name limerick)
      (string/join "\n" limerick)
      album-id)))

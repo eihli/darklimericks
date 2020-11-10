@@ -1,14 +1,20 @@
 (ns com.darklimericks.server.core
   (:gen-class)
   (:require [integrant.core :as ig]
-            [com.darklimericks.server.system :as system]
             [reitit.coercion]
             [reitit.coercion.spec]
             [taoensso.timbre :as timbre]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [org.httpkit.server :as kit]))
 
+(defmethod ig/init-key ::server [_ {:keys [handler] :as opts}]
+  (timbre/info (format "Starting server on port %d" (:port opts)))
+  (kit/run-server handler (dissoc opts :handler)))
 
-(def a (atom {}))
+(defmethod ig/halt-key! ::server [_ server]
+  (timbre/info "Stopping server.")
+  (server))
+
 
 (defn -main []
   (try
