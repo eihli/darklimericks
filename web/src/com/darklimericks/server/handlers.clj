@@ -227,14 +227,13 @@
 
 (defn submit-limericks-get-handler [db]
   (fn [request]
+    (timbre/info request)
     (if-let [session-key (:session/key request)]
       (let [session-key (-> session-key
                             (string/split #":")
                             (nth 2)
                             java.util.UUID/fromString)
             limericks (db.limericks/limericks-by-session db session-key)]
-        (println session-key)
-        (println limericks)
         {:status 200
          :headers {"Content-Type" "text/html; charset=uft-8"}
          :body (views/wrapper
@@ -248,4 +247,4 @@
               db
               request
               {}
-              [:div "Enable cookies to submit limericks."])})))
+              (views/submit-limericks request []))})))

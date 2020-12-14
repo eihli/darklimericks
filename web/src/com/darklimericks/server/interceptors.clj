@@ -21,13 +21,17 @@
 
 (def logging-interceptor
   {:enter (fn [{:keys [request] :as ctx}]
-            #_(timbre/info
-             (str "Entering " (dissoc request ::reitit/match)))
+            (timbre/debug
+             (str "Entering "
+                  (-> request
+                      (select-keys [:cookie :headers :session :referer]))))
             ctx)
    :leave (fn [{:keys [response] :as ctx}]
-           #_(timbre/info
-            (str "Exiting " (dissoc response ::reitit/match)))
-           ctx)})
+            (timbre/debug
+             (str "Exiting "
+                  (-> response
+                      (select-keys [:status :content-type :headers]))))
+            ctx)})
 
 (def coerce-request-interceptor
   {:enter
@@ -49,7 +53,7 @@
    :cookie-attrs (merge {:path "/"
                          :http-only true}
                         (options :cookie-attrs)
-                        (if-let [root (options :root)]
+                        (when-let [root (options :root)]
                           {:path root}))})
 
 (defn session-interceptor
@@ -59,11 +63,12 @@
    (let [options (session-options cache options)]
      {:enter
       (fn [ctx]
-        (update
-         ctx
-         :request
-         ring.middleware.session/session-request
-         options))
+        (let [new-ctx (update
+                       ctx
+                       :request
+                       ring.middleware.session/session-request
+                       options)]
+          new-ctx))
       :leave
       (fn [{:keys [response request] :as ctx}]
         (update
@@ -71,5 +76,20 @@
          :response
          ring.middleware.session/session-response
          request
-         options))}))
-  )
+         options))})))
+
+  ;; ([handler]
+  ;;    (wrap-session handler {}))
+  ;; ([handler options]
+  ;;    (let [options (session-options options)]
+  ;;      (fn
+  ;;        ([request]
+  ;;         (let [request (session-request request options)]
+  ;;           (-> (handler request)
+  ;;               (session-response request options))))
+  ;;        ([request respond raise]
+  ;;         (let [request (session-request request options)]
+  ;;           (handler request
+  ;;                    (fn [response]
+  ;;                      (respond (session-response response request options)))
+  ;;                    raise)))))))

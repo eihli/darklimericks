@@ -52,7 +52,6 @@
                    ig/read-string)]
     (ig/load-namespaces config)
     (-> config
-        ig/prep
         constantly
         repl/set-prep!)
     (repl/go)))
@@ -60,17 +59,22 @@
 (defn reset []
   (repl/halt))
 
-
-
 (comment
+  (let [db (-> state/system :com.darklimericks.db.core/connection)
+        session (java.util.UUID/fromString "47e25213-6cd7-493d-a92a-b5bae635c8f4")]
+    (db.limericks/limericks-by-session db session))
+
+  (require '[taoensso.carmine.ring :as cr])
+  (let [kv (-> state/system :com.darklimericks.kv.core/connection)]
+    (cr/carmine-store kv))
+
   (require '[com.darklimericks.db.limericks :as db.limericks])
   (let [session
-        (java.util.UUID/fromString "4605f687-4e91-47de-abdf-458ef7d47b7e")]
+        (java.util.UUID/fromString "47e25213-6cd7-493d-a92a-b5bae635c8f4")]
     (db.limericks/limericks-by-session
      (-> state/system :com.darklimericks.db.core/connection)
      session))
   (init)
-  (auto-reset)
   (let [db (-> state/system :database.sql/connection)
         albums (db.albums/most-recent-albums db)]
     (->> albums
@@ -89,7 +93,6 @@
   (car/wcar
    (-> state/system :database.kv/connection)
    (car/ping)
-   (car/set "foo" "bar")
    (car/set "baz" "buzz")
    (car/get "baz"))
   (limericks/get-artist-and-album-for-new-limerick (-> state/system :database.sql/connection))

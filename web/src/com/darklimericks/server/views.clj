@@ -159,16 +159,30 @@
 (defn submit-limericks
   [request limericks]
   [:div
-   [:h1 "Submit Limericks"]
+   [:h1 "Generate Limerick"]
    (form/form-to
     [:post (util/route-name->path
             request
             :com.darklimericks.server.router/limerick-generation-task)]
-    (form/text-field "scheme")
-    (form/submit-button "Generate dark limerick"))
-   [:div "Session " (:session/key request)]
-   (for [limerick limericks]
-     [:div
-      [:h3 (:limerick/name limerick)]
-      (for [line (string/split (:limerick/text limerick) #"\n")]
-        [:div line])])])
+    (form/text-field
+     {:placeholder "A10 A10 B6 B6 A10"}
+     "scheme")
+    (form/submit-button
+     {:class "ml2"}
+     "Generate dark limerick"))
+   (when (:session/key request)
+     [:p "Session " (-> (:session/key request)
+                        (string/split #":")
+                        (nth 2))])
+   [:h2 "Generated Limericks"]
+   (if (empty? limericks)
+     [:p "None, yet..."]
+     (for [[i limerick] (map vector (range 1 (inc (count limericks))) limericks)]
+       [:div
+        [:h3 (format "%s: %s" i (:limerick/name limerick))]
+        [:div
+         [:div (format "artist: %s" (:artist/name limerick))]
+         [:div (format "album: %s" (:album/name limerick))]]
+        [:p
+         (for [line (string/split (:limerick/text limerick) #"\n")]
+           [:div line])]]))])

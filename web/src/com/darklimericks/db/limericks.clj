@@ -61,7 +61,9 @@
   (->> (honey.sql/build
         :select :*
         :from :limerick
-        :join [:session_limerick [:= :session_limerick.limerick_id :limerick.id]]
+        :join [:session_limerick [:= :session_limerick.limerick_id :limerick.id]
+               :album [:= :limerick.album_id :album.id]
+               :artist [:= :album.artist_id :artist.id]]
         :where [:= :session_limerick.session_id session])
        honey.sql/format
        (jdbc/execute! db)))
