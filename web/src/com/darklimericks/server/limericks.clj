@@ -1,6 +1,5 @@
 (ns com.darklimericks.server.limericks
   (:require [clojure.string :as string]
-            [clojure.core.async :as async]
             [reitit.core :as reitit]
             [com.darklimericks.db.artists :as artists]
             [com.darklimericks.db.albums :as albums]

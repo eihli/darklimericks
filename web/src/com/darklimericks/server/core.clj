@@ -18,15 +18,26 @@
 
 (defn -main []
   (try
-    (let [system (->> "server/config.edn"
+    (let [config (->> "server/config.edn"
                       io/resource
                       slurp
-                      ig/read-string
-                      ig/prep
-                      ig/init)]
+                      ig/read-string)
+          _ (ig/load-namespaces config)
+          system (-> config
+                     ig/prep
+                     ig/init)]
       (timbre/info "Running with config: server/config.edn" )
       system)
     (catch Throwable e
       (.printStackTrace e)
       (System/exit 1))))
 
+(comment
+  (def m (-main))
+  (->> "server/config.edn"
+       io/resource
+       slurp
+       ig/read-string
+       ig/load-namespaces
+       )
+  )

@@ -1,5 +1,6 @@
 #+TITLE: Database setup
 
+
 This directory contains necessities for initializing and running a database
 locally inside a docker container.
 
@@ -23,7 +24,7 @@ Running requires the following environment variables.
 
 
 #+BEGIN_SRC sh
-docker build -t db .
+docker build -t darklimericks-db .
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle run.sh :tangle-mode (identity #o755)
@@ -40,7 +41,7 @@ docker run \
     -e POSTGRES_USER=$POSTGRES_USER \
     -v $PGDATA:/var/lib/postgresql/data \
     -p 5432:5432 \
-    db
+    darklimericks-db
 #+END_SRC
 
 #+BEGIN_SRC sh

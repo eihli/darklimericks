@@ -17,8 +17,6 @@ build: FORCE
 FORCE:
 
 push: FORCE
-	rsync -aP web/LottoEmail.jar root@165.227.27.168:/root
+	rsync -aP web/darklimericks.jar root@165.227.16.47:/root/darklimericks/web/
 
-deploy: LottoEmail.jar
-	ssh root@165.227.27.168 java -jar /root/LottoEmail.jar
 # end
