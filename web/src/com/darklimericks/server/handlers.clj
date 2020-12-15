@@ -242,6 +242,7 @@
                 {}
                 (views/submit-limericks request limericks))})
       {:status 200
+       :session {}
        :headers {"Content-Type" "text/html; charset=uft-8"}
        :body (views/wrapper
               db

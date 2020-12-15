@@ -52,6 +52,7 @@
                    ig/read-string)]
     (ig/load-namespaces config)
     (-> config
+        ig/prep
         constantly
         repl/set-prep!)
     (repl/go)))
