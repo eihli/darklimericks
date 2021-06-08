@@ -1,6 +1,8 @@
 #+TITLE: Persistent KV Store
 
-There's really nothing to build right now.
+#+BEGIN_SRC sh
+docker build -t darklimericks-kv .
+#+END_SRC
 
 #+BEGIN_SRC sh :tangle run.sh :tangle-mode (identity #o755)
 #!/usr/bin/env sh

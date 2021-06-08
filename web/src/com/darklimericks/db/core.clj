@@ -15,3 +15,14 @@
 
 (defmethod ig/init-key ::connection [_ db-spec]
   (jdbc/get-datasource db-spec))
+
+(comment
+  (let [ds (jdbc/get-datasource {:jdbcUrl (str "jdbc:postgresql://localhost:5432/?user="
+                                               (or (env :postgres-user)
+                                                   "dev")
+                                               "&password="
+                                               (or (env :postgres-password)
+                                                   "dev"))})]
+    ds)
+
+  )
