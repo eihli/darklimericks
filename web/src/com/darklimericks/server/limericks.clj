@@ -64,15 +64,13 @@
         albums (albums/artist-albums db (:artist/id artist))
         limericks (db.limericks/album-limericks db (:album/id (first albums)))]
     (cond
-      (< (count limericks) 10)
-      (do
-        (when (or (nil? artist)
-                  (nil? (first albums)))
-          (throw (ex-info "Nil artist or album" {:artist artist
-                                                 :album (first albums)})))
-        [(:artist/id artist) (:album/id (first albums))])
+      (and artist
+           albums
+           (< (count limericks) 10))
+      [(:artist/id artist) (:album/id (first albums))]
 
-      (< (count albums) 5)
+      (and artist
+           (< (count albums) 5))
       (let [album-name (linguistics/gen-album)
             {album-id :album/id} (albums/insert-album db album-name (:artist/id artist))]
         (when (or (nil? (:artist/id artist))
