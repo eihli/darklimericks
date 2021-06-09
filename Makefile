@@ -6,7 +6,7 @@
 
 src = $(shell find web -type f -iname *.clj 2>/dev/null)
 
-LottoEmail.jar: $(src)
+darklimericks.jar: $(src)
 	cd web && clj -A:depstar -M:depstar -m hf.depstar.uberjar \
 		darklimericks.jar -C -m com.darklimericks.server.core
 

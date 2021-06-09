@@ -1,0 +1,7 @@
+#+TITLE: DarkLimericks
+
+* Development
+
+Requires [[https://github.com/tachyons-css/tachyons/][Tachyons CSS]]. There is a symlink in ~web/resources/public~ to the pre-built ~tachyons.css~ and ~tachyons.min.css~ found in the repo.
+
+Build ~.jar~ with ~clojure -X:depstart uberjar :jar prhyme.jar~.

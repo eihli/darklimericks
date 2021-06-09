@@ -5,10 +5,17 @@
 (def config {:store :database
              :migration-dir "migrations/"
              :init-script "init.sql"
-             :db {:connection-uri (-> state/config :database.sql/connection :jdbcUrl)}})
+             :db {:connection-uri (:jdbcUrl (-> state/config :com.darklimericks.db.core/connection))}})
 
 (comment
+
+
+  config
+
+  (migratus/init config)
+
   (migratus/migrate config)
+
   (migratus/create config "User Limericks")
   state/config
   (:database.sql/connection state/system)
