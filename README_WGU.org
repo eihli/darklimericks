@@ -1,0 +1,47 @@
+#+TITLE: Capstone Documentation
+
+* Documentation
+
+D.  Create each of the following forms of documentation for the product you have developed:
+
+** Business Vision
+
+Provide rhyming lyric suggestions optionally constrained by syllable count.
+
+** Data Sets
+
+See ~resources/darklyrics-markov.tpt~
+
+** Data Analysis
+
+See ~src/com/owoga/darklyrics/core.clj~
+
+See https://github.com/eihli/prhyme
+
+** Assessment
+
+See visualization of rhyme suggestion in action.
+
+See perplexity?
+
+** Visualizations
+
+See visualization of smoothing technique.
+
+See wordcloud
+
+** Accuracy
+
+•  assessment of the product’s accuracy
+
+** Testing
+
+•  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
+
+** Source
+
+•  source code and executable file(s)
+
+** Quick Start
+
+•  a quick start guide summarizing the steps necessary to install and use the product

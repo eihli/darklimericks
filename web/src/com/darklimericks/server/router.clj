@@ -32,7 +32,11 @@
                    :coercion reitit.coercion.spec/coercion
                    :parameters {:path {:artist-id int?}}
                    :get {:handler (handlers/artist-get-handler db)}}]]
-                ["/assets/*" handlers/resource-handler]]]
+                ["/assets/*" handlers/resource-handler]
+                ["/wgu"
+                 {:name ::wgu
+                  :get {:handler (handlers/wgu db cache)}
+                  :post {:handler (handlers/show-rhyme-suggestion db cache)}}]]]
     (timbre/info "Starting router.")
     (http/router
      routes

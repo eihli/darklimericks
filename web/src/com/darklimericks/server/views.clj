@@ -186,3 +186,28 @@
         [:p
          (for [line (string/split (:limerick/text limerick) #"\n")]
            [:div line])]]))])
+
+(defn wgu
+  [request]
+  [:div
+   [:h1 "WGU Capstone"]
+   (form/form-to
+    [:post (util/route-name->path
+            request
+            :com.darklimericks.server.router/wgu)]
+    (form/label
+     "rhyme-target"
+     "Target word or phrase for which to find rhyme suggestions")
+    " "
+    (form/text-field
+     {:placeholder "instead of war on poverty"}
+     "rhyme-target")
+    (form/submit-button
+     {:class "ml2"}
+     "Show rhyme suggestions"))])
+
+(defn show-rhyme-suggestion
+  [request]
+  [:div
+   (wgu request)
+   [:div "Hi"]])

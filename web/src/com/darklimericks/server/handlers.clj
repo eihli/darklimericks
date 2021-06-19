@@ -235,7 +235,7 @@
                             java.util.UUID/fromString)
             limericks (db.limericks/limericks-by-session db session-key)]
         {:status 200
-         :headers {"Content-Type" "text/html; charset=uft-8"}
+         :headers {"Content-Type" "text/html; charset=utf-8"}
          :body (views/wrapper
                 db
                 request
@@ -249,3 +249,23 @@
               request
               {}
               (views/submit-limericks request []))})))
+
+(defn wgu [db cache]
+  (fn [request]
+    {:status 200
+     :headers {"Content-Type" "text/html; charset=utf-8"}
+     :body (views/wrapper
+            db
+            request
+            {}
+            (views/wgu request))}))
+
+(defn show-rhyme-suggestion [db cache]
+  (fn [request]
+    {:status 201
+     :headers {"Content-Type" "text/html; charset=utf-8"}
+     :body (views/wrapper
+            db
+            request
+            {}
+            (views/show-rhyme-suggestion request))}))

@@ -61,6 +61,8 @@
   (repl/halt))
 
 (comment
+  (require '[clojure.java.jdbc :as sql])
+
   (let [db (-> state/system :com.darklimericks.db.core/connection)
         session (java.util.UUID/fromString "47e25213-6cd7-493d-a92a-b5bae635c8f4")]
     (db.limericks/limericks-by-session db session))
@@ -75,7 +77,9 @@
     (db.limericks/limericks-by-session
      (-> state/system :com.darklimericks.db.core/connection)
      session))
+
   (init)
+
   (let [db (-> state/system :database.sql/connection)
         albums (db.albums/most-recent-albums db)]
     (->> albums
@@ -105,6 +109,19 @@
                     (-> state/system :database.sql/connection)
                     (-> state/system :app/cache))]
        (handler {:params {:scheme "A9 A9 B5 B5 A9" #_'((A 9) (A 9) (B 5) (B 5) (A 9))}}))))
+
+  ;; If the namespace gets dirty, this can clear it up.
+  (run!
+   #(ns-unalias (find-ns 'user) %)
+   (keys (ns-aliases 'user)))
+
+  ;; Making a request from the REPL
+  (let [handler (handlers/show-rhyme-suggestion
+                 (-> state/system :com.darklimericks.db.core/connection)
+                 (-> state/system :com.darklimericks.kv.core/connection))
+        router (state/system :com.darklimericks.server.router/router)]
+    (handler {:params {:rhyme-target "foo"}
+              ::reitit/router router}))
  
   (db.albums/num-albums
    (-> state/system :database.sql/connection))
