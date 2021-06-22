@@ -14,3 +14,8 @@
        (map string/capitalize)
        (string/join " ")))
 
+
+(defn rhymes
+  "All rhymes. Slightly flexible. Ordered by number of rhyming syllables.
+  Most generic and likely desired rhyming algorithm."
+  [target])

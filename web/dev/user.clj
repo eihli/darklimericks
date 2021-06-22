@@ -95,20 +95,31 @@
       (-> state/system :database.kv/connection)
       (car-mq/enqueue "limericks" '((A 8) (A 8) (B 4) (B 4) (A 8))))))
 
+  (->> (car/wcar
+        (-> state/system :database.kv/connection)
+        #_#_(car/ping)
+        (car/set "baz" "buzz")
+        (car/keys "*"))
+       (map
+        #(car/wcar (-> state/system :database.kv/connection) (car/get %))))
+
   (car/wcar
    (-> state/system :database.kv/connection)
-   (car/ping)
-   (car/set "baz" "buzz")
-   (car/get "baz"))
+   (car/get "carmine:session:174a7525-04cb-4d73-a03c-1141bef6ad75"))
+
   (limericks/get-artist-and-album-for-new-limerick (-> state/system :database.sql/connection))
 
   (repeatedly
    1
    (fn []
      (let [handler (handlers/limerick-generation-post-handler
-                    (-> state/system :database.sql/connection)
-                    (-> state/system :app/cache))]
-       (handler {:params {:scheme "A9 A9 B5 B5 A9" #_'((A 9) (A 9) (B 5) (B 5) (A 9))}}))))
+                    (-> state/system :com.darklimericks.db.core/connection)
+                    (-> state/system :com.darklimericks.kv.core/connection))
+           session-id "carmine:session:174a7525-04cb-4d73-a03c-1141bef6ad75"
+           router (state/system :com.darklimericks.server.router/router)]
+       (handler {:params {:scheme "A9 A9 B6 B6 A9" #_'((A 9) (A 9) (B 5) (B 5) (A 9))}
+                 :session/key session-id
+                 ::reitit/router router}))))
 
   ;; If the namespace gets dirty, this can clear it up.
   (run!

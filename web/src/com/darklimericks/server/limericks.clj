@@ -2,13 +2,20 @@
   (:require [clojure.string :as string]
             [reitit.core :as reitit]
             [com.darklimericks.db.artists :as artists]
+            [com.owoga.prhyme.data-transform :as data-transform]
             [com.darklimericks.db.albums :as albums]
             [com.darklimericks.db.limericks :as db.limericks]
             [com.darklimericks.util.identicon :as identicon]
             [com.darklimericks.linguistics.core :as linguistics]
-            [com.owoga.prhyme.limerick :as limerick]
+            [com.owoga.corpus.markov :as markov]
             [com.owoga.prhyme.data.dictionary :as dict]
-            [com.owoga.prhyme.data.darklyrics :refer [darklyrics-markov-2]]))
+            [com.owoga.prhyme.data.darklyrics :refer [darklyrics-markov-2]]
+            [com.owoga.tightly-packed-trie :as tpt]
+            [clojure.java.io :as io]
+            [com.owoga.tightly-packed-trie.encoding :as encoding]
+            [taoensso.nippy :as nippy]
+            [com.owoga.trie :as trie]
+            [taoensso.timbre :as timbre]))
 
 (defn parse-scheme-element [[tokens ctx]]
   (cond
@@ -99,12 +106,36 @@
        (map string/capitalize)
        (string/join " ")))
 
+(def database (nippy/thaw-from-file (io/resource "models/database.bin")))
+(def rhyme-trie (into (trie/make-trie) (nippy/thaw-from-file (io/resource "models/rhyme-trie.bin"))))
+(def markov-trie (tpt/load-tightly-packed-trie-from-file
+                  (io/resource "models/tpt.bin")
+                  (markov/decode-fn database)))
+
+(comment
+  (->> (markov/rhyme-from-scheme
+        '[[A 9] [A 9] [B 6] [B 6] [A 9]]
+        database
+        markov-trie
+        rhyme-trie)
+       (map reverse)
+       (map (partial map second))
+       (map data-transform/untokenize))
+
+  )
+
 (defn generate-limerick-worker [db message]
+  (timbre/info "Begin generate limerick worker.")
   (let [{:keys [scheme session-id]} message
-        limerick (limerick/rhyme-from-scheme
-                  dict/prhyme-dict
-                  darklyrics-markov-2
-                  scheme)
+        limerick (->> (markov/rhyme-from-scheme
+                       scheme
+                       database
+                       markov-trie
+                       rhyme-trie)
+                      (map reverse)
+                      (map (partial map second))
+                      (map data-transform/untokenize))
+        _ (timbre/info "Limerick: " limerick)
         album-artist (get-artist-and-album-for-new-limerick db)
         [artist-id album-id] album-artist
         album (albums/album db album-id)]
