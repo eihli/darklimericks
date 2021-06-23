@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [clojure.java.io :as io]
             [reitit.core :as reitit]
+            [com.darklimericks.server.models :as models]
             [com.darklimericks.db.artists :as artists]
             [com.darklimericks.db.albums :as albums]
             [com.darklimericks.db.limericks :as db.limericks]
@@ -12,7 +13,6 @@
             [com.owoga.corpus.markov :as markov]
             [com.owoga.prhyme.data-transform :as data-transform]
             [com.owoga.tightly-packed-trie.encoding :as encoding]
-            [taoensso.nippy :as nippy]
             [taoensso.timbre :as timbre]))
 
 (defn parse-scheme-element [[tokens ctx]]
@@ -104,12 +104,6 @@
        (map string/capitalize)
        (string/join " ")))
 
-(def database (nippy/thaw-from-resource "models/database.bin"))
-(def rhyme-trie (into (trie/make-trie) (nippy/thaw-from-resource "models/rhyme-trie.bin")))
-(def markov-trie (tpt/load-tightly-packed-trie-from-file
-                  (io/resource "models/tpt.bin")
-                  (markov/decode-fn database)))
-
 (comment
   (->> (markov/rhyme-from-scheme
         '[[A 9] [A 9] [B 6] [B 6] [A 9]]
@@ -127,9 +121,9 @@
   (let [{:keys [scheme session-id]} message
         limerick (->> (markov/rhyme-from-scheme
                        scheme
-                       database
-                       markov-trie
-                       rhyme-trie)
+                       models/database
+                       models/markov-trie
+                       models/rhyme-trie)
                       (map reverse)
                       (map (partial map second))
                       (map data-transform/untokenize))

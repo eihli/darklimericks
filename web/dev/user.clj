@@ -132,7 +132,11 @@
         router (state/system :com.darklimericks.server.router/router)]
     (handler {:params {:rhyme-target "foo"}
               ::reitit/router router}))
- 
+
+  (let [router (state/system :com.darklimericks.server.router/router)]
+    (reitit/match-by-path router "/.well-known/foo.txt"))
+
+
   (db.albums/num-albums
    (-> state/system :database.sql/connection))
 

@@ -207,7 +207,8 @@
      "Show rhyme suggestions"))])
 
 (defn show-rhyme-suggestion
-  [request]
+  [request suggestions]
   [:div
    (wgu request)
-   [:div "Hi"]])
+   (for [suggestion suggestions]
+     [:div suggestion])])

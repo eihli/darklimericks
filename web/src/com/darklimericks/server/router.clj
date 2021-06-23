@@ -5,7 +5,8 @@
             [reitit.coercion.spec]
             [reitit.http.interceptors.parameters :refer [parameters-interceptor]]
             [com.darklimericks.server.handlers :as handlers]
-            [com.darklimericks.server.interceptors :as interceptors]))
+            [com.darklimericks.server.interceptors :as interceptors]
+            [reitit.ring :as ring]))
 
 (defmethod ig/init-key ::router [_ {:keys [db cache]}]
   (let [routes [["/" {:name ::home
@@ -36,7 +37,9 @@
                 ["/wgu"
                  {:name ::wgu
                   :get {:handler (handlers/wgu db cache)}
-                  :post {:handler (handlers/show-rhyme-suggestion db cache)}}]]]
+                  :post {:handler (handlers/show-rhyme-suggestion db cache)}}]
+                ["/.well-known/*" (ring/create-file-handler
+                                   {:root "resources/public/.well-known"})]]]
     (timbre/info "Starting router.")
     (http/router
      routes
