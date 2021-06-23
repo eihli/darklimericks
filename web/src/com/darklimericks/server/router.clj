@@ -32,7 +32,7 @@
                    :coercion reitit.coercion.spec/coercion
                    :parameters {:path {:artist-id int?}}
                    :get {:handler (handlers/artist-get-handler db)}}]]
-                ["/assets/*" handlers/resource-handler]
+                ["/assets/*" handlers/file-handler]
                 ["/wgu"
                  {:name ::wgu
                   :get {:handler (handlers/wgu db cache)}
