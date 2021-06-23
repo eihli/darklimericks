@@ -15,7 +15,6 @@
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.db.limericks :as db.limericks]
             [com.darklimericks.server.util :as util]
-            [com.darklimericks.server.system]
             [reitit.core :as reitit]))
 
 (comment
@@ -144,21 +143,4 @@
    (-> state/system :app/router)
    "/limericks/1/1")
 
-  (let [router (-> state/system :app/router)]
-    (util/route-name->path {::reitit/router router}
-                           :com.darklimericks.server.system/artist
-                           {:artist-id 1}))
-
-  (let [router (-> state/system :app/router)]
-    (util/route-name->path
-     {::reitit/router router}
-     :com.darklimericks.server.system/artist
-     {:artist-id 1}))
-
-  (let [router (-> state/system :app/router)]
-    (->> :com.darklimericks.server.system/artist
-         (#(reitit/match-by-name (::reitit/router {::reitit/router router})
-                                 %
-                                 {:artist-id 1}))
-         (reitit/match->path)))
   )

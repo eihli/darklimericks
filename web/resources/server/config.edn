@@ -1,5 +1,5 @@
 {:com.darklimericks.logging/logging
- {:min-level :warning}
+ {:min-level :warn}
 
  :com.darklimericks.server.core/server
  {:port 80 :handler #ig/ref :com.darklimericks.server.handlers/handler}

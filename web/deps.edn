@@ -1,17 +1,13 @@
 {:deps
  {org.clojure/tools.namespace {:mvn/version "1.0.0"}
-  org.clojure/tools.deps.alpha
-  {:git/url "https://github.com/clojure/tools.deps.alpha.git"
-   :sha "d492e97259c013ba401c5238842cd3445839d020"}
   digest {:mvn/version "1.4.9"}
   hiccup {:mvn/version "1.0.5"}
   com.taoensso/timbre {:mvn/version "5.1.0"}
   com.taoensso/carmine {:mvn/version "3.0.1"}
+  com.taoensso/nippy {:mvn/version "3.1.1"}
   http-kit {:mvn/version "2.5.0"}
   integrant {:mvn/version "0.8.0"}
-  integrant/repl {:mvn/version "0.3.2"}
   seancorfield/next.jdbc {:mvn/version "1.1.610"}
-  org.xerial/sqlite-jdbc {:mvn/version "3.32.3.2"}
   honeysql {:mvn/version "1.0.444"}
   metosin/muuntaja {:mvn/version "0.6.7"}
   metosin/reitit {:mvn/version "0.5.10"}
@@ -27,4 +23,8 @@
  :aliases {:dev {:extra-paths ["dev"]
                  :extra-deps {hawk {:mvn/version "0.2.11"}
                               seancorfield/depstar {:mvn/version "1.1.132"}
-                              ring/ring-devel {:mvn/version "1.8.2"}}}}}
+                              ring/ring-devel {:mvn/version "1.8.2"}
+                              integrant/repl {:mvn/version "0.3.2"}
+                              org.clojure/tools.deps.alpha
+                              {:git/url "https://github.com/clojure/tools.deps.alpha.git"
+                               :sha "d492e97259c013ba401c5238842cd3445839d020"}}}}}
