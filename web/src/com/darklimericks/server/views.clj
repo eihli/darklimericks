@@ -210,5 +210,5 @@
   [request suggestions]
   [:div
    (wgu request)
-   (for [suggestion suggestions]
-     [:div suggestion])])
+   (for [[suggestion freq] suggestions]
+     [:div suggestion freq])])

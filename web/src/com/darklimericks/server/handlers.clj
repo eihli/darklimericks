@@ -17,7 +17,8 @@
             [com.darklimericks.db.artists :as db.artists]
             [com.darklimericks.server.views :as views]
             [com.darklimericks.server.limericks :as limericks]
-            [com.darklimericks.linguistics.core :as linguistics]))
+            [com.darklimericks.linguistics.core :as linguistics]
+            [com.darklimericks.server.models :as models]))
 
 (defmethod ig/init-key ::handler [_ {:keys [router]}]
   (http/ring-handler
@@ -265,7 +266,10 @@
 
 (defn show-rhyme-suggestion [db cache]
   (fn [request]
-    (let [suggestions (linguistics/rhymes (:rhyme-target (:params request)))]
+    (let [suggestions (linguistics/rhymes-with-frequencies
+                       (:rhyme-target (:params request))
+                       models/markov-trie
+                       models/database)]
       {:status 201
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrapper
