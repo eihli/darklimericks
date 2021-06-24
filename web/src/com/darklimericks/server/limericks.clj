@@ -25,8 +25,8 @@
                 "Expected a letter followed by an integer.")
         (let [text (re-find #"[a-zA-Z]+" (first tokens))
               count (Integer/parseInt (re-find #"\d+" (first tokens)))]
-          (assert (and (< 5 count) (< count 14))
-                  "Expected syllable counts between 5 and 14.")
+          (assert (and (<= 3 count) (<= count 14))
+                  "Expected syllable counts between [3 and 14].")
           [(rest tokens) (conj ctx [text count])]))
 
     (or (= 4 (count tokens))
