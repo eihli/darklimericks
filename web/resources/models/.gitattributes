@@ -1,0 +1,4 @@
+rhyme-trie-unstressed-vowels-and-trailing-consonants.bin filter=lfs diff=lfs merge=lfs -text
+markov-database-4-gram-backwards.bin filter=lfs diff=lfs merge=lfs -text
+markov-tightly-packed-trie-4-gram-backwards.bin filter=lfs diff=lfs merge=lfs -text
+rhyme-trie-primary-stressed-vowels-and-trailing-consonants.bin filter=lfs diff=lfs merge=lfs -text

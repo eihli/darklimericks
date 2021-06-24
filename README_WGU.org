@@ -45,3 +45,7 @@ See wordcloud
 ** Quick Start
 
 •  a quick start guide summarizing the steps necessary to install and use the product
+
+* Notes
+
+http-kit doesn't support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.

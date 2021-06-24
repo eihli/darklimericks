@@ -11,6 +11,8 @@
             [com.owoga.trie :as trie]
             [com.owoga.tightly-packed-trie :as tpt]
             [com.owoga.corpus.markov :as markov]
+            [com.owoga.prhyme.core :as prhyme]
+            [com.owoga.phonetics :as phonetics]
             [com.owoga.prhyme.data-transform :as data-transform]
             [com.owoga.tightly-packed-trie.encoding :as encoding]
             [taoensso.timbre :as timbre]))
@@ -116,14 +118,57 @@
 
   )
 
+(def rhyme-trie-unstressed-trailing-consonants
+  (markov/->RhymeTrie
+   models/rhyme-trie
+   (fn [phones]
+     (->> phones
+          prhyme/take-vowels-and-tail-consonants
+          prhyme/remove-all-stress))
+   (fn [phones choices]
+     (every? phonetics/consonant (butlast phones)))))
+
+
+(comment
+  (let [result {'[a 8]
+                [[[["P" "AE1" "S"] "pass"]
+                  [["P" "ER0" "EH1" "N" "IY0" "AH0" "L" "IY0"] "perennially"]
+                  [["Y" "UW1"] "you"]
+                  [["T" "UW1"] "to"]]
+                 [[["OW1" "V" "ER0" "P" "AE2" "S"] "overpass"]
+                  [["AH0" "N"] "an"]
+                  [["AO1" "N"] "on"]
+                  [["M" "AH0" "N" "IH2" "P" "Y" "AH0" "L" "EY1" "SH" "AH0" "N"]
+                   "manipulation"]]
+                 [[["M" "IH1" "D" "AH0" "L" "K" "L" "AE1" "S"] "middle-class"]
+                  [["HH" "AY1" "D" "IH0" "NG"] "hiding"]
+                  [["M" "AA1" "N" "S" "T" "ER0"] "monster"]
+                  [["K" "R" "UW1" "AH0" "L"] "cruel"]]],
+                '[b 5]
+                [[[["R" "EY1" "S"] "race"]
+                  [["M" "AH0" "T" "IH1" "R" "IY0" "AH0" "L"] "material"]]
+                 [[["B" "AO1" "R" "G" "EY0" "S"] "borges"]
+                  [["IY2" "K" "W" "AH0" "L" "IH1" "B" "R" "IY0" "AH0" "M"] "equilibrium"]]]}
+        [[a1 a2 a2] [b1 b2]] (vals result)]
+    (->> [a1 a2 b1]
+         (map reverse)
+         (map (partial map second))))
+
+  )
+
 (defn generate-limerick-worker [db message]
   (timbre/info "Begin generate limerick worker.")
   (let [{:keys [scheme session-id]} message
-        limerick (->> (markov/rhyme-from-scheme
-                       scheme
-                       models/database
-                       models/markov-trie
-                       models/rhyme-trie)
+
+        [[a1 a2 a3] [b1 b2]]
+        (vals
+         (markov/rhyme-from-scheme-v2
+          scheme
+          models/database
+          models/markov-trie
+          rhyme-trie-unstressed-trailing-consonants))
+
+        limerick (->> [a1 a2 b1 b2 a3]
                       (map reverse)
                       (map (partial map second))
                       (map data-transform/untokenize))
