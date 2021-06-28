@@ -1,0 +1,369 @@
+#+TITLE: Capstone Documentation
+
+:PROPERTIES:
+:END:
+
+* C
+
+Design and develop a fully functional data product that addresses your identified business problem or organizational need. Include each of the following attributes as they are the minimum required elements for the product:
+
+** one descriptive method and one non-descriptive (predictive or prescriptive) method
+
+*** Descriptive Method
+
+**** Most common sentence structures
+
+Here is the code to generate a report on the most common sentence structures given a directory of lyrics files.
+
+#+begin_src clojure :results value
+(require '[com.owoga.corpus.markov :as markov]
+         '[com.owoga.prhyme.nlp.core :as nlp]
+         '[clojure.string :as string]
+         '[clojure.java.io :as io])
+
+(let [lines (transduce
+             (comp
+              (map slurp)
+              (map #(string/split % #"\n"))
+              (map (partial remove empty?))
+              (map nlp/structure-freqs))
+             merge
+             {}
+             (eduction (markov/xf-file-seq 0 10) (file-seq (io/file "/home/eihli/src/prhyme/dark-corpus"))))]
+  (take 5 (sort-by (comp - second) lines)))
+#+end_src
+
+#+RESULTS:
+| (TOP (NP (NNP) (.)))                                     | 6 |
+| (TOP (S (NP (PRP)) (VP (VBP) (ADJP (JJ))) (.)))          | 6 |
+| (INC (NP (JJ) (NN)) nil (IN) (NP (DT)) (NP (PRP)) (VBP)) | 4 |
+| (TOP (NP (NP (JJ) (NN)) nil (NP (NN) (CC) (NN))))        | 4 |
+| (TOP (S (NP (JJ) (NN)) nil (VP (VBG) (ADJP (JJ)))))      | 4 |
+
+*** Prescriptive Method
+
+**** Most likely next words
+
+#+begin_src clojure
+(require '[com.darklimericks.server.models :as models]
+         '[com.owoga.trie :as trie])
+
+(let [seed ["bother" "me"]
+      seed-ids (map models/database seed)
+      lookup (reverse seed-ids)
+      results (trie/children (trie/lookup models/markov-trie lookup))]
+  (->> results
+       (map #(get % []))
+       (sort-by (comp - second))
+       (map #(update % 0 models/database))
+       (take 10)))
+#+end_src
+
+#+RESULTS:
+| don't     | 36 |
+| doesn't   | 21 |
+| to        | 14 |
+| won't     |  9 |
+| really    |  5 |
+| not       |  4 |
+| you       |  4 |
+| it        |  3 |
+| even      |  3 |
+| shouldn't |  3 |
+
+** collected or available datasets
+
+The dataset currently in use is in ~/dark-corpus~. Further dataset will need to be provided by the end-user.
+
+** Decision support functionality
+
+*** Choosing words for a lyric based on markov likelihood
+
+*** Choosing words to complete a lyric based on rhyme quality
+
+#+begin_src clojure :results value table :colnames yes
+(require '[com.darklimericks.linguistics.core :as linguistics])
+
+(let [results
+      (linguistics/rhymes-with-frequencies-and-rhyme-quality
+       "bother me"
+       models/markov-trie
+       models/database)]
+  (->> results
+       (map
+        (fn [[rhyming-word
+              rhyming-word-phones
+              frequency-count-of-rhyming-word
+              target-word
+              target-word-phones
+              rhyme-quality]]
+          [rhyming-word frequency-count-of-rhyming-word rhyme-quality]))
+       (take 10)
+       (vec)
+       (into [["rhyme" "frequency count" "rhyme quality"]])))
+#+end_src
+
+#+RESULTS:
+| rhyme     | frequency count | rhyme quality |
+| honoree   |               2 |             7 |
+| referee   |               3 |             6 |
+| repartee  |               2 |             6 |
+| nominee   |               2 |             6 |
+| undersea  |               1 |             6 |
+| oversea   |               1 |             6 |
+| rosemarie |               0 |             6 |
+| disagree  |             180 |             5 |
+| poverty   |             175 |             5 |
+| mockery   |             122 |             5 |
+
+** Ability to support featurizing, parsing, cleaning, and wrangling datasets
+
+The data processing code is in ~prhyme~
+
+Each line gets tokenized using a regular expression to split the string into tokens.
+
+#+begin_src clojure
+(def re-word
+  "Regex for tokenizing a string into words
+  (including contractions and hyphenations),
+  commas, periods, and newlines."
+  #"(?s).*?([a-zA-Z\d]+(?:['\-]?[a-zA-Z]+)?|,|\.|\?|\n)")
+#+end_src
+
+Along with tokenization, the lines get stripped of whitespace and converted to lowercase. This conversion is done so that
+words can be compared: "Foo" is the same as "foo".
+
+#+begin_src clojure
+(def xf-tokenize
+  (comp
+   (map string/trim)
+   (map (partial re-seq re-word))
+   (map (partial map second))
+   (map (partial mapv string/lower-case))))
+#+end_src
+
+
+** methods and algorithms supporting data exploration and preparation
+
+The primary data structure and algorithms supporting exploration of the data are a Markov Trie
+
+The Trie data structure suppors a ~lookup~ function that returns the child trie at a certain lookup key and a ~children~ function that returns all of the immediate children of a particular Trie.
+
+#+begin_src clojure
+(defprotocol ITrie
+  (children [self] "Immediate children of a node.")
+  (lookup [self ^clojure.lang.PersistentList ks] "Return node at key."))
+
+(deftype Trie [key value ^clojure.lang.PersistentTreeMap children-]
+  ITrie
+  (children [trie]
+    (map
+     (fn [[k ^Trie child]]
+       (Trie. k
+              (.value child)
+              (.children- child)))
+     children-))
+
+  (lookup [trie k]
+    (loop [k k
+           trie trie]
+      (cond
+        ;; Allows `update` to work the same as with maps... can use `fnil`.
+        ;; (nil? trie') (throw (Exception. (format "Key not found: %s" k)))
+        (nil? trie) nil
+        (empty? k)
+        (Trie. (.key trie)
+               (.value trie)
+               (.children- trie))
+        :else (recur
+               (rest k)
+               (get (.children- trie) (first k))))))
+#+end_src
+
+** data visualization functionalities for data exploration and inspection
+
+** implementation of interactive queries
+
+Interactive query capability at [[https://darklimericks.com/wgu]].
+
+** implementation of machine-learning methods and algorithms
+
+Functions for training both forwards and backwards
+
+#+begin_src clojure
+(defn file-seq->markov-trie
+  "For forwards markov."
+  [database files n m]
+  (transduce
+   (comp
+    (map slurp)
+    (map #(string/split % #"[\n+\?\.]"))
+    (map (partial transduce data-transform/xf-tokenize conj))
+    (map (partial transduce data-transform/xf-filter-english conj))
+    (map (partial remove empty?))
+    (map (partial into [] (data-transform/xf-pad-tokens (dec m) "<s>" 1 "</s>")))
+    (map (partial mapcat (partial data-transform/n-to-m-partitions n (inc m))))
+    (mapcat (partial mapv (data-transform/make-database-processor database))))
+   (completing
+    (fn [trie lookup]
+      (update trie lookup (fnil #(update % 1 inc) [lookup 0]))))
+   (trie/make-trie)
+   files))
+
+(comment
+  (let [files (->> "dark-corpus"
+                   io/file
+                   file-seq
+                   (eduction (xf-file-seq 501 2)))
+        database (atom {:next-id 1})
+        trie (file-seq->markov-trie database files 1 3)]
+    [(take 20 trie)
+     (map (comp (partial map @database) first) (take 20 (drop 105 trie)))
+     (take 10 @database)])
+  ;; [([(1 1 2) [[1 1 2] 1]]
+  ;;   [(1 1 3) [[1 1 3] 1]]
+  ;;   [(1 1 7) [[1 1 7] 2]]
+  ;;   [(1 1 9) [[1 1 9] 3]]
+  ;;   [(1 1 16) [[1 1 16] 4]])
+  ;;  (("<s>" "call" "me")
+  ;;   ("<s>" "call")
+  ;;   ("<s>" "right" "</s>")
+  ;;   ("<s>" "right")
+  ;;   ("<s>" "that's" "proportional")
+  ;;   ("<s>" "that's")
+  ;;   ("<s>" "don't" "</s>")
+  ;;   ("<s>" "don't")
+  ;;   ("<s>" "yourself" "in")
+  ;;   ("<s>" "yourself")
+  ;;   ("<s>" "transformation" "</s>")
+  ;;   ("<s>" "transformation")
+  ;;   ("<s>")
+  ;;   ("them" "from" "their")
+  ;;   ("them" "from")
+  ;;   ("them")
+  ;;   ("from" "their" "pain")
+  ;;   ("from" "their")
+  ;;   ("from" "your" "side")
+  ;;   ("from" "your"))
+  ;;  (["come" 92]
+  ;;   ["summer" 17]
+  ;;   ["more" 101]
+  ;;   [121 "that's"]
+  ;;   [65 "by"]
+  ;;   ["dust" 133]
+  ;;   [70 "said"]
+  ;;   ["misery" 128]
+  ;;   [62 "get"]
+  ;;   [74 "gone"])]
+  )
+#+end_src
+
+#+begin_src clojure
+(defn train-backwards
+  "For building lines backwards so they can be seeded with a target rhyme."
+  [files n m trie-filepath database-filepath tightly-packed-trie-filepath]
+  (let [database (atom {:next-id 1})
+        trie (file-seq->backwards-markov-trie database files n m)]
+    (nippy/freeze-to-file trie-filepath (seq trie))
+    (println "Froze" trie-filepath)
+    (nippy/freeze-to-file database-filepath @database)
+    (println "Froze" database-filepath)
+    (save-tightly-packed-trie trie database tightly-packed-trie-filepath)
+    (let [loaded-trie (->> trie-filepath
+                           nippy/thaw-from-file
+                           (into (trie/make-trie)))
+          loaded-db (->> database-filepath
+                         nippy/thaw-from-file)
+          loaded-tightly-packed-trie (tpt/load-tightly-packed-trie-from-file
+                                      tightly-packed-trie-filepath
+                                      (decode-fn loaded-db))]
+      (println "Loaded trie:" (take 5 loaded-trie))
+      (println "Loaded database:" (take 5 loaded-db))
+      (println "Loaded tightly-packed-trie:" (take 5 loaded-tightly-packed-trie))
+      (println "Successfully loaded trie and database."))))
+
+(comment
+  (time
+   (let [files (->> "dark-corpus"
+                    io/file
+                    file-seq
+                    (eduction (xf-file-seq 0 250000)))
+         [trie database] (train-backwards
+                          files
+                          1
+                          5
+                          "/home/eihli/.models/markov-trie-4-gram-backwards.bin"
+                          "/home/eihli/.models/markov-database-4-gram-backwards.bin"
+                          "/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin")]))
+
+  (time
+   (def markov-trie (into (trie/make-trie) (nippy/thaw-from-file "/home/eihli/.models/markov-trie-4-gram-backwards.bin"))))
+  (time
+   (def database (nippy/thaw-from-file "/home/eihli/.models/markov-database-4-gram-backwards.bin")))
+  (time
+   (def markov-tight-trie
+     (tpt/load-tightly-packed-trie-from-file
+      "/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"
+      (decode-fn database))))
+  (take 20 markov-tight-trie)
+  )
+#+end_src
+
+** functionalities to evaluate the accuracy of the data product
+
+** industry-appropriate security features
+
+** tools to monitor and maintain the product
+
+** a user-friendly, functional dashboard that includes at least three visualization types
+
+
+* Documentation
+
+D.  Create each of the following forms of documentation for the product you have developed:
+
+** Business Vision
+
+Provide rhyming lyric suggestions optionally constrained by syllable count.
+
+** Data Sets
+
+See ~resources/darklyrics-markov.tpt~
+
+** Data Analysis
+
+See ~src/com/owoga/darklyrics/core.clj~
+
+See https://github.com/eihli/prhyme
+
+** Assessment
+
+See visualization of rhyme suggestion in action.
+
+See perplexity?
+
+** Visualizations
+
+See visualization of smoothing technique.
+
+See wordcloud
+
+** Accuracy
+
+•  assessment of the product’s accuracy
+
+** Testing
+
+•  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
+
+** Source
+
+•  source code and executable file(s)
+
+** Quick Start
+
+•  a quick start guide summarizing the steps necessary to install and use the product
+
+* Notes
+
+http-kit doesn't support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.

@@ -5,5 +5,7 @@
   "devDependencies": {
     "shadow-cljs": "2.14.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "chart.js": "^3.4.0"
+  }
 }

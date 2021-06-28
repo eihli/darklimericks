@@ -10,4 +10,6 @@
  :builds
  {:frontend
   {:target :browser
+   :output-dir "/home/eihli/src/darklimericks/web/resources/public/wgu/"
+   :assets-path "/assets/"
    :modules {:main {:init-fn wgu.app/init}}}}}

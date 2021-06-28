@@ -93,7 +93,7 @@
       css :css
       :or {title "DarkLimericks"
            css ["/assets/tachyons.css"]
-           js ["/assets/wgu-main.js"]}
+           js ["/assets/wgu/main.js"]}
       :as opts} :opts}
     & body]
    (println (keys request))
@@ -293,7 +293,9 @@
      "rhyme-target")
     (form/submit-button
      {:class "ml2"}
-     "Show rhyme suggestions"))])
+     "Show rhyme suggestions"))
+   [:div
+    [:canvas#myChart {:width 400 :height 400}]]])
 
 (defn show-rhyme-suggestion
   [request suggestions]
