@@ -135,7 +135,7 @@
         perfect-sans-consonants? (if (perfect-rhyme-sans-consonants? phones1 phones2) 1 0)
         num-matching-stressed (number-of-matching-vowels-with-stress phones1 phones2)
         num-matching-any-stress (number-of-matching-vowels-any-stress phones1 phones2)
-        same-number-of-syllables (same-number-of-syllables? phones1 phones2)]
+        same-number-of-syllables (if (same-number-of-syllables? phones1 phones2) 1 0)]
     (+ perfect?
        perfect-sans-consonants?
        num-matching-stressed
@@ -258,6 +258,25 @@
   ;;     ["bog" ["B" "AO1" "G"] 42 "log" ["L" "AO1" "G"] 4])
   )
 
+
+(defn distinct-by
+  "Returns a stateful transducer that removes elements by calling f on each step as a uniqueness key.
+   Returns a lazy sequence when provided with a collection."
+  ([f]
+   (fn [rf]
+     (let [seen (volatile! #{})]
+       (fn
+         ([] (rf))
+         ([result] (rf result))
+         ([result input]
+          (let [v (f input)]
+            (if (contains? @seen v)
+              result
+              (do (vswap! seen conj v)
+                  (rf result input)))))))))
+  ([f xs]
+   (sequence (distinct-by f) xs)))
+
 (defn rhymes-with-frequencies-and-rhyme-quality
   [target trie database]
   (let [rhymes- (rhymes target)
@@ -266,7 +285,9 @@
              (assoc-phrases-with-phones)
              (append-freqs models/database models/markov-trie [1 1 1])
              (append-rhyme-quality target))]
-    (distinct
+    (into
+     []
+     (distinct-by first)
      (sort-by
       (fn [[w1 p1 f w2 p2 q]]
         [(- q) (- f)])

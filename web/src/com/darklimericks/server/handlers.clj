@@ -258,21 +258,21 @@
   (fn [request]
     {:status 200
      :headers {"Content-Type" "text/html; charset=utf-8"}
-     :body (views/wrapper
-            db
-            request
-            {}
+     :body (views/wrap-with-js
+            {:db db
+             :request request
+             :opts {}}
             (views/wgu request))}))
 
 (defn show-rhyme-suggestion [db cache]
   (fn [request]
-    (let [suggestions (linguistics/rhymes-with-frequencies
+    (let [suggestions (linguistics/rhymes-with-frequencies-and-rhyme-quality
                        (:rhyme-target (:params request))
                        models/markov-trie
                        models/database)]
       {:status 201
        :headers {"Content-Type" "text/html; charset=utf-8"}
-       :body (views/wrapper
+       :body (views/wrap-with-js
               db
               request
               {}

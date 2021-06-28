@@ -85,6 +85,95 @@
            num-artists)]
          [:a.washed-yellow.pl1 {:href "#"} "LINKS"]]]]))))
 
+(defn wrap-with-js
+  ([{db :db
+     request :request
+     {title :title
+      js :js
+      css :css
+      :or {title "DarkLimericks"
+           css ["/assets/tachyons.css"]
+           js ["/assets/wgu-main.js"]}
+      :as opts} :opts}
+    & body]
+   (println (keys request))
+   (let [num-albums (db.albums/num-albums db)
+         num-artists (db.artists/num-artists db)]
+     (page/html5
+      [:head
+       [:meta {:charset "utf-8"}]
+       [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
+       (apply page/include-css css)
+       (apply page/include-js js)
+       [:title title]
+       [:link {:rel "shortcut icon" :href "/assets/favicon.ico"}]]
+      [:body.tc.washed-yellow.bg-near-black.avenir
+       [:h1
+        [:a.link.dim.washed-yellow {:href "/"} "DarkLimericks.com"]]
+       [:div.w-50-ns.w-90.center.bg-dark-gray.pa2
+        [:div.f6.lh-copy.flex.justify-between
+         [:a.washed-yellow.pl1
+          {:href (util/route-name->path
+                  request
+                  :com.darklimericks.server.router/submit)}
+          "SUBMIT LIMERICKS"]
+         [:span.dark-yellow
+          (format
+           "METAL LIMERICKS - CURRENTLY %d ALBUMS FROM %d+ BANDS"
+           num-albums
+           num-artists)]
+         [:a.washed-yellow.pr1 {:href "#"} "LINKS"]]
+        [:div.flex.items-stretch.bg-near-black.flex-wrap.flex-nowrap-l.f6
+         (let [letters (map (comp str char) (range 97 123))]
+           (for [letter letters]
+             [:a.link.washed-yellow.bg-mid-gray.pv2.w1.w-100-ns.flex-auto
+              {:href (format "/%s.html" letter)
+               :style "margin: 1px;"}
+              [:strong (string/upper-case letter)]]))]
+        [:div.flex.items-center.justify-center.pv2
+         [:span.f6.ph2 "Search the darkness for limericks most heartless"]
+         [:form.ph2
+          {:method "GET" :action "#"}
+          [:input.bg-white.w4.w5-ns
+           {:type "text"
+            :name "search"
+            :id "search"
+            :value ""}]]]
+        [:div.bg-near-black.br4.pa2
+         body]
+
+        [:div.flex.items-center.justify-center.pv2
+         [:span.f6.ph2 "Search the darkness for limericks most heartless"]
+         [:form.ph2
+          {:method "GET" :action "#"}
+          [:input.bg-white.w4.w5-ns
+           {:type "text"
+            :name "search"
+            :id "search"
+            :value ""}]]]
+        [:div.flex.items-stretch.bg-near-black.flex-wrap.flex-nowrap-l.f6
+         (let [letters (map (comp str char) (range 97 123))]
+           (for [letter letters]
+             [:a.link.washed-yellow.bg-mid-gray.pv2.w1.w-100-ns.flex-auto
+              {:href (format "/%s.html" letter)
+               :style "margin: 1px;"}
+              [:strong (string/upper-case letter)]]))]
+
+        [:div.f6.lh-copy.flex.justify-between
+         [:a.washed-yellow.pr1
+          {:href (util/route-name->path
+                  request
+                  :com.darklimericks.server.router/submit)}
+          "SUBMIT LIMERICKS"]
+         [:span.dark-yellow
+          (format
+           "METAL LIMERICKS - CURRENTLY %d ALBUMS FROM %d+ BANDS"
+           num-albums
+           num-artists)]
+         [:a.washed-yellow.pl1 {:href "#"} "LINKS"]]]]))))
+
+
+
 (defn home [db request recent-albums artists-by-album]
   (wrapper
    db
@@ -210,5 +299,5 @@
   [request suggestions]
   [:div
    (wgu request)
-   (for [[suggestion freq] suggestions]
-     [:div suggestion freq])])
+   (for [[suggestion p1 freq _ p2 quality] suggestions]
+     [:div (string/join " - " [suggestion freq p1 p2])])])
