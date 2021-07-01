@@ -273,9 +273,9 @@
       {:status 201
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrap-with-js
-              db
-              request
-              {}
+              {:db db
+               :request request
+               :opts {}}
               (views/show-rhyme-suggestion
                request
                suggestions))})))

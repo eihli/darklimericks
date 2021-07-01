@@ -2,3 +2,5 @@
 .nrepl-port
 .cpcache
 /kv/data
+/web/resources/public/wgu/cljs-runtime/
+/web/resources/public/cljs-runtime/
