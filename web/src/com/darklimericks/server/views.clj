@@ -294,8 +294,10 @@
     (form/submit-button
      {:class "ml2"}
      "Show rhyme suggestions"))
-   [:div
-    [:canvas#myChart {:width 400 :height 400}]]])
+   #_[:div
+    [:canvas#myChart {:width 400 :height 400}]]
+   [:iframe {:src "/assets/README_WGU.htm"
+             :style "background-color: white; width: 100%; height: 760px;"}]])
 
 (defn show-rhyme-suggestion
   [request suggestions]

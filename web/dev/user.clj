@@ -143,8 +143,9 @@
   (limericks/get-artist-and-album-for-new-limerick
    (-> state/system :database.sql/connection))
 
-  (reitit/match-by-path
-   (-> state/system :app/router)
-   "/limericks/1/1")
+  (:template
+   (reitit/match-by-path
+    (-> state/system :com.darklimericks.server.router/router)
+    "/wgu/foo.html"))
 
   )

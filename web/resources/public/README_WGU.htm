@@ -1,0 +1,1039 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-07-13 Tue 20:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RhymeStorm - WGU CSCI Capstone Project</title>
+<meta name="author" content="Eric Ihli" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">RhymeStorm - WGU CSCI Capstone Project</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org14a3a15">1. RhymeStorm Capstone Requirements Documentation</a>
+<ul>
+<li><a href="#org716e7d7">1.1. Descriptive And Predictive Methods</a>
+<ul>
+<li><a href="#org12c93c0">1.1.1. Descriptive Method</a></li>
+<li><a href="#org6c4e064">1.1.2. Prescriptive Method</a></li>
+</ul>
+</li>
+<li><a href="#org1ccfefb">1.2. Datasets</a></li>
+<li><a href="#org8b56e0a">1.3. Decision Support Functionality</a>
+<ul>
+<li><a href="#org19a500c">1.3.1. Choosing Words For A Lyric Based On Markov Likelihood</a></li>
+<li><a href="#orge4b7a97">1.3.2. Choosing Words To Complete A Lyric Based On Rhyme Quality</a></li>
+</ul>
+</li>
+<li><a href="#orgf13759f">1.4. Featurizing, Parsing, Cleaning, And Wrangling Data</a></li>
+<li><a href="#org5c868f3">1.5. Data Exploration And Preparation</a></li>
+<li><a href="#org1a53aca">1.6. <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</a></li>
+<li><a href="#org9160b2a">1.7. <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</a></li>
+<li><a href="#org5bb9e83">1.8. <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</a></li>
+<li><a href="#org7791154">1.9. Security Features</a></li>
+<li><a href="#org2118b36">1.10. <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</a></li>
+<li><a href="#org3e7ea9b">1.11. <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</a></li>
+</ul>
+</li>
+<li><a href="#orge2d60f8">2. Documentation</a>
+<ul>
+<li><a href="#orgcc70df2">2.1. Business Vision</a></li>
+<li><a href="#orgc216269">2.2. Data Sets</a></li>
+<li><a href="#org4fd130a">2.3. Data Analysis</a></li>
+<li><a href="#org33bec77">2.4. Assessment</a></li>
+<li><a href="#orgae6aaf1">2.5. Visualizations</a></li>
+<li><a href="#orgaad09e3">2.6. Accuracy</a></li>
+<li><a href="#org248156b">2.7. Testing</a></li>
+<li><a href="#org4c2c5cb">2.8. Source</a></li>
+<li><a href="#org55bc8bd">2.9. Quick Start</a></li>
+</ul>
+</li>
+<li><a href="#org3027af3">3. Notes</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org14a3a15" class="outline-2">
+<h2 id="org14a3a15"><span class="section-number-2">1</span> RhymeStorm Capstone Requirements Documentation</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+RhymeStorm is an application to help singers and songwriters brainstorm new lyrics.
+</p>
+</div>
+
+<div id="outline-container-org716e7d7" class="outline-3">
+<h3 id="org716e7d7"><span class="section-number-3">1.1</span> Descriptive And Predictive Methods</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org12c93c0" class="outline-4">
+<h4 id="org12c93c0"><span class="section-number-4">1.1.1</span> Descriptive Method</h4>
+<div class="outline-text-4" id="text-1-1-1">
+</div>
+<ol class="org-ol">
+<li><a id="org4d1af34"></a>Most Common Grammatical Structures In A Set Of Lyrics<br />
+<div class="outline-text-5" id="text-1-1-1-1">
+<p>
+By filtering songs by metrics such as popularity, number of awards, etc&#x2026; we can use this software package to determine the most common grammatical phrase structure for different filtered categories.
+</p>
+
+<p>
+Since  much of the data a record label might want to categorize songs by is likely proprietary, filtering the songs by whatever metric is the responsibility of the user.
+</p>
+
+<p>
+Once the songs are filtered/categorized, they can be passed to this software where a list of the most popular grammar structures will be returned.
+</p>
+
+<p>
+In the example below, you&rsquo;ll see that a simple noun-phrase is the most popular structure with 6 occurrences, tied with a sentence composed of a prepositional-phrase, verb-phrase, and adjective.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.owoga.corpus.markov <span style="color: #a9a1e1;">:as</span> markov<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>com.owoga.prhyme.nlp.core <span style="color: #a9a1e1;">:as</span> nlp<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>clojure.string <span style="color: #a9a1e1;">:as</span> string<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>clojure.java.io <span style="color: #a9a1e1;">:as</span> io<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>lines <span style="color: #98be65;">(</span>transduce
+             <span style="color: #a9a1e1;">(</span>comp
+              <span style="color: #51afef;">(</span>map slurp<span style="color: #51afef;">)</span>
+              <span style="color: #51afef;">(</span>map #<span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">string</span>/split <span style="color: #dcaeea;">%</span> #<span style="color: #98be65;">"</span><span style="color: #98be65; font-weight: bold;">\n</span><span style="color: #98be65;">"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+              <span style="color: #51afef;">(</span>map <span style="color: #c678dd;">(</span>partial remove empty?<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+              <span style="color: #51afef;">(</span>map <span style="color: #ECBE7B;">nlp</span>/structure-freqs<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+             merge
+             <span style="color: #a9a1e1;">{}</span>
+             <span style="color: #a9a1e1;">(</span>eduction <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">markov</span>/xf-file-seq <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #da8548; font-weight: bold;">10</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span>file-seq <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">io</span>/file <span style="color: #98be65;">"/home/eihli/src/prhyme/dark-corpus"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>take <span style="color: #da8548; font-weight: bold;">5</span> <span style="color: #98be65;">(</span>sort-by <span style="color: #a9a1e1;">(</span>comp - second<span style="color: #a9a1e1;">)</span> lines<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">(TOP (NP (NNP) (.)))</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">(TOP (S (NP (PRP)) (VP (VBP) (ADJP (JJ))) (.)))</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">(INC (NP (JJ) (NN)) nil (IN) (NP (DT)) (NP (PRP)) (VBP))</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-left">(TOP (NP (NP (JJ) (NN)) nil (NP (NN) (CC) (NN))))</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-left">(TOP (S (NP (JJ) (NN)) nil (VP (VBG) (ADJP (JJ)))))</td>
+<td class="org-right">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org6c4e064" class="outline-4">
+<h4 id="org6c4e064"><span class="section-number-4">1.1.2</span> Prescriptive Method</h4>
+<div class="outline-text-4" id="text-1-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org385543b"></a>Most Likely Word To Follow A Given Phrase<br />
+<div class="outline-text-5" id="text-1-1-2-1">
+<p>
+To help songwriters think of new lyrics, we provide an API to receive a list of words that commonly follow/precede a given phrase.
+</p>
+
+<p>
+Models can be trained on different genres or categories of songs. This will ensure that recommended lyric completions are apt.
+</p>
+
+<p>
+In the example below, we provide a seed suffix of &ldquo;bother me&rdquo; and ask the software to predict the most likely words that precede that phrase. The resulting most popular phrases are &ldquo;don&rsquo;t bother me&rdquo;, &ldquo;doesn&rsquo;t bother me&rdquo;, &ldquo;to bother me&rdquo;, &ldquo;won&rsquo;t bother me&rdquo;, etc&#x2026;
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.darklimericks.server.models <span style="color: #a9a1e1;">:as</span> models<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>com.owoga.trie <span style="color: #a9a1e1;">:as</span> trie<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>seed <span style="color: #98be65;">[</span><span style="color: #98be65;">"bother"</span> <span style="color: #98be65;">"me"</span><span style="color: #98be65;">]</span>
+      seed-ids <span style="color: #98be65;">(</span>map <span style="color: #ECBE7B;">models</span>/database seed<span style="color: #98be65;">)</span>
+      lookup <span style="color: #98be65;">(</span>reverse seed-ids<span style="color: #98be65;">)</span>
+      results <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">trie</span>/children <span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">trie</span>/lookup <span style="color: #ECBE7B;">models</span>/markov-trie lookup<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">-&gt;&gt;</span> results
+       <span style="color: #98be65;">(</span>map #<span style="color: #a9a1e1;">(</span>get <span style="color: #dcaeea;">%</span> <span style="color: #51afef;">[]</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>sort-by <span style="color: #a9a1e1;">(</span>comp - second<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>map #<span style="color: #a9a1e1;">(</span>update <span style="color: #dcaeea;">%</span> <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #ECBE7B;">models</span>/database<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>take <span style="color: #da8548; font-weight: bold;">10</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">don&rsquo;t</td>
+<td class="org-right">36</td>
+</tr>
+
+<tr>
+<td class="org-left">doesn&rsquo;t</td>
+<td class="org-right">21</td>
+</tr>
+
+<tr>
+<td class="org-left">to</td>
+<td class="org-right">14</td>
+</tr>
+
+<tr>
+<td class="org-left">won&rsquo;t</td>
+<td class="org-right">9</td>
+</tr>
+
+<tr>
+<td class="org-left">really</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-left">not</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-left">you</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-left">it</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left">even</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left">shouldn&rsquo;t</td>
+<td class="org-right">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1ccfefb" class="outline-3">
+<h3 id="org1ccfefb"><span class="section-number-3">1.2</span> Datasets</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The dataset currently in use is in <code>/dark-corpus</code>. This dataset was generated from the publicly available lyrics at <a href="http://darklyrics.com">http://darklyrics.com</a>.
+</p>
+
+<p>
+Further datasets will need to be provided by the end-user.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8b56e0a" class="outline-3">
+<h3 id="org8b56e0a"><span class="section-number-3">1.3</span> Decision Support Functionality</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org19a500c" class="outline-4">
+<h4 id="org19a500c"><span class="section-number-4">1.3.1</span> Choosing Words For A Lyric Based On Markov Likelihood</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Entire phrases can be generated using the previously mentioned functionality of generating lists of likely prefix/suffix words.
+</p>
+
+<p>
+The software can be seeded with a simple &ldquo;end-of-sentence&rdquo; or &ldquo;beginning-of-sentence&rdquo; token and can be asked to work backwards to build a phrase that meets certain criteria.
+</p>
+
+<p>
+The user can supply criteria such as restrictions on the number of syllables, number of words, rhyme scheme, etc&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge4b7a97" class="outline-4">
+<h4 id="orge4b7a97"><span class="section-number-4">1.3.2</span> Choosing Words To Complete A Lyric Based On Rhyme Quality</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Another part of the decision support functionality is filtering and ordering predicted words based on their rhyme quality.
+</p>
+
+<p>
+The official definition of a &ldquo;perfect&rdquo; rhyme is when two words have matching phonemes starting from their primary stress.
+</p>
+
+<p>
+For example: technology and ecology. Both of those words have a stress on the second syllable. The first syllables differ. But from the stressed syllable on, they have exactly matching phones.
+</p>
+
+<p>
+A rhyme that might be useful to a songwriter but that doesn&rsquo;t fit the definition of a &ldquo;perfect&rdquo; rhyme would be &ldquo;technology&rdquo; and &ldquo;economy&rdquo;. Those two words just barely break the rules for a perfect rhyme. Their vowel phones match from their primary stress to their ends. But one of the consonant phones doesn&rsquo;t match.
+</p>
+
+<p>
+Singers and songwriters have some flexibility and artistic freedom and imperfect rhymes can be a fallback.
+</p>
+
+<p>
+Therefore, this software provides functionality to sort rhymes so that rhymes that are closer to perfect are first in the ordering.
+</p>
+
+<p>
+In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfect, but then &ldquo;hypocrisy&rdquo; is listed as rhyming with &ldquo;technology&rdquo;. This is for the reason just mentioned. It&rsquo;s close to a perfect rhyme and it&rsquo;s of interest to singers/songwriters.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.darklimericks.linguistics.core <span style="color: #a9a1e1;">:as</span> linguistics<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>results
+      <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">linguistics</span>/rhymes-with-frequencies-and-rhyme-quality
+       <span style="color: #98be65;">"technology"</span>
+       <span style="color: #ECBE7B;">models</span>/markov-trie
+       <span style="color: #ECBE7B;">models</span>/database<span style="color: #98be65;">)</span><span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">-&gt;&gt;</span> results
+       <span style="color: #98be65;">(</span>map
+        <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">fn</span> <span style="color: #51afef;">[</span><span style="color: #c678dd;">[</span>rhyming-word
+              rhyming-word-phones
+              frequency-count-of-rhyming-word
+              target-word
+              target-word-phones
+              rhyme-quality<span style="color: #c678dd;">]</span><span style="color: #51afef;">]</span>
+          <span style="color: #51afef;">[</span>rhyming-word frequency-count-of-rhyming-word rhyme-quality<span style="color: #51afef;">]</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>take <span style="color: #da8548; font-weight: bold;">25</span><span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>vec<span style="color: #98be65;">)</span>
+       <span style="color: #98be65;">(</span>into <span style="color: #a9a1e1;">[</span><span style="color: #51afef;">[</span><span style="color: #98be65;">"rhyme"</span> <span style="color: #98be65;">"frequency count"</span> <span style="color: #98be65;">"rhyme quality"</span><span style="color: #51afef;">]</span><span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">class java.lang.IllegalArgumentException</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf13759f" class="outline-3">
+<h3 id="orgf13759f"><span class="section-number-3">1.4</span> Featurizing, Parsing, Cleaning, And Wrangling Data</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The data processing code is in <code>prhyme</code>
+</p>
+
+<p>
+Each line gets tokenized using a regular expression to split the string into tokens.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span><span style="color: #51afef;">def</span> <span style="color: #dcaeea;">re-word</span>
+  <span style="color: #83898d;">"Regex for tokenizing a string into words</span>
+<span style="color: #83898d;">  (including contractions and hyphenations),</span>
+<span style="color: #83898d;">  commas, periods, and newlines."</span>
+  #<span style="color: #98be65;">"</span><span style="color: #51afef; font-weight: bold;">(</span><span style="color: #98be65;">?s</span><span style="color: #51afef; font-weight: bold;">)</span><span style="color: #98be65;">.*?</span><span style="color: #51afef; font-weight: bold;">(</span><span style="color: #98be65;">[a-zA-Z</span><span style="color: #98be65; font-weight: bold;">\d</span><span style="color: #98be65;">]+</span><span style="color: #51afef; font-weight: bold;">(?:</span><span style="color: #98be65;">['</span><span style="color: #98be65; font-weight: bold;">\-</span><span style="color: #98be65;">]?[a-zA-Z]+</span><span style="color: #51afef; font-weight: bold;">)</span><span style="color: #98be65;">?</span><span style="color: #51afef; font-weight: bold;">|</span><span style="color: #98be65;">,</span><span style="color: #51afef; font-weight: bold;">|</span><span style="color: #98be65; font-weight: bold;">\.</span><span style="color: #51afef; font-weight: bold;">|</span><span style="color: #98be65; font-weight: bold;">\?</span><span style="color: #51afef; font-weight: bold;">|</span><span style="color: #98be65; font-weight: bold;">\n</span><span style="color: #51afef; font-weight: bold;">)</span><span style="color: #98be65;">"</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+Along with tokenization, the lines get stripped of whitespace and converted to lowercase. This conversion is done so that
+words can be compared: &ldquo;Foo&rdquo; is the same as &ldquo;foo&rdquo;.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span><span style="color: #51afef;">def</span> <span style="color: #dcaeea;">xf-tokenize</span>
+  <span style="color: #c678dd;">(</span>comp
+   <span style="color: #98be65;">(</span>map <span style="color: #ECBE7B;">string</span>/trim<span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span>map <span style="color: #a9a1e1;">(</span>partial re-seq re-word<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span>map <span style="color: #a9a1e1;">(</span>partial map second<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span>map <span style="color: #a9a1e1;">(</span>partial mapv <span style="color: #ECBE7B;">string</span>/lower-case<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5c868f3" class="outline-3">
+<h3 id="org5c868f3"><span class="section-number-3">1.5</span> Data Exploration And Preparation</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+The primary data structure and algorithms supporting exploration of the data are a Markov Trie
+</p>
+
+<p>
+The Trie data structure supports a <code>lookup</code> function that returns the child trie at a certain lookup key and a <code>children</code> function that returns all of the immediate children of a particular Trie.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span><span style="color: #51afef;">defprotocol</span> <span style="color: #ECBE7B;">ITrie</span>
+  <span style="color: #c678dd;">(</span>children <span style="color: #98be65;">[</span>self<span style="color: #98be65;">]</span> <span style="color: #98be65;">"Immediate children of a node."</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>lookup <span style="color: #98be65;">[</span>self <span style="color: #bbc2cf; background-color: #21242b;">^</span><span style="color: #ECBE7B;">clojure.lang.PersistentList</span> ks<span style="color: #98be65;">]</span> <span style="color: #98be65;">"Return node at key."</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">deftype</span> <span style="color: #ECBE7B;">Trie</span> <span style="color: #c678dd;">[</span>key value <span style="color: #bbc2cf; background-color: #21242b;">^</span><span style="color: #ECBE7B;">clojure.lang.PersistentTreeMap</span> children-<span style="color: #c678dd;">]</span>
+  ITrie
+  <span style="color: #c678dd;">(</span>children <span style="color: #98be65;">[</span>trie<span style="color: #98be65;">]</span>
+    <span style="color: #98be65;">(</span>map
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">fn</span> <span style="color: #51afef;">[</span><span style="color: #c678dd;">[</span>k <span style="color: #bbc2cf; background-color: #21242b;">^</span><span style="color: #ECBE7B;">Trie</span> child<span style="color: #c678dd;">]</span><span style="color: #51afef;">]</span>
+       <span style="color: #51afef;">(</span>Trie. k
+              <span style="color: #c678dd;">(</span>.value child<span style="color: #c678dd;">)</span>
+              <span style="color: #c678dd;">(</span>.children- child<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+     children-<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+
+  <span style="color: #c678dd;">(</span>lookup <span style="color: #98be65;">[</span>trie k<span style="color: #98be65;">]</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">loop</span> <span style="color: #a9a1e1;">[</span>k k
+           trie trie<span style="color: #a9a1e1;">]</span>
+      <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">cond</span>
+        <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">Allows `</span><span style="color: #a9a1e1;">update</span><span style="color: #5B6268;">` to work the same as with maps... can use `</span><span style="color: #a9a1e1;">fnil</span><span style="color: #5B6268;">`.</span>
+        <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">(nil? trie') (throw (Exception. (format "Key not found: %s" k)))</span>
+        <span style="color: #51afef;">(</span>nil? trie<span style="color: #51afef;">)</span> <span style="color: #a9a1e1;">nil</span>
+        <span style="color: #51afef;">(</span>empty? k<span style="color: #51afef;">)</span>
+        <span style="color: #51afef;">(</span>Trie. <span style="color: #c678dd;">(</span>.key trie<span style="color: #c678dd;">)</span>
+               <span style="color: #c678dd;">(</span>.value trie<span style="color: #c678dd;">)</span>
+               <span style="color: #c678dd;">(</span>.children- trie<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+        <span style="color: #a9a1e1;">:else</span> <span style="color: #51afef;">(</span><span style="color: #51afef;">recur</span>
+               <span style="color: #c678dd;">(</span>rest k<span style="color: #c678dd;">)</span>
+               <span style="color: #c678dd;">(</span>get <span style="color: #98be65;">(</span>.children- trie<span style="color: #98be65;">)</span> <span style="color: #98be65;">(</span>first k<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1a53aca" class="outline-3">
+<h3 id="org1a53aca"><span class="section-number-3">1.6</span> <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>graph of phrase complexity on one axis and rhyme quality on another axis.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9160b2a" class="outline-3">
+<h3 id="org9160b2a"><span class="section-number-3">1.7</span> <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Interactive query capability at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5bb9e83" class="outline-3">
+<h3 id="org5bb9e83"><span class="section-number-3">1.8</span> <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+The machine learning method chosen for this software is a Hidden Markov Model.
+</p>
+
+<p>
+Each line of each song is split into &ldquo;tokens&rdquo; (words) and then the previous <code>n - 1</code> tokens are used to predict the <code>nth</code> token.
+</p>
+
+<p>
+The algorithm is implemented in several parts which are demonstrated below.
+</p>
+
+<ol class="org-ol">
+<li>Read each song line-by-line.</li>
+<li>Split each line into tokens.</li>
+<li>Partition the tokens into sequences of length <code>n</code>.</li>
+<li>Associate each sequence into a Trie and update the value representing the number of times that sequence has been encountered.</li>
+</ol>
+
+<p>
+That is the process for building the Hidden Markov Model.
+</p>
+
+<p>
+The algorithm for generating predictions from the HMM is as follows.
+</p>
+
+<ol class="org-ol">
+<li>Look up the <code>n - 1</code> tokens in the Trie.</li>
+<li>Normalize the frequencies of the children of the <code>n - 1</code> tokens into percentage likelihoods.</li>
+<li>Account for &ldquo;unseen <code>n grams</code>&rdquo; (Simple Good Turing).</li>
+<li>Sort results by maximum likelihood.</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.owoga.prhyme.data-transform <span style="color: #a9a1e1;">:as</span> data-transform<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>clojure.pprint <span style="color: #a9a1e1;">:as</span> pprint<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">defn</span> <span style="color: #c678dd;">file-seq-&gt;markov-trie</span>
+  <span style="color: #83898d;">"For forwards markov."</span>
+  <span style="color: #c678dd;">[</span>database files n m<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>transduce
+   <span style="color: #98be65;">(</span>comp
+    <span style="color: #a9a1e1;">(</span>map slurp<span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map #<span style="color: #51afef;">(</span><span style="color: #ECBE7B;">string</span>/split <span style="color: #dcaeea;">%</span> #<span style="color: #98be65;">"[</span><span style="color: #98be65; font-weight: bold;">\n</span><span style="color: #98be65;">+</span><span style="color: #98be65; font-weight: bold;">\?\.</span><span style="color: #98be65;">]"</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>partial transduce <span style="color: #ECBE7B;">data-transform</span>/xf-tokenize conj<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>partial transduce <span style="color: #ECBE7B;">data-transform</span>/xf-filter-english conj<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>partial remove empty?<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>partial into <span style="color: #c678dd;">[]</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">data-transform</span>/xf-pad-tokens <span style="color: #98be65;">(</span>dec m<span style="color: #98be65;">)</span> <span style="color: #98be65;">"&lt;s&gt;"</span> <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #98be65;">"&lt;/s&gt;"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>partial mapcat <span style="color: #c678dd;">(</span>partial <span style="color: #ECBE7B;">data-transform</span>/n-to-m-partitions n <span style="color: #98be65;">(</span>inc m<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #a9a1e1;">(</span>mapcat <span style="color: #51afef;">(</span>partial mapv <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">data-transform</span>/make-database-processor database<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span>completing
+    <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">fn</span> <span style="color: #51afef;">[</span>trie lookup<span style="color: #51afef;">]</span>
+      <span style="color: #51afef;">(</span>update trie lookup <span style="color: #c678dd;">(</span>fnil #<span style="color: #98be65;">(</span>update <span style="color: #dcaeea;">%</span> <span style="color: #da8548; font-weight: bold;">1</span> inc<span style="color: #98be65;">)</span> <span style="color: #98be65;">[</span>lookup <span style="color: #da8548; font-weight: bold;">0</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">trie</span>/make-trie<span style="color: #98be65;">)</span>
+   files<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>files <span style="color: #98be65;">(</span><span style="color: #51afef;">-&gt;&gt;</span> <span style="color: #98be65;">"/home/eihli/src/prhyme/dark-corpus"</span>
+                 <span style="color: #ECBE7B;">io</span>/file
+                 file-seq
+                 <span style="color: #a9a1e1;">(</span>eduction <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">data-transform</span>/xf-file-seq <span style="color: #da8548; font-weight: bold;">501</span> <span style="color: #da8548; font-weight: bold;">2</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+      database <span style="color: #98be65;">(</span>atom <span style="color: #a9a1e1;">{</span><span style="color: #a9a1e1;">:next-id</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #a9a1e1;">}</span><span style="color: #98be65;">)</span>
+      trie <span style="color: #98be65;">(</span>file-seq-&gt;markov-trie database files <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">3</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">]</span>
+ <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">pprint</span>/pprint <span style="color: #98be65;">[</span><span style="color: #a9a1e1;">(</span>map <span style="color: #51afef;">(</span>comp <span style="color: #c678dd;">(</span>partial map @database<span style="color: #c678dd;">)</span> first<span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span>take <span style="color: #da8548; font-weight: bold;">10</span> <span style="color: #c678dd;">(</span>drop <span style="color: #da8548; font-weight: bold;">105</span> trie<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example" id="org9d447fd">
+[(("&lt;s&gt;" "call" "me")
+  ("&lt;s&gt;" "call")
+  ("&lt;s&gt;" "right" "&lt;/s&gt;")
+  ("&lt;s&gt;" "right")
+  ("&lt;s&gt;" "that's" "proportional")
+  ("&lt;s&gt;" "that's")
+  ("&lt;s&gt;" "don't" "&lt;/s&gt;")
+  ("&lt;s&gt;" "don't")
+  ("&lt;s&gt;" "yourself" "in")
+  ("&lt;s&gt;" "yourself"))]
+</pre>
+
+<p>
+The results above show a sample of 10 elements in a 1-to-3-gram trie
+</p>
+
+<p>
+The code sample below demonstrates training a Hidden Markov Model on a set of lyrics where each line gets reversed. This model is useful for predicting words backwards, so that you can start with the rhyming end of a word or phrase and generate backwards to the start of the lyric.
+</p>
+
+<p>
+It also performs compaction and serialization. Song lyrics are typically provided as text files. Reading files on a hard drive is an expensive process, but we can perform that expensive training process only once and save the resulting Markov Model in a more memory-efficient format.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span><span style="color: #51afef;">defn</span> <span style="color: #c678dd;">train-backwards</span>
+  <span style="color: #83898d;">"For building lines backwards so they can be seeded with a target rhyme."</span>
+  <span style="color: #c678dd;">[</span>files n m trie-filepath database-filepath tightly-packed-trie-filepath<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">let</span> <span style="color: #98be65;">[</span>database <span style="color: #a9a1e1;">(</span>atom <span style="color: #51afef;">{</span><span style="color: #a9a1e1;">:next-id</span> <span style="color: #da8548; font-weight: bold;">1</span><span style="color: #51afef;">}</span><span style="color: #a9a1e1;">)</span>
+        trie <span style="color: #a9a1e1;">(</span>file-seq-&gt;backwards-markov-trie database files n m<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">]</span>
+    <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">nippy</span>/freeze-to-file trie-filepath <span style="color: #a9a1e1;">(</span>seq trie<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>println <span style="color: #98be65;">"Froze"</span> trie-filepath<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">nippy</span>/freeze-to-file database-filepath @database<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>println <span style="color: #98be65;">"Froze"</span> database-filepath<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>save-tightly-packed-trie trie database tightly-packed-trie-filepath<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">let</span> <span style="color: #a9a1e1;">[</span>loaded-trie <span style="color: #51afef;">(</span><span style="color: #51afef;">-&gt;&gt;</span> trie-filepath
+                           <span style="color: #ECBE7B;">nippy</span>/thaw-from-file
+                           <span style="color: #c678dd;">(</span>into <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">trie</span>/make-trie<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+          loaded-db <span style="color: #51afef;">(</span><span style="color: #51afef;">-&gt;&gt;</span> database-filepath
+                         <span style="color: #ECBE7B;">nippy</span>/thaw-from-file<span style="color: #51afef;">)</span>
+          loaded-tightly-packed-trie <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">tpt</span>/load-tightly-packed-trie-from-file
+                                      tightly-packed-trie-filepath
+                                      <span style="color: #c678dd;">(</span>decode-fn loaded-db<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">]</span>
+      <span style="color: #a9a1e1;">(</span>println <span style="color: #98be65;">"Loaded trie:"</span> <span style="color: #51afef;">(</span>take <span style="color: #da8548; font-weight: bold;">5</span> loaded-trie<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span>println <span style="color: #98be65;">"Loaded database:"</span> <span style="color: #51afef;">(</span>take <span style="color: #da8548; font-weight: bold;">5</span> loaded-db<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span>println <span style="color: #98be65;">"Loaded tightly-packed-trie:"</span> <span style="color: #51afef;">(</span>take <span style="color: #da8548; font-weight: bold;">5</span> loaded-tightly-packed-trie<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span>
+      <span style="color: #a9a1e1;">(</span>println <span style="color: #98be65;">"Successfully loaded trie and database."</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span>comment
+  <span style="color: #c678dd;">(</span>time
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">let</span> <span style="color: #a9a1e1;">[</span>files <span style="color: #51afef;">(</span><span style="color: #51afef;">-&gt;&gt;</span> <span style="color: #98be65;">"dark-corpus"</span>
+                    <span style="color: #ECBE7B;">io</span>/file
+                    file-seq
+                    <span style="color: #c678dd;">(</span>eduction <span style="color: #98be65;">(</span>xf-file-seq <span style="color: #da8548; font-weight: bold;">0</span> <span style="color: #da8548; font-weight: bold;">250000</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+         <span style="color: #51afef;">[</span>trie database<span style="color: #51afef;">]</span> <span style="color: #51afef;">(</span>train-backwards
+                          files
+                          <span style="color: #da8548; font-weight: bold;">1</span>
+                          <span style="color: #da8548; font-weight: bold;">5</span>
+                          <span style="color: #98be65;">"/home/eihli/.models/markov-trie-4-gram-backwards.bin"</span>
+                          <span style="color: #98be65;">"/home/eihli/.models/markov-database-4-gram-backwards.bin"</span>
+                          <span style="color: #98be65;">"/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+
+  <span style="color: #c678dd;">(</span>time
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">def</span> <span style="color: #dcaeea;">markov-trie</span> <span style="color: #a9a1e1;">(</span>into <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">trie</span>/make-trie<span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span><span style="color: #ECBE7B;">nippy</span>/thaw-from-file <span style="color: #98be65;">"/home/eihli/.models/markov-trie-4-gram-backwards.bin"</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>time
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">def</span> <span style="color: #dcaeea;">database</span> <span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">nippy</span>/thaw-from-file <span style="color: #98be65;">"/home/eihli/.models/markov-database-4-gram-backwards.bin"</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>time
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">def</span> <span style="color: #dcaeea;">markov-tight-trie</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">tpt</span>/load-tightly-packed-trie-from-file
+      <span style="color: #98be65;">"/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"</span>
+      <span style="color: #51afef;">(</span>decode-fn database<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>take <span style="color: #da8548; font-weight: bold;">20</span> markov-tight-trie<span style="color: #c678dd;">)</span>
+  <span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+Functionalities To Evaluate The Accuracy Of The Data Product
+</p>
+
+<p>
+Since creative brainstorming is the goal, &ldquo;accuracy&rdquo; is subjective.
+</p>
+
+<p>
+We can, however, measure and compare language generation algorithms against how &ldquo;expected&rdquo; a phrase is given the training data. This measurement is &ldquo;perplexity&rdquo;.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>taoensso.nippy <span style="color: #a9a1e1;">:as</span> nippy<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>com.owoga.tightly-packed-trie <span style="color: #a9a1e1;">:as</span> tpt<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>com.owoga.corpus.markov <span style="color: #a9a1e1;">:as</span> markov<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">defonce</span> <span style="color: #dcaeea;">database</span> <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">nippy</span>/thaw-from-file <span style="color: #98be65;">"/home/eihli/.models/markov-database-4-gram-backwards.bin"</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">defonce</span> <span style="color: #dcaeea;">markov-tight-trie</span>
+  <span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">tpt</span>/load-tightly-packed-trie-from-file
+   <span style="color: #98be65;">"/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"</span>
+   <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">markov</span>/decode-fn database<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+<span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>likely-phrase <span style="color: #98be65;">[</span><span style="color: #98be65;">"a"</span> <span style="color: #98be65;">"hole"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span><span style="color: #98be65;">]</span>
+      less-likely-phrase <span style="color: #98be65;">[</span><span style="color: #98be65;">"this"</span> <span style="color: #98be65;">"hole"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span><span style="color: #98be65;">]</span>
+      least-likely-phrase <span style="color: #98be65;">[</span><span style="color: #98be65;">"that"</span> <span style="color: #98be65;">"hole"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>run!
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">fn</span> <span style="color: #a9a1e1;">[</span>word<span style="color: #a9a1e1;">]</span>
+     <span style="color: #a9a1e1;">(</span>println
+      <span style="color: #51afef;">(</span>format
+       <span style="color: #98be65;">"</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">%s</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> has preceeded </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">hole</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">&lt;/s&gt;</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">&lt;/s&gt;</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> a total of %s times"</span>
+       word
+       <span style="color: #c678dd;">(</span>second <span style="color: #98be65;">(</span>get markov-tight-trie <span style="color: #a9a1e1;">(</span>map database <span style="color: #51afef;">[</span><span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"hole"</span> word<span style="color: #51afef;">]</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">[</span><span style="color: #98be65;">"a"</span> <span style="color: #98be65;">"this"</span> <span style="color: #98be65;">"that"</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span>
+  <span style="color: #c678dd;">(</span>run!
+   <span style="color: #98be65;">(</span><span style="color: #51afef;">fn</span> <span style="color: #a9a1e1;">[</span>word<span style="color: #a9a1e1;">]</span>
+     <span style="color: #a9a1e1;">(</span><span style="color: #51afef;">let</span> <span style="color: #51afef;">[</span>seed <span style="color: #c678dd;">[</span><span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"&lt;/s&gt;"</span> <span style="color: #98be65;">"hole"</span> word<span style="color: #c678dd;">]</span><span style="color: #51afef;">]</span>
+       <span style="color: #51afef;">(</span>println
+        <span style="color: #c678dd;">(</span>format
+         <span style="color: #98be65;">"%s is the perplexity of </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">%s</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">hole</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">&lt;/s&gt;</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;"> </span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">&lt;/s&gt;</span><span style="color: #98be65; font-weight: bold;">\"</span><span style="color: #98be65;">"</span>
+         <span style="color: #98be65;">(</span><span style="color: #51afef;">-&gt;&gt;</span> seed
+              <span style="color: #a9a1e1;">(</span>map database<span style="color: #a9a1e1;">)</span>
+              <span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">markov</span>/perplexity <span style="color: #da8548; font-weight: bold;">4</span> markov-tight-trie<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+         word<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+   <span style="color: #98be65;">[</span><span style="color: #98be65;">"a"</span> <span style="color: #98be65;">"this"</span> <span style="color: #98be65;">"that"</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span>
+  <span style="color: #a9a1e1;">nil</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<pre class="example">
+"a" has preceeded "hole" "&lt;/s&gt;" "&lt;/s&gt;" a total of 250 times
+"this" has preceeded "hole" "&lt;/s&gt;" "&lt;/s&gt;" a total of 173 times
+"that" has preceeded "hole" "&lt;/s&gt;" "&lt;/s&gt;" a total of 45 times
+-12.184088569934774 is the perplexity of "a" "hole" "&lt;/s&gt;" "&lt;/s&gt;"
+-12.552930899563904 is the perplexity of "this" "hole" "&lt;/s&gt;" "&lt;/s&gt;"
+-13.905719644461469 is the perplexity of "that" "hole" "&lt;/s&gt;" "&lt;/s&gt;"
+</pre>
+
+
+<p>
+The results above make intuitive sense. The most common word to preceed &ldquo;hole&rdquo; at the end of a sentence is the word &ldquo;a&rdquo;. There are 250 instances of sentences of &ldquo;&#x2026; a hole.&rdquo;. That can be compared to 173 instances of &ldquo;&#x2026; this hole.&rdquo; and 45 instances of &ldquo;&#x2026; that hole.&rdquo;.
+</p>
+
+<p>
+Therefore, &ldquo;&#x2026; a hole.&rdquo; is has the lowest &ldquo;perplexity&rdquo;.
+</p>
+
+<p>
+This standardized measure of accuracy can be used to compare different language generation algorithms.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7791154" class="outline-3">
+<h3 id="org7791154"><span class="section-number-3">1.9</span> Security Features</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Artists/Songwriters place a lot of value in the secrecy of their content. Therefore, all communication with the web-based interface occurs over a secure connection using HTTPS.
+</p>
+
+<p>
+Security certificates are generated using Let&rsquo;s Encrypt and an Nginx web server handles the SSL termination.
+</p>
+
+<p>
+With this precaution in place, attackers will not be able to snoop the content that songwriters are sending to or receiving from the servers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2118b36" class="outline-3">
+<h3 id="org2118b36"><span class="section-number-3">1.10</span> <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li>Script to auto-update SSL cert</li>
+<li>Enable NGINX dashboard?</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3e7ea9b" class="outline-3">
+<h3 id="org3e7ea9b"><span class="section-number-3">1.11</span> <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orge2d60f8" class="outline-2">
+<h2 id="orge2d60f8"><span class="section-number-2">2</span> Documentation</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>Create each of the following forms of documentation for the product you have developed:</li>
+</ol>
+</div>
+
+<div id="outline-container-orgcc70df2" class="outline-3">
+<h3 id="orgcc70df2"><span class="section-number-3">2.1</span> Business Vision</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Provide rhyming lyric suggestions optionally constrained by syllable count.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc216269" class="outline-3">
+<h3 id="orgc216269"><span class="section-number-3">2.2</span> Data Sets</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+See <code>resources/darklyrics-markov.tpt</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4fd130a" class="outline-3">
+<h3 id="org4fd130a"><span class="section-number-3">2.3</span> Data Analysis</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+See <code>src/com/owoga/darklyrics/core.clj</code>
+</p>
+
+<p>
+See <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org33bec77" class="outline-3">
+<h3 id="org33bec77"><span class="section-number-3">2.4</span> Assessment</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+See visualization of rhyme suggestion in action.
+</p>
+
+<p>
+See perplexity?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgae6aaf1" class="outline-3">
+<h3 id="orgae6aaf1"><span class="section-number-3">2.5</span> Visualizations</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+See visualization of smoothing technique.
+</p>
+
+<p>
+See wordcloud
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaad09e3" class="outline-3">
+<h3 id="orgaad09e3"><span class="section-number-3">2.6</span> Accuracy</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+•  assessment of the product’s accuracy
+</p>
+</div>
+</div>
+
+<div id="outline-container-org248156b" class="outline-3">
+<h3 id="org248156b"><span class="section-number-3">2.7</span> Testing</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+•  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4c2c5cb" class="outline-3">
+<h3 id="org4c2c5cb"><span class="section-number-3">2.8</span> Source</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+•  source code and executable file(s)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org55bc8bd" class="outline-3">
+<h3 id="org55bc8bd"><span class="section-number-3">2.9</span> Quick Start</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+•  a quick start guide summarizing the steps necessary to install and use the product
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3027af3" class="outline-2">
+<h2 id="org3027af3"><span class="section-number-2">3</span> Notes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+http-kit doesn&rsquo;t support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Eric Ihli</p>
+<p class="date">Created: 2021-07-13 Tue 20:39</p>
+</div>
+</body>
+</html>

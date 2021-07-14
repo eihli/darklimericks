@@ -1,21 +1,27 @@
-#+TITLE: Capstone Documentation
+#+TITLE: RhymeStorm - WGU CSCI Capstone Project
 
 :PROPERTIES:
 :END:
 
-* C
+* RhymeStorm Capstone Requirements Documentation
 
-Design and develop a fully functional data product that addresses your identified business problem or organizational need. Include each of the following attributes as they are the minimum required elements for the product:
+RhymeStorm is an application to help singers and songwriters brainstorm new lyrics.
 
-** one descriptive method and one non-descriptive (predictive or prescriptive) method
+** Descriptive And Predictive Methods
 
 *** Descriptive Method
 
-**** Most common sentence structures
+**** Most Common Grammatical Structures In A Set Of Lyrics
 
-Here is the code to generate a report on the most common sentence structures given a directory of lyrics files.
+By filtering songs by metrics such as popularity, number of awards, etc... we can use this software package to determine the most common grammatical phrase structure for different filtered categories.
 
-#+begin_src clojure :results value
+Since  much of the data a record label might want to categorize songs by is likely proprietary, filtering the songs by whatever metric is the responsibility of the user.
+
+Once the songs are filtered/categorized, they can be passed to this software where a list of the most popular grammar structures will be returned.
+
+In the example below, you'll see that a simple noun-phrase is the most popular structure with 6 occurrences, tied with a sentence composed of a prepositional-phrase, verb-phrase, and adjective.
+
+#+begin_src clojure :results value :session main :exports both
 (require '[com.owoga.corpus.markov :as markov]
          '[com.owoga.prhyme.nlp.core :as nlp]
          '[clojure.string :as string]
@@ -42,9 +48,15 @@ Here is the code to generate a report on the most common sentence structures giv
 
 *** Prescriptive Method
 
-**** Most likely next words
+**** Most Likely Word To Follow A Given Phrase
 
-#+begin_src clojure
+To help songwriters think of new lyrics, we provide an API to receive a list of words that commonly follow/precede a given phrase.
+
+Models can be trained on different genres or categories of songs. This will ensure that recommended lyric completions are apt.
+
+In the example below, we provide a seed suffix of "bother me" and ask the software to predict the most likely words that precede that phrase. The resulting most popular phrases are "don't bother me", "doesn't bother me", "to bother me", "won't bother me", etc...
+
+#+begin_src clojure :session main :exports both
 (require '[com.darklimericks.server.models :as models]
          '[com.owoga.trie :as trie])
 
@@ -71,22 +83,44 @@ Here is the code to generate a report on the most common sentence structures giv
 | even      |  3 |
 | shouldn't |  3 |
 
-** collected or available datasets
+** Datasets
 
-The dataset currently in use is in ~/dark-corpus~. Further dataset will need to be provided by the end-user.
+The dataset currently in use is in ~/dark-corpus~. This dataset was generated from the publicly available lyrics at http://darklyrics.com.
 
-** Decision support functionality
+ Further datasets will need to be provided by the end-user.
 
-*** Choosing words for a lyric based on markov likelihood
+** Decision Support Functionality
 
-*** Choosing words to complete a lyric based on rhyme quality
+*** Choosing Words For A Lyric Based On Markov Likelihood
 
-#+begin_src clojure :results value table :colnames yes
+Entire phrases can be generated using the previously mentioned functionality of generating lists of likely prefix/suffix words.
+
+The software can be seeded with a simple "end-of-sentence" or "beginning-of-sentence" token and can be asked to work backwards to build a phrase that meets certain criteria.
+
+The user can supply criteria such as restrictions on the number of syllables, number of words, rhyme scheme, etc...
+
+*** Choosing Words To Complete A Lyric Based On Rhyme Quality
+
+Another part of the decision support functionality is filtering and ordering predicted words based on their rhyme quality.
+
+The official definition of a "perfect" rhyme is when two words have matching phonemes starting from their primary stress.
+
+For example: technology and ecology. Both of those words have a stress on the second syllable. The first syllables differ. But from the stressed syllable on, they have exactly matching phones.
+
+A rhyme that might be useful to a songwriter but that doesn't fit the definition of a "perfect" rhyme would be "technology" and "economy". Those two words just barely break the rules for a perfect rhyme. Their vowel phones match from their primary stress to their ends. But one of the consonant phones doesn't match.
+
+Singers and songwriters have some flexibility and artistic freedom and imperfect rhymes can be a fallback.
+
+Therefore, this software provides functionality to sort rhymes so that rhymes that are closer to perfect are first in the ordering.
+
+In the example below, you'll see that the first 20 or so rhymes are perfect, but then "hypocrisy" is listed as rhyming with "technology". This is for the reason just mentioned. It's close to a perfect rhyme and it's of interest to singers/songwriters.
+
+#+begin_src clojure :results value table :colnames yes :session main :exports both
 (require '[com.darklimericks.linguistics.core :as linguistics])
 
 (let [results
       (linguistics/rhymes-with-frequencies-and-rhyme-quality
-       "bother me"
+       "technology"
        models/markov-trie
        models/database)]
   (->> results
@@ -98,31 +132,46 @@ The dataset currently in use is in ~/dark-corpus~. Further dataset will need to 
               target-word-phones
               rhyme-quality]]
           [rhyming-word frequency-count-of-rhyming-word rhyme-quality]))
-       (take 10)
+       (take 25)
        (vec)
        (into [["rhyme" "frequency count" "rhyme quality"]])))
 #+end_src
 
 #+RESULTS:
-| rhyme     | frequency count | rhyme quality |
-| honoree   |               2 |             7 |
-| referee   |               3 |             6 |
-| repartee  |               2 |             6 |
-| nominee   |               2 |             6 |
-| undersea  |               1 |             6 |
-| oversea   |               1 |             6 |
-| rosemarie |               0 |             6 |
-| disagree  |             180 |             5 |
-| poverty   |             175 |             5 |
-| mockery   |             122 |             5 |
+| rhyme          | frequency count | rhyme quality |
+| technology     |             318 |             8 |
+| apology        |              68 |             7 |
+| pathology      |              42 |             7 |
+| mythology      |              27 |             7 |
+| psychology     |              24 |             7 |
+| theology       |              23 |             7 |
+| biology        |              20 |             7 |
+| ecology        |              11 |             7 |
+| chronology     |              10 |             7 |
+| astrology      |               9 |             7 |
+| biotechnology  |               8 |             7 |
+| nanotechnology |               5 |             7 |
+| geology        |               3 |             7 |
+| ontology       |               2 |             7 |
+| morphology     |               2 |             7 |
+| seismology     |               1 |             7 |
+| urology        |               1 |             7 |
+| doxology       |               0 |             7 |
+| neurology      |               0 |             7 |
+| hypocrisy      |             723 |             6 |
+| democracy      |             238 |             6 |
+| atrocity       |             224 |             6 |
+| philosophy     |             181 |             6 |
+| equality       |             109 |             6 |
+| ideology       |             105 |             6 |
 
-** Ability to support featurizing, parsing, cleaning, and wrangling datasets
+** Featurizing, Parsing, Cleaning, And Wrangling Data
 
 The data processing code is in ~prhyme~
 
 Each line gets tokenized using a regular expression to split the string into tokens.
 
-#+begin_src clojure
+#+begin_src clojure :session main
 (def re-word
   "Regex for tokenizing a string into words
   (including contractions and hyphenations),
@@ -143,13 +192,13 @@ words can be compared: "Foo" is the same as "foo".
 #+end_src
 
 
-** methods and algorithms supporting data exploration and preparation
+** Data Exploration And Preparation
 
 The primary data structure and algorithms supporting exploration of the data are a Markov Trie
 
-The Trie data structure suppors a ~lookup~ function that returns the child trie at a certain lookup key and a ~children~ function that returns all of the immediate children of a particular Trie.
+The Trie data structure supports a ~lookup~ function that returns the child trie at a certain lookup key and a ~children~ function that returns all of the immediate children of a particular Trie.
 
-#+begin_src clojure
+#+begin_src clojure :eval no
 (defprotocol ITrie
   (children [self] "Immediate children of a node.")
   (lookup [self ^clojure.lang.PersistentList ks] "Return node at key."))
@@ -180,17 +229,40 @@ The Trie data structure suppors a ~lookup~ function that returns the child trie 
                (get (.children- trie) (first k))))))
 #+end_src
 
-** data visualization functionalities for data exploration and inspection
+** TODO Data Visualization Functionalities For Data Exploration And Inspection
 
-** implementation of interactive queries
+- graph of phrase complexity on one axis and rhyme quality on another axis.
+
+** TODO Implementation Of Interactive Queries
 
 Interactive query capability at [[https://darklimericks.com/wgu]].
 
-** implementation of machine-learning methods and algorithms
+** TODO implementation of machine-learning methods and algorithms
 
-Functions for training both forwards and backwards
+The machine learning method chosen for this software is a Hidden Markov Model.
 
-#+begin_src clojure
+Each line of each song is split into "tokens" (words) and then the previous ~n - 1~ tokens are used to predict the ~nth~ token.
+
+The algorithm is implemented in several parts which are demonstrated below.
+
+1. Read each song line-by-line.
+2. Split each line into tokens.
+3. Partition the tokens into sequences of length ~n~.
+4. Associate each sequence into a Trie and update the value representing the number of times that sequence has been encountered.
+
+That is the process for building the Hidden Markov Model.
+
+The algorithm for generating predictions from the HMM is as follows.
+
+1. Look up the ~n - 1~ tokens in the Trie.
+2. Normalize the frequencies of the children of the ~n - 1~ tokens into percentage likelihoods.
+3. Account for "unseen ~n grams~" (Simple Good Turing).
+4. Sort results by maximum likelihood.
+
+#+begin_src clojure :session main :results output :exports both
+(require '[com.owoga.prhyme.data-transform :as data-transform]
+         '[clojure.pprint :as pprint])
+
 (defn file-seq->markov-trie
   "For forwards markov."
   [database files n m]
@@ -210,53 +282,34 @@ Functions for training both forwards and backwards
    (trie/make-trie)
    files))
 
-(comment
-  (let [files (->> "dark-corpus"
-                   io/file
-                   file-seq
-                   (eduction (xf-file-seq 501 2)))
-        database (atom {:next-id 1})
-        trie (file-seq->markov-trie database files 1 3)]
-    [(take 20 trie)
-     (map (comp (partial map @database) first) (take 20 (drop 105 trie)))
-     (take 10 @database)])
-  ;; [([(1 1 2) [[1 1 2] 1]]
-  ;;   [(1 1 3) [[1 1 3] 1]]
-  ;;   [(1 1 7) [[1 1 7] 2]]
-  ;;   [(1 1 9) [[1 1 9] 3]]
-  ;;   [(1 1 16) [[1 1 16] 4]])
-  ;;  (("<s>" "call" "me")
-  ;;   ("<s>" "call")
-  ;;   ("<s>" "right" "</s>")
-  ;;   ("<s>" "right")
-  ;;   ("<s>" "that's" "proportional")
-  ;;   ("<s>" "that's")
-  ;;   ("<s>" "don't" "</s>")
-  ;;   ("<s>" "don't")
-  ;;   ("<s>" "yourself" "in")
-  ;;   ("<s>" "yourself")
-  ;;   ("<s>" "transformation" "</s>")
-  ;;   ("<s>" "transformation")
-  ;;   ("<s>")
-  ;;   ("them" "from" "their")
-  ;;   ("them" "from")
-  ;;   ("them")
-  ;;   ("from" "their" "pain")
-  ;;   ("from" "their")
-  ;;   ("from" "your" "side")
-  ;;   ("from" "your"))
-  ;;  (["come" 92]
-  ;;   ["summer" 17]
-  ;;   ["more" 101]
-  ;;   [121 "that's"]
-  ;;   [65 "by"]
-  ;;   ["dust" 133]
-  ;;   [70 "said"]
-  ;;   ["misery" 128]
-  ;;   [62 "get"]
-  ;;   [74 "gone"])]
-  )
+(let [files (->> "/home/eihli/src/prhyme/dark-corpus"
+                 io/file
+                 file-seq
+                 (eduction (data-transform/xf-file-seq 501 2)))
+      database (atom {:next-id 1})
+      trie (file-seq->markov-trie database files 1 3)]
+ (pprint/pprint [(map (comp (partial map @database) first) (take 10 (drop 105 trie)))]))
 #+end_src
+
+#+RESULTS:
+#+begin_example
+[(("<s>" "call" "me")
+  ("<s>" "call")
+  ("<s>" "right" "</s>")
+  ("<s>" "right")
+  ("<s>" "that's" "proportional")
+  ("<s>" "that's")
+  ("<s>" "don't" "</s>")
+  ("<s>" "don't")
+  ("<s>" "yourself" "in")
+  ("<s>" "yourself"))]
+#+end_example
+
+The results above show a sample of 10 elements in a 1-to-3-gram trie
+
+The code sample below demonstrates training a Hidden Markov Model on a set of lyrics where each line gets reversed. This model is useful for predicting words backwards, so that you can start with the rhyming end of a word or phrase and generate backwards to the start of the lyric.
+
+It also performs compaction and serialization. Song lyrics are typically provided as text files. Reading files on a hard drive is an expensive process, but we can perform that expensive training process only once and save the resulting Markov Model in a more memory-efficient format.
 
 #+begin_src clojure
 (defn train-backwards
@@ -309,13 +362,77 @@ Functions for training both forwards and backwards
   )
 #+end_src
 
-** functionalities to evaluate the accuracy of the data product
+Functionalities To Evaluate The Accuracy Of The Data Product
 
-** industry-appropriate security features
+Since creative brainstorming is the goal, "accuracy" is subjective.
 
-** tools to monitor and maintain the product
+We can, however, measure and compare language generation algorithms against how "expected" a phrase is given the training data. This measurement is "perplexity".
 
-** a user-friendly, functional dashboard that includes at least three visualization types
+#+begin_src clojure :session main :exports both :results output
+(require '[taoensso.nippy :as nippy]
+         '[com.owoga.tightly-packed-trie :as tpt]
+         '[com.owoga.corpus.markov :as markov])
+
+(defonce database (nippy/thaw-from-file "/home/eihli/.models/markov-database-4-gram-backwards.bin"))
+
+(defonce markov-tight-trie
+  (tpt/load-tightly-packed-trie-from-file
+   "/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"
+   (markov/decode-fn database)))
+
+(let [likely-phrase ["a" "hole" "</s>" "</s>"]
+      less-likely-phrase ["this" "hole" "</s>" "</s>"]
+      least-likely-phrase ["that" "hole" "</s>" "</s>"]]
+  (run!
+   (fn [word]
+     (println
+      (format
+       "\"%s\" has preceeded \"hole\" \"</s>\" \"</s>\" a total of %s times"
+       word
+       (second (get markov-tight-trie (map database ["</s>" "</s>" "hole" word]))))))
+   ["a" "this" "that"])
+  (run!
+   (fn [word]
+     (let [seed ["</s>" "</s>" "hole" word]]
+       (println
+        (format
+         "%s is the perplexity of \"%s\" \"hole\" \"</s>\" \"</s>\""
+         (->> seed
+              (map database)
+              (markov/perplexity 4 markov-tight-trie))
+         word))))
+   ["a" "this" "that"])
+  nil)
+#+end_src
+
+#+RESULTS:
+: "a" has preceeded "hole" "</s>" "</s>" a total of 250 times
+: "this" has preceeded "hole" "</s>" "</s>" a total of 173 times
+: "that" has preceeded "hole" "</s>" "</s>" a total of 45 times
+: -12.184088569934774 is the perplexity of "a" "hole" "</s>" "</s>"
+: -12.552930899563904 is the perplexity of "this" "hole" "</s>" "</s>"
+: -13.905719644461469 is the perplexity of "that" "hole" "</s>" "</s>"
+
+The results above make intuitive sense. The most common word to preceed "hole" at the end of a sentence is the word "a". There are 250 instances of sentences of "... a hole.". That can be compared to 173 instances of "... this hole." and 45 instances of "... that hole.".
+
+Therefore, "... a hole." is has the lowest "perplexity".
+
+This standardized measure of accuracy can be used to compare different language generation algorithms.
+
+** Security Features
+
+Artists/Songwriters place a lot of value in the secrecy of their content. Therefore, all communication with the web-based interface occurs over a secure connection using HTTPS.
+
+Security certificates are generated using Let's Encrypt and an Nginx web server handles the SSL termination.
+
+With this precaution in place, attackers will not be able to snoop the content that songwriters are sending to or receiving from the servers.
+
+** TODO Tools To Monitor And Maintain The Product
+
+- Script to auto-update SSL cert
+- Enable NGINX dashboard?
+
+** TODO A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
 
 
 * Documentation
