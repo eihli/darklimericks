@@ -3,7 +3,91 @@
 :PROPERTIES:
 :END:
 
-* RhymeStorm Capstone Requirements Documentation
+* A. Letter Of Transmittal
+
+Create a letter of transmittal and a project proposal to convince senior, non-technical managers and executives to implement the data product you have designed. The proposal should include each of the following:
+
+** Problem Summary
+
+Songwriters, artists, and record labels can save time and discover better lyrics with the help of a machine learning tool that supports their creative endeavours.
+
+Songwriters have several old-fashioned tools at their disposal including dictionaries and thesauruses. But machine learning exposes a new set of powerful possibilities. Using simple machine learning techniques, it is possible to automatically generate vast numbers of lyrics that match specified criteria for rhyming, syllable count, genre, and more.
+
+** a description of how the data product benefits the customer and supports the decision-making process
+
+How many sensible phrases can you think of that rhyme with "war on poverty"? What if I say that there's a restriction to only come up with phrases that are exactly 14 syllables? That's a common restriction when a songwriter is trying to match the meter of a previous line. What if I add another restriction that there must be primary stress at certain spots in that 14 syllable phrase?
+
+This is the process that songwriters go through all day. It's a process that gets little help from traditional tools like dictionaries and thesauruses.
+
+And this is a process that is perfect for machine learning. Machine learning can learn the most likely grammatical structure of phrases and can make predictions about likely words that follow a given sequence of other words. Computers can iterate through millions of words, checking for restrictions on rhyme, syllable count, and more. The most tedious part of lyric generation can be automated with machine learning software, leaving the songwriter free to cherry-pick from the best lyrics and make minor touch-ups to make them perfect.
+
+** an outline of the data product
+
+The machine learning part of software that I described above can be implemented with a simple machine learning technique known as a Hidden Markov Model.
+
+Without getting too technical, using a Hidden Markov Model will involve using an existing lyrics database as input and the output will be a function that returns the likelihood of a word following a sequence of previous words.
+
+A choice of many different programming languages and algorithms are sufficient to handle the other parts of the product, like splitting a word into phonetic sounds, finding rhymes, and matching stress between phrases.
+
+An initial version of the software will be trained on the heavy metal lyrics database at http://darklyrics.com and a website will be created where users can type in a "seed" sequence of word(s) and the model will output a variety of possible completions.
+
+This auto-complete functionality will be similar to the auto-complete that is commonly found on phone keyboard applications that help users type faster on phone touchscreens.
+
+** a description of the data that will be used to construct the data product
+
+The initial model will be trained on the lyrics from http://darklyrics.com. This is a publicly available data set with minimal meta-data. Record labels will have more valuable datasets that will include meta-data along with lyrics, such as the date the song was popular, the number of radio plays of the song, the profit of the song/artist, etc...
+
+The software can be augmented with additional algorithms to account for the type of meta-data that a record label may have. The augmentations can happen in iterative software development cycles, using Agile methodologies.
+
+** the objectives and hypotheses of the project
+
+This software will accomplish its primary objective if it makes its way into the daily toolkit of a handful of singers/songwriters.
+
+Several secondary objectives are also desirable and reasonably expected. The architecture of the software lends itself to existing as several independently useful modules.
+
+For example, the Markov Model can be conveniently backed by a Trie data structure. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
+
+Another example is the package that turns phrases into phones. That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
+
+** an outline of the project methodology
+
+** funding requirements
+
+** the impact of the solution on stakeholders
+
+** ethical and legal considerations and precautions that will be used when working with and communicating about sensitive data
+
+** your expertise relevant to the solution you propose
+
+
+Note: Expertise described here could be real or hypothetical to fit the project topic you have created.
+
+
+* B. Executive Summary - Technical Notes And Requirements
+
+Write an executive summary directed to IT professionals that addresses each of the following requirements:
+
+** the decision-support problem or opportunity you are solving for
+
+** a description of the customers and why this product will fulfill their needs
+
+** existing gaps in the data products you are replacing or modifying (if applicable)
+
+** the data available or the data that needs to be collected to support the data product lifecycle
+
+** the methodology you use to guide and support the data product design and development
+
+** deliverables associated with the design and development of the data product
+
+** the plan for implementation of your data product, including the anticipated outcomes from this development
+
+** the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
+
+** the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
+
+** a projected timeline, including milestones, start and end dates, duration for each milestone, dependencies, and resources assigned to each task
+
+* C. RhymeStorm Capstone Requirements Documentation
 
 RhymeStorm is an application to help singers and songwriters brainstorm new lyrics.
 
@@ -438,9 +522,9 @@ With this precaution in place, attackers will not be able to snoop the content t
 ** TODO A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
 
 
-* Documentation
+* D. Documentation
 
-D.  Create each of the following forms of documentation for the product you have developed:
+Create each of the following forms of documentation for the product you have developed:
 
 ** Business Vision
 
