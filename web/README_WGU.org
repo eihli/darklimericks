@@ -13,7 +13,7 @@ Songwriters, artists, and record labels can save time and discover better lyrics
 
 Songwriters have several old-fashioned tools at their disposal including dictionaries and thesauruses. But machine learning exposes a new set of powerful possibilities. Using simple machine learning techniques, it is possible to automatically generate vast numbers of lyrics that match specified criteria for rhyming, syllable count, genre, and more.
 
-** a description of how the data product benefits the customer and supports the decision-making process
+** Benefits
 
 How many sensible phrases can you think of that rhyme with "war on poverty"? What if I say that there's a restriction to only come up with phrases that are exactly 14 syllables? That's a common restriction when a songwriter is trying to match the meter of a previous line. What if I add another restriction that there must be primary stress at certain spots in that 14 syllable phrase?
 
@@ -21,7 +21,7 @@ This is the process that songwriters go through all day. It's a process that get
 
 And this is a process that is perfect for machine learning. Machine learning can learn the most likely grammatical structure of phrases and can make predictions about likely words that follow a given sequence of other words. Computers can iterate through millions of words, checking for restrictions on rhyme, syllable count, and more. The most tedious part of lyric generation can be automated with machine learning software, leaving the songwriter free to cherry-pick from the best lyrics and make minor touch-ups to make them perfect.
 
-** an outline of the data product
+** Product
 
 The machine learning part of software that I described above can be implemented with a simple machine learning technique known as a Hidden Markov Model.
 
@@ -33,13 +33,13 @@ An initial version of the software will be trained on the heavy metal lyrics dat
 
 This auto-complete functionality will be similar to the auto-complete that is commonly found on phone keyboard applications that help users type faster on phone touchscreens.
 
-** a description of the data that will be used to construct the data product
+** Data
 
 The initial model will be trained on the lyrics from http://darklyrics.com. This is a publicly available data set with minimal meta-data. Record labels will have more valuable datasets that will include meta-data along with lyrics, such as the date the song was popular, the number of radio plays of the song, the profit of the song/artist, etc...
 
 The software can be augmented with additional algorithms to account for the type of meta-data that a record label may have. The augmentations can happen in iterative software development cycles, using Agile methodologies.
 
-** the objectives and hypotheses of the project
+** Objectives
 
 This software will accomplish its primary objective if it makes its way into the daily toolkit of a handful of singers/songwriters.
 
@@ -49,33 +49,101 @@ For example, the Markov Model can be conveniently backed by a Trie data structur
 
 Another example is the package that turns phrases into phones. That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
 
-** an outline of the project methodology
+** Development Methodology - Agile
 
-** funding requirements
+This project will be developed with an iterative Agile methodology. Since a large part of data science and machine learning is exploration, this project will benefit from ongoing exploration in tandem with development.
 
-** the impact of the solution on stakeholders
+Additionally, the developer(s) working on the project won't have (and won't need to have) access to the data sets that songwriters and record labels may have. Work can begin immediately with an iterative approach and future data sets can be integrated as they become available.
 
-** ethical and legal considerations and precautions that will be used when working with and communicating about sensitive data
+The prices quoted below are for an initial minimum-viable-product that will serve as a proof-of-concept. Future contracts can be negotiated for ongoing development at similar rates.
 
-** your expertise relevant to the solution you propose
+** Costs
+
+Funding requirements are minimal. The initial dataset is public and freely available. On a typical consumer laptop, Hidden Markov Models can be trained on fairly large datasets in short time and the training doesn't require the use of expensive hardware like the GPUs used to train Deep Neural Networks.
+
+For the initial product, the only development expensive would be the hourly rate of a full-stack developer. The ongoing expensive for the website hosting the user interface would be roughly $20 to $200 per month depending on how many users access the site at the same time.
+
+These are my estimates for the time and cost of different aspects of initial development.
+
+| Task                    | Hours | Cost   |
+|-------------------------+-------+--------|
+| Trie                    |    60 | $600   |
+| Phonetics               |    30 | $300   |
+| HMM Training Algorithms |    60 | $600   |
+| Web User Interface      |    80 | $800   |
+| Web Server              |    60 | $600   |
+| Testing                 |    20 | $200   |
+| Quality Assurance       |    20 | $200   |
+| Total                   |   330 | $3,300 |
 
 
-Note: Expertise described here could be real or hypothetical to fit the project topic you have created.
+** NO the impact of the solution on stakeholders
 
+This seems redundant or irrelevant. The only stakeholders in the project I'm describing would be the record labels or songwriters and the impact on them is described in the [[Benefits]] section above.
 
-* B. Executive Summary - Technical Notes And Requirements
+** Ethical And Legal Considerations
+
+Web scraping, the method used to obtain the initial dataset from http://darklyrics.com, is protected given the ruling in [[https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn]].
+
+The use of publicly available data in generative works is less clear. But Microsoft's lawyers deemed it sound given their recent release of Github CoPilot ([[https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code]]).
+
+** Expertise
+
+I have 10 years experience as a programmer and have worked extensively on both frontend technologies like HTML/JavaScript, backend technologies like Django, and building libraries/packages/frameworks.
+
+I've also been writing limericks my entire life and hold the International Limerick Imaginative Enthusiast's ILIE award for the years 2013 and 2019.
+
+* B. Executive Summary - RhymeStorm® Technical Notes And Requirements
 
 Write an executive summary directed to IT professionals that addresses each of the following requirements:
 
-** the decision-support problem or opportunity you are solving for
+** Decision Support Opportunity
 
-** a description of the customers and why this product will fulfill their needs
+Songwriters expend a lot of time and effort finding the perfect rhyming word or phrase. RhymeStorm® is going to amplify user's creative abilities by searching its machine learning model for sensible and proven-successful words and phrases that meet the rhyme scheme and meter requirements requested by the user.
 
-** existing gaps in the data products you are replacing or modifying (if applicable)
+When a songwriter needs to find likely phrases that rhyme with "war on poverty" and has 14 syllables, RhymeStorm® will automatically generate dozens of possibilities and rank them by "perplexity" and rhyme quality. The songwriter can focus there efforts on simple touch-ups to perfect the automatically generated lyrics.
 
-** the data available or the data that needs to be collected to support the data product lifecycle
+** Customer Needs And Product Description
 
-** the methodology you use to guide and support the data product design and development
+Songwriters spend money on dictionaries, compilations of slang, thesauruses, and phrase dictionaries. They spend their time daydreaming, brainstorming, contemplating, and mixing and matching the knowledge they acquire through these traditional means.
+
+A simple experiment you can try yourself will show that it takes between 5 and 30 seconds to look up a word in a dictionary or thesaurus. Then it takes an equal amount of time to look up each synonym, antonym, or other word that comes to mind. A few of those words may rhyme, but each word requires building an entire sentence around it that meets restrictions for sensibility, meter, and scheme.
+
+This process can take a person hours for a single line and weeks for a single song.
+
+Computers can process and sort this information and sort the results by quality millions of times faster. A few minutes of a songwriter specifying filters, restrictions, and requirements can save them days of traditional brainstorming.
+
+** Existing Products
+
+We're all familiar with dictionaries, thesauruses, and their shortcomings.
+
+There is a small amount of technology being applied to this problem. A popular site to find rhymes is https://www.rhymezone.com.
+
+RhymeZone is limited in its capability. It doesn't do well finding rhymes for phrases more than a couple of words and it can't generate suggestions for lyric completions.
+
+** Available Data And Future Data Lifecycle
+
+The initial dataset will be gathered by downloading lyrics from http://darklyrics.com and future models can be generated by downloading lyrics from other websites. Alternatively, data can be provided by record labels and combined with meta-data that the record label may have, such as how many radio plays each song gets and how much profit they make from each song.
+
+RhymeStorm® can offer multiple models depending on the genre or theme that the songwriter is looking for. With the initial dataset from http://darklyrics.com, all suggestions will have a heavy metal theme. But future data sets can be trained on rap, pop, or other genres.
+
+Songs don't get released fast enough that training needs to be an automated ongoing process. Perhaps once a year, or whenever a new dataset becomes available, someone can run a script that will update the data models.
+
+The script to generate data models will accept as arguments a directory containing files of songs, a filepath to save the completed model, the "rank" of the Hidden Markov Model, and it will generate a Trie representing the HMM and save it to disk at the specified location.
+
+Each new model can be uploaded to the web server and users can select which model they want to use.
+
+** Methodology - Agile
+
+RhymeStorm® development will proceed with an iterative Agile methodology. It will be composed of several independent modules that can be worked on independently, in parallel, and iteratively.
+
+The Trie data structure that will be used as a backing to the Hidden Markov Model can be worked on in isolation from any other aspect of the project. The first iteration can use a simple hash-map as a backing store. The second iteration can improve memory efficiency by using a ByteBuffer as a [[https://aclanthology.org/W09-1505.pdf][Tightly Packed Trie]]. Future iterations can continue to improve performance metrics.
+
+The web server can be implemented initially without security measures like HTTPS and performance measures like load balancing. Future iterations can add these features as they become necessary.
+
+The user interface can be implemented as a wireframe and extended as new functionality becomes available from the backend.
+
+Much of data science is exploratory and taking an iterative Agile approach can take advantage of delaying decisions while information is gathered.
 
 ** deliverables associated with the design and development of the data product
 
