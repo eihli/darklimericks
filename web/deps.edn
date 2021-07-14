@@ -20,7 +20,7 @@
   environ/environ             {:mvn/version "1.2.0"}
   metasoarous/oz              {:git/url "https://github.com/metasoarous/oz"
                                :sha     "22aba1588e9082eac420f562c7628f90977574ce"}
-  prhyme                      {:local/root "/home/eihli/src/prhyme"}
+  prhyme/prhyme               {:local/root "/home/eihli/src/prhyme"}
   com.owoga/phonetics         {:local/root "/home/eihli/src/phonetics"}}
  :paths   ["src" "resources"]
  :aliases {:dev {:extra-paths ["dev"]

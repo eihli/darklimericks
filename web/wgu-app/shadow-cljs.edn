@@ -5,7 +5,7 @@
   "src/test"]
 
  :dependencies
- []
+ [[metasoarous/oz "1.6.0-alpha34"]]
 
  :builds
  {:frontend

@@ -85,9 +85,9 @@ In the example below, we provide a seed suffix of "bother me" and ask the softwa
 
 ** Datasets
 
-The dataset currently in use is in ~/dark-corpus~. This dataset was generated from the publicly available lyrics at http://darklyrics.com.
+The dataset currently in use was generated from the publicly available lyrics at http://darklyrics.com.
 
- Further datasets will need to be provided by the end-user.
+Further datasets will need to be provided by the end-user.
 
 ** Decision Support Functionality
 
@@ -116,7 +116,8 @@ Therefore, this software provides functionality to sort rhymes so that rhymes th
 In the example below, you'll see that the first 20 or so rhymes are perfect, but then "hypocrisy" is listed as rhyming with "technology". This is for the reason just mentioned. It's close to a perfect rhyme and it's of interest to singers/songwriters.
 
 #+begin_src clojure :results value table :colnames yes :session main :exports both
-(require '[com.darklimericks.linguistics.core :as linguistics])
+(require '[com.darklimericks.linguistics.core :as linguistics]
+         '[com.darklimericks.server.models :as models])
 
 (let [results
       (linguistics/rhymes-with-frequencies-and-rhyme-quality
@@ -167,7 +168,7 @@ In the example below, you'll see that the first 20 or so rhymes are perfect, but
 
 ** Featurizing, Parsing, Cleaning, And Wrangling Data
 
-The data processing code is in ~prhyme~
+The data processing code is in [[https://github.com/eihli/prhyme]]
 
 Each line gets tokenized using a regular expression to split the string into tokens.
 
@@ -197,6 +198,8 @@ words can be compared: "Foo" is the same as "foo".
 The primary data structure and algorithms supporting exploration of the data are a Markov Trie
 
 The Trie data structure supports a ~lookup~ function that returns the child trie at a certain lookup key and a ~children~ function that returns all of the immediate children of a particular Trie.
+
+All Trie code is hosted in the git repo located at [[https://github.com/eihli/clj-tightly-packed-trie]].
 
 #+begin_src clojure :eval no
 (defprotocol ITrie
@@ -362,7 +365,7 @@ It also performs compaction and serialization. Song lyrics are typically provide
   )
 #+end_src
 
-Functionalities To Evaluate The Accuracy Of The Data Product
+** Functionalities To Evaluate The Accuracy Of The Data Product
 
 Since creative brainstorming is the goal, "accuracy" is subjective.
 
