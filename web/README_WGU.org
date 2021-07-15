@@ -3,6 +3,41 @@
 :PROPERTIES:
 :END:
 
+* WGU Evaluator Notes
+
+Hello! I hope you enjoy your time with this evaluation!
+
+Here's a quick introduction to help you navigate this project.
+
+The document you are reading now contains or points to each of the requirements listed at the course task overview page for C964.
+
+The section immediately following this contains notes on how to view and run the software locally. In addition, I'm hosting a demo of the application at https://darklimericks.com/wgu.
+
+After I describe the steps to initialize a development environment, you'll find a [[Letter Of Transmittal]], [[#executive-summary][Technical Executive Summary]], [[#requirements-documentation][links to the final product and details of how it meets each requirement]], and the [[#remaining-documentation][remaining required documentation]].
+
+* Evaluation Technical Documentation
+
+** How To Initialize Development Environment
+
+*** Required Software
+
+- [[https://www.docker.com/][Docker]]
+- [[https://clojure.org/releases/downloads][Clojure Version 1.10+]]
+- [[https://nodejs.org/en/download/][NodeJS]]
+
+** How To Run Software Locally
+
+*** Requirements
+
+- [[https://www.java.com/download/ie_manual.jsp][Java]]
+- [[https://www.docker.com/][Docker]]
+
+*** Steps
+
+1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
+2. Navigate to the root directory of this git repo and run ~java -jar darklimericks-dev.jar~
+3. Visit http://localhost:8000/wgu
+
 * A. Letter Of Transmittal
 
 ** Problem Summary
@@ -94,6 +129,9 @@ I have 10 years experience as a programmer and have worked extensively on both f
 I've also been writing limericks my entire life and hold the International Limerick Imaginative Enthusiast's ILIE award for the years 2013 and 2019.
 
 * B. Executive Summary - RhymeStorm™ Technical Notes And Requirements
+:PROPERTIES:
+:CUSTOM_ID: executive-summary
+:END:
 
 Write an executive summary directed to IT professionals that addresses each of the following requirements:
 
@@ -205,6 +243,9 @@ All code was written and all models were trained on a Lenovo T15G with an Intel 
 |      6 | 2021-08-21 | 2021-09-07 | QA - Testing - Deploy And Release Web App                     |
 
 * C. RhymeStormg™ Capstone Requirements Documentation
+:PROPERTIES:
+:CUSTOM_ID: requirements-documentation
+:END:
 
 RhymeStorm™ is an application to help singers and songwriters brainstorm new lyrics.
 
@@ -679,12 +720,23 @@ With this precaution in place, attackers will not be able to snoop the content t
 
 
 * D. Documentation
+:PROPERTIES:
+:CUSTOM_ID: remaining-documentation
+:END:
 
 Create each of the following forms of documentation for the product you have developed:
 
 ** Business Vision
 
 Provide rhyming lyric suggestions optionally constrained by syllable count.
+
+*** Requirements
+
+- [ ] Given a word or phrase, suggest rhymes (ranked by quality) (Trie)
+- [ ] Given a word or phrase, suggest lyric completion (Hidden Markov Model)
+  + [ ] Restrict suggestion by syllable count
+  + [ ] Restrict suggestion by rhyme quality
+  + [ ] Show graph of suggestions with perplexity on one axis and rhyme quality on the other
 
 ** Data Sets
 
