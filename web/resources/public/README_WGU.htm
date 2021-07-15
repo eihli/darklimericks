@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-13 Tue 20:39 -->
+<!-- 2021-07-14 Wed 19:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RhymeStorm - WGU CSCI Capstone Project</title>
+<title>RhymeStorm™ - WGU CSCI Capstone Project</title>
 <meta name="author" content="Eric Ihli" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -218,73 +218,610 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">RhymeStorm - WGU CSCI Capstone Project</h1>
+<h1 class="title">RhymeStorm™ - WGU CSCI Capstone Project</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org14a3a15">1. RhymeStorm Capstone Requirements Documentation</a>
+<li><a href="#org3daefd8">1. A. Letter Of Transmittal</a>
 <ul>
-<li><a href="#org716e7d7">1.1. Descriptive And Predictive Methods</a>
-<ul>
-<li><a href="#org12c93c0">1.1.1. Descriptive Method</a></li>
-<li><a href="#org6c4e064">1.1.2. Prescriptive Method</a></li>
+<li><a href="#org719ab7d">1.1. Problem Summary</a></li>
+<li><a href="#orge4c184c">1.2. Benefits</a></li>
+<li><a href="#org7f197c9">1.3. Product - RhymeStorm®</a></li>
+<li><a href="#org0ebb246">1.4. Data</a></li>
+<li><a href="#orgd1c230f">1.5. Objectives</a></li>
+<li><a href="#org76960e3">1.6. Development Methodology - Agile</a></li>
+<li><a href="#org1e0d457">1.7. Costs</a></li>
+<li><a href="#org062fa9a">1.8. <span class="done NO">NO</span> the impact of the solution on stakeholders</a></li>
+<li><a href="#orga4f9dd0">1.9. Ethical And Legal Considerations</a></li>
+<li><a href="#org8334871">1.10. Expertise</a></li>
 </ul>
 </li>
-<li><a href="#org1ccfefb">1.2. Datasets</a></li>
-<li><a href="#org8b56e0a">1.3. Decision Support Functionality</a>
+<li><a href="#orgfdef98e">2. B. Executive Summary - RhymeStorm® Technical Notes And Requirements</a>
 <ul>
-<li><a href="#org19a500c">1.3.1. Choosing Words For A Lyric Based On Markov Likelihood</a></li>
-<li><a href="#orge4b7a97">1.3.2. Choosing Words To Complete A Lyric Based On Rhyme Quality</a></li>
+<li><a href="#org0715087">2.1. Decision Support Opportunity</a></li>
+<li><a href="#orgc162b6b">2.2. Customer Needs And Product Description</a></li>
+<li><a href="#org62bb9c8">2.3. Existing Products</a></li>
+<li><a href="#org23c6f72">2.4. Available Data And Future Data Lifecycle</a></li>
+<li><a href="#orge28c5b5">2.5. Methodology - Agile</a></li>
+<li><a href="#orgbb27410">2.6. Deliverables</a></li>
+<li><a href="#org79cc7a1">2.7. Implementation Plan And Anticipations</a></li>
+<li><a href="#orgbf01f48">2.8. Requirements Validation And Verification</a></li>
+<li><a href="#orgca70067">2.9. Programming Environments And Costs</a></li>
+<li><a href="#org5c72ee3">2.10. Timeline And Milestones</a></li>
 </ul>
 </li>
-<li><a href="#orgf13759f">1.4. Featurizing, Parsing, Cleaning, And Wrangling Data</a></li>
-<li><a href="#org5c868f3">1.5. Data Exploration And Preparation</a></li>
-<li><a href="#org1a53aca">1.6. <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</a></li>
-<li><a href="#org9160b2a">1.7. <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</a></li>
-<li><a href="#org5bb9e83">1.8. <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</a></li>
-<li><a href="#org7791154">1.9. Security Features</a></li>
-<li><a href="#org2118b36">1.10. <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</a></li>
-<li><a href="#org3e7ea9b">1.11. <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</a></li>
-</ul>
-</li>
-<li><a href="#orge2d60f8">2. Documentation</a>
+<li><a href="#org2596c7c">3. C. RhymeStorm Capstone Requirements Documentation</a>
 <ul>
-<li><a href="#orgcc70df2">2.1. Business Vision</a></li>
-<li><a href="#orgc216269">2.2. Data Sets</a></li>
-<li><a href="#org4fd130a">2.3. Data Analysis</a></li>
-<li><a href="#org33bec77">2.4. Assessment</a></li>
-<li><a href="#orgae6aaf1">2.5. Visualizations</a></li>
-<li><a href="#orgaad09e3">2.6. Accuracy</a></li>
-<li><a href="#org248156b">2.7. Testing</a></li>
-<li><a href="#org4c2c5cb">2.8. Source</a></li>
-<li><a href="#org55bc8bd">2.9. Quick Start</a></li>
+<li><a href="#orgcc92b82">3.1. Descriptive And Predictive Methods</a>
+<ul>
+<li><a href="#orgcd4681d">3.1.1. Descriptive Method</a></li>
+<li><a href="#org751d925">3.1.2. Prescriptive Method</a></li>
 </ul>
 </li>
-<li><a href="#org3027af3">3. Notes</a></li>
+<li><a href="#orgb91051c">3.2. Datasets</a></li>
+<li><a href="#org541df2d">3.3. Decision Support Functionality</a>
+<ul>
+<li><a href="#orgf41fd57">3.3.1. Choosing Words For A Lyric Based On Markov Likelihood</a></li>
+<li><a href="#org59de772">3.3.2. Choosing Words To Complete A Lyric Based On Rhyme Quality</a></li>
+</ul>
+</li>
+<li><a href="#orga0687da">3.4. Featurizing, Parsing, Cleaning, And Wrangling Data</a></li>
+<li><a href="#org16825c0">3.5. Data Exploration And Preparation</a></li>
+<li><a href="#orgad4da42">3.6. <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</a></li>
+<li><a href="#org960bb46">3.7. <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</a></li>
+<li><a href="#org143d723">3.8. <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</a></li>
+<li><a href="#org783a845">3.9. Functionalities To Evaluate The Accuracy Of The Data Product</a></li>
+<li><a href="#org30d2726">3.10. Security Features</a></li>
+<li><a href="#org2af4d15">3.11. <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</a></li>
+<li><a href="#org51581d8">3.12. <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</a></li>
+</ul>
+</li>
+<li><a href="#org78016b5">4. D. Documentation</a>
+<ul>
+<li><a href="#orgde9a9b6">4.1. Business Vision</a></li>
+<li><a href="#orge9c500f">4.2. Data Sets</a></li>
+<li><a href="#orgfb34734">4.3. Data Analysis</a></li>
+<li><a href="#org800eb15">4.4. Assessment</a></li>
+<li><a href="#org0ed7075">4.5. Visualizations</a></li>
+<li><a href="#orgde27d1f">4.6. Accuracy</a></li>
+<li><a href="#orgd80a269">4.7. Testing</a></li>
+<li><a href="#org99c9655">4.8. Source</a></li>
+<li><a href="#org3600f98">4.9. Quick Start</a></li>
+</ul>
+</li>
+<li><a href="#org16138d4">5. Notes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org14a3a15" class="outline-2">
-<h2 id="org14a3a15"><span class="section-number-2">1</span> RhymeStorm Capstone Requirements Documentation</h2>
+<div id="outline-container-org3daefd8" class="outline-2">
+<h2 id="org3daefd8"><span class="section-number-2">1</span> A. Letter Of Transmittal</h2>
 <div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org719ab7d" class="outline-3">
+<h3 id="org719ab7d"><span class="section-number-3">1.1</span> Problem Summary</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Songwriters, artists, and record labels can save time and discover better lyrics with the help of a machine learning tool that supports their creative endeavours.
+</p>
+
+<p>
+Songwriters have several old-fashioned tools at their disposal including dictionaries and thesauruses. But machine learning exposes a new set of powerful possibilities. Using simple machine learning techniques, it is possible to automatically generate vast numbers of lyrics that match specified criteria for rhyming, syllable count, genre, and more.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge4c184c" class="outline-3">
+<h3 id="orge4c184c"><span class="section-number-3">1.2</span> Benefits</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+How many sensible phrases can you think of that rhyme with &ldquo;war on poverty&rdquo;? What if I say that there&rsquo;s a restriction to only come up with phrases that are exactly 14 syllables? That&rsquo;s a common restriction when a songwriter is trying to match the meter of a previous line. What if I add another restriction that there must be primary stress at certain spots in that 14 syllable phrase?
+</p>
+
+<p>
+This is the process that songwriters go through all day. It&rsquo;s a process that gets little help from traditional tools like dictionaries and thesauruses.
+</p>
+
+<p>
+And this is a process that is perfect for machine learning. Machine learning can learn the most likely grammatical structure of phrases and can make predictions about likely words that follow a given sequence of other words. Computers can iterate through millions of words, checking for restrictions on rhyme, syllable count, and more. The most tedious part of lyric generation can be automated with machine learning software, leaving the songwriter free to cherry-pick from the best lyrics and make minor touch-ups to make them perfect.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7f197c9" class="outline-3">
+<h3 id="org7f197c9"><span class="section-number-3">1.3</span> Product - RhymeStorm®</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+RhymeStorm® is a tool to help songwriters brainstorm. It provides lyrics automatically generated based on training data from existing songs while adhering to restrictions based on rhyme scheme, meter, genre, and more.
+</p>
+
+<p>
+The machine learning part of software that I described above can be implemented with a simple machine learning technique known as a Hidden Markov Model.
+</p>
+
+<p>
+Without getting too technical, using a Hidden Markov Model will involve using an existing lyrics database as input and the output will be a function that returns the likelihood of a word following a sequence of previous words.
+</p>
+
+<p>
+A choice of many different programming languages and algorithms are sufficient to handle the other parts of the product, like splitting a word into phonetic sounds, finding rhymes, and matching stress between phrases.
+</p>
+
+<p>
+An initial version of the software will be trained on the heavy metal lyrics database at <a href="http://darklyrics.com">http://darklyrics.com</a> and a website will be created where users can type in a &ldquo;seed&rdquo; sequence of word(s) and the model will output a variety of possible completions.
+</p>
+
+<p>
+This auto-complete functionality will be similar to the auto-complete that is commonly found on phone keyboard applications that help users type faster on phone touchscreens.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ebb246" class="outline-3">
+<h3 id="org0ebb246"><span class="section-number-3">1.4</span> Data</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The initial model will be trained on the lyrics from <a href="http://darklyrics.com">http://darklyrics.com</a>. This is a publicly available data set with minimal meta-data. Record labels will have more valuable datasets that will include meta-data along with lyrics, such as the date the song was popular, the number of radio plays of the song, the profit of the song/artist, etc&#x2026;
+</p>
+
+<p>
+The software can be augmented with additional algorithms to account for the type of meta-data that a record label may have. The augmentations can happen in iterative software development cycles, using Agile methodologies.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd1c230f" class="outline-3">
+<h3 id="orgd1c230f"><span class="section-number-3">1.5</span> Objectives</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+This software will accomplish its primary objective if it makes its way into the daily toolkit of a handful of singers/songwriters.
+</p>
+
+<p>
+Several secondary objectives are also desirable and reasonably expected. The architecture of the software lends itself to existing as several independently useful modules.
+</p>
+
+<p>
+For example, the Markov Model can be conveniently backed by a Trie data structure. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
+</p>
+
+<p>
+Another example is the package that turns phrases into phones. That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org76960e3" class="outline-3">
+<h3 id="org76960e3"><span class="section-number-3">1.6</span> Development Methodology - Agile</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+This project will be developed with an iterative Agile methodology. Since a large part of data science and machine learning is exploration, this project will benefit from ongoing exploration in tandem with development.
+</p>
+
+<p>
+Additionally, the developer(s) working on the project won&rsquo;t have (and won&rsquo;t need to have) access to the data sets that songwriters and record labels may have. Work can begin immediately with an iterative approach and future data sets can be integrated as they become available.
+</p>
+
+<p>
+The prices quoted below are for an initial minimum-viable-product that will serve as a proof-of-concept. Future contracts can be negotiated for ongoing development at similar rates.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e0d457" class="outline-3">
+<h3 id="org1e0d457"><span class="section-number-3">1.7</span> Costs</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Funding requirements are minimal. The initial dataset is public and freely available. On a typical consumer laptop, Hidden Markov Models can be trained on fairly large datasets in short time and the training doesn&rsquo;t require the use of expensive hardware like the GPUs used to train Deep Neural Networks.
+</p>
+
+<p>
+For the initial product, the only development expensive would be the hourly rate of a full-stack developer. The ongoing expensive for the website hosting the user interface would be roughly $20 to $200 per month depending on how many users access the site at the same time.
+</p>
+
+<p>
+These are my estimates for the time and cost of different aspects of initial development.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Task</th>
+<th scope="col" class="org-right">Hours</th>
+<th scope="col" class="org-left">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Trie</td>
+<td class="org-right">60</td>
+<td class="org-left">$600</td>
+</tr>
+
+<tr>
+<td class="org-left">Phonetics</td>
+<td class="org-right">30</td>
+<td class="org-left">$300</td>
+</tr>
+
+<tr>
+<td class="org-left">HMM Training Algorithms</td>
+<td class="org-right">60</td>
+<td class="org-left">$600</td>
+</tr>
+
+<tr>
+<td class="org-left">Web User Interface</td>
+<td class="org-right">80</td>
+<td class="org-left">$800</td>
+</tr>
+
+<tr>
+<td class="org-left">Web Server</td>
+<td class="org-right">60</td>
+<td class="org-left">$600</td>
+</tr>
+
+<tr>
+<td class="org-left">Testing</td>
+<td class="org-right">20</td>
+<td class="org-left">$200</td>
+</tr>
+
+<tr>
+<td class="org-left">Quality Assurance</td>
+<td class="org-right">20</td>
+<td class="org-left">$200</td>
+</tr>
+
+<tr>
+<td class="org-left">Total</td>
+<td class="org-right">330</td>
+<td class="org-left">$3,300</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org062fa9a" class="outline-3">
+<h3 id="org062fa9a"><span class="section-number-3">1.8</span> <span class="done NO">NO</span> the impact of the solution on stakeholders</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+This seems redundant or irrelevant. The only stakeholders in the project I&rsquo;m describing would be the record labels or songwriters and the impact on them is described in the <a href="#orge4c184c">1.2</a> section above.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga4f9dd0" class="outline-3">
+<h3 id="orga4f9dd0"><span class="section-number-3">1.9</span> Ethical And Legal Considerations</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Web scraping, the method used to obtain the initial dataset from <a href="http://darklyrics.com">http://darklyrics.com</a>, is protected given the ruling in <a href="https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn">https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn</a>.
+</p>
+
+<p>
+The use of publicly available data in generative works is less clear. But Microsoft&rsquo;s lawyers deemed it sound given their recent release of Github CoPilot (<a href="https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code">https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code</a>).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8334871" class="outline-3">
+<h3 id="org8334871"><span class="section-number-3">1.10</span> Expertise</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+I have 10 years experience as a programmer and have worked extensively on both frontend technologies like HTML/JavaScript, backend technologies like Django, and building libraries/packages/frameworks.
+</p>
+
+<p>
+I&rsquo;ve also been writing limericks my entire life and hold the International Limerick Imaginative Enthusiast&rsquo;s ILIE award for the years 2013 and 2019.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfdef98e" class="outline-2">
+<h2 id="orgfdef98e"><span class="section-number-2">2</span> B. Executive Summary - RhymeStorm® Technical Notes And Requirements</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Write an executive summary directed to IT professionals that addresses each of the following requirements:
+</p>
+</div>
+
+<div id="outline-container-org0715087" class="outline-3">
+<h3 id="org0715087"><span class="section-number-3">2.1</span> Decision Support Opportunity</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Songwriters expend a lot of time and effort finding the perfect rhyming word or phrase. RhymeStorm® is going to amplify user&rsquo;s creative abilities by searching its machine learning model for sensible and proven-successful words and phrases that meet the rhyme scheme and meter requirements requested by the user.
+</p>
+
+<p>
+When a songwriter needs to find likely phrases that rhyme with &ldquo;war on poverty&rdquo; and has 14 syllables, RhymeStorm® will automatically generate dozens of possibilities and rank them by &ldquo;perplexity&rdquo; and rhyme quality. The songwriter can focus there efforts on simple touch-ups to perfect the automatically generated lyrics.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc162b6b" class="outline-3">
+<h3 id="orgc162b6b"><span class="section-number-3">2.2</span> Customer Needs And Product Description</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Songwriters spend money on dictionaries, compilations of slang, thesauruses, and phrase dictionaries. They spend their time daydreaming, brainstorming, contemplating, and mixing and matching the knowledge they acquire through these traditional means.
+</p>
+
+<p>
+A simple experiment you can try yourself will show that it takes between 5 and 30 seconds to look up a word in a dictionary or thesaurus. Then it takes an equal amount of time to look up each synonym, antonym, or other word that comes to mind. A few of those words may rhyme, but each word requires building an entire sentence around it that meets restrictions for sensibility, meter, and scheme.
+</p>
+
+<p>
+This process can take a person hours for a single line and weeks for a single song.
+</p>
+
+<p>
+Computers can process and sort this information and sort the results by quality millions of times faster. A few minutes of a songwriter specifying filters, restrictions, and requirements can save them days of traditional brainstorming.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org62bb9c8" class="outline-3">
+<h3 id="org62bb9c8"><span class="section-number-3">2.3</span> Existing Products</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+We&rsquo;re all familiar with dictionaries, thesauruses, and their shortcomings.
+</p>
+
+<p>
+There is a small amount of technology being applied to this problem. A popular site to find rhymes is <a href="https://www.rhymezone.com">https://www.rhymezone.com</a>.
+</p>
+
+<p>
+RhymeZone is limited in its capability. It doesn&rsquo;t do well finding rhymes for phrases more than a couple of words and it can&rsquo;t generate suggestions for lyric completions.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org23c6f72" class="outline-3">
+<h3 id="org23c6f72"><span class="section-number-3">2.4</span> Available Data And Future Data Lifecycle</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+The initial dataset will be gathered by downloading lyrics from <a href="http://darklyrics.com">http://darklyrics.com</a> and future models can be generated by downloading lyrics from other websites. Alternatively, data can be provided by record labels and combined with meta-data that the record label may have, such as how many radio plays each song gets and how much profit they make from each song.
+</p>
+
+<p>
+RhymeStorm® can offer multiple models depending on the genre or theme that the songwriter is looking for. With the initial dataset from <a href="http://darklyrics.com">http://darklyrics.com</a>, all suggestions will have a heavy metal theme. But future data sets can be trained on rap, pop, or other genres.
+</p>
+
+<p>
+Songs don&rsquo;t get released fast enough that training needs to be an automated ongoing process. Perhaps once a year, or whenever a new dataset becomes available, someone can run a script that will update the data models.
+</p>
+
+<p>
+The script to generate data models will accept as arguments a directory containing files of songs, a filepath to save the completed model, the &ldquo;rank&rdquo; of the Hidden Markov Model, and it will generate a Trie representing the HMM and save it to disk at the specified location.
+</p>
+
+<p>
+Each new model can be uploaded to the web server and users can select which model they want to use.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge28c5b5" class="outline-3">
+<h3 id="orge28c5b5"><span class="section-number-3">2.5</span> Methodology - Agile</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+RhymeStorm® development will proceed with an iterative Agile methodology. It will be composed of several independent modules that can be worked on independently, in parallel, and iteratively.
+</p>
+
+<p>
+The Trie data structure that will be used as a backing to the Hidden Markov Model can be worked on in isolation from any other aspect of the project. The first iteration can use a simple hash-map as a backing store. The second iteration can improve memory efficiency by using a ByteBuffer as a <a href="https://aclanthology.org/W09-1505.pdf">Tightly Packed Trie</a>. Future iterations can continue to improve performance metrics.
+</p>
+
+<p>
+The web server can be implemented initially without security measures like HTTPS and performance measures like load balancing. Future iterations can add these features as they become necessary.
+</p>
+
+<p>
+The user interface can be implemented as a wireframe and extended as new functionality becomes available from the backend.
+</p>
+
+<p>
+Much of data science is exploratory and taking an iterative Agile approach can take advantage of delaying decisions while information is gathered.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbb27410" class="outline-3">
+<h3 id="orgbb27410"><span class="section-number-3">2.6</span> Deliverables</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+<a href="https://github.com/eihli/clj-tightly-packed-trie">Tightly Packed Trie</a>
+</p>
+
+<p>
+<a href="https://github.com/eihli/phonetics">Phonetics and Syllabification</a>
+</p>
+
+<p>
+<a href="https://github.com/eihli/prhyme">Data Processing, Markov, and Rhyme Algorithms</a>
+</p>
+
+<p>
+<a href="https://darklimericks.com/wgu">Web GUI and Documentation</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org79cc7a1" class="outline-3">
+<h3 id="org79cc7a1"><span class="section-number-3">2.7</span> Implementation Plan And Anticipations</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+the plan for implementation of your data product, including the anticipated outcomes from this development
+</p>
+
+<p>
+I&rsquo;ll start by writing and releasing the supporting libraries and packages: Tries, Syllabification/Phonetics, Rhyming.
+</p>
+
+<p>
+Then I&rsquo;ll write a website that imports and uses those libraries.
+</p>
+
+<p>
+Since I&rsquo;ll be writing and releasing these packages iteratively as open source, I&rsquo;ll share them publicly as I progress and can use feedback to improve them before RhymeStorm® takes its final form.
+</p>
+
+<p>
+In anticipation of user growth, I&rsquo;ll be deploying the final product on DigitalOcean Droplets. They are virtual machines with resources that can be resized to meet growing demands or shrunk to save money in times of low traffic.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbf01f48" class="outline-3">
+<h3 id="orgbf01f48"><span class="section-number-3">2.8</span> Requirements Validation And Verification</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
+</p>
+
+<p>
+For the known requirements, I&rsquo;ll perform personally perform manual tests and quality assurance. This is a small enough project that one individual can thoroughly test all of the primary requirements.
+</p>
+
+<p>
+Since the project is broken down into isolated sub-projects, unit tests will be added to the sub-projects to make sure they meet their own goals and performance standards.
+</p>
+
+<p>
+The final website will integrate multiple technologies and the integrations won&rsquo;t be ideal for unit testing. But as mentioned, the user acceptance requirements are not major and can be manually ensured.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgca70067" class="outline-3">
+<h3 id="orgca70067"><span class="section-number-3">2.9</span> Programming Environments And Costs</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
+</p>
+
+<p>
+One of the benefits of a Hidden Markov Model is its relative computational affordability when compared to other machine learning techniques, like Deep Neural Networks.
+</p>
+
+<p>
+We don&rsquo;t require a GPU or long training times on powerful computers. The over 200,000 songs obtained from <a href="http://darklyrics.com">http://darklyrics.com</a> can be trained into a 4-gram Hidden Markov Model in just a few hours on a consumer laptop.
+</p>
+
+<p>
+The training process never uses more than 20 gigabytes of ram.
+</p>
+
+<p>
+All code was written and all models were trained on a Lenovo T15G with an Intel i9 2.4 ghz processor and 32gb of RAM.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5c72ee3" class="outline-3">
+<h3 id="org5c72ee3"><span class="section-number-3">2.10</span> Timeline And Milestones</h3>
+<div class="outline-text-3" id="text-2-10">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Sprint</th>
+<th scope="col" class="org-right">Start</th>
+<th scope="col" class="org-right">End</th>
+<th scope="col" class="org-left">Tasks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">2021-07-01</td>
+<td class="org-right">2021-07-07</td>
+<td class="org-left">Acquire corpus - Explore Modelling - Review Existing Material</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">2021-07-07</td>
+<td class="org-right">2021-07-21</td>
+<td class="org-left">Data Cleanup - Feature Extraction - Lyric Generation (POC)</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">2021-07-21</td>
+<td class="org-right">2021-07-28</td>
+<td class="org-left">Lyric Generation Restrictions (Syllable-count, Rhyme, Etc&#x2026;)</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">2021-07-28</td>
+<td class="org-right">2021-08-14</td>
+<td class="org-left">Train Full-scale Model - Performance Tuning</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">2021-08-14</td>
+<td class="org-right">2021-08-21</td>
+<td class="org-left">Create Web Interface And Visualizations</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">2021-08-21</td>
+<td class="org-right">2021-09-07</td>
+<td class="org-left">QA - Testing - Deploy And Release Web App</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2596c7c" class="outline-2">
+<h2 id="org2596c7c"><span class="section-number-2">3</span> C. RhymeStorm Capstone Requirements Documentation</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 RhymeStorm is an application to help singers and songwriters brainstorm new lyrics.
 </p>
 </div>
 
-<div id="outline-container-org716e7d7" class="outline-3">
-<h3 id="org716e7d7"><span class="section-number-3">1.1</span> Descriptive And Predictive Methods</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-orgcc92b82" class="outline-3">
+<h3 id="orgcc92b82"><span class="section-number-3">3.1</span> Descriptive And Predictive Methods</h3>
+<div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-org12c93c0" class="outline-4">
-<h4 id="org12c93c0"><span class="section-number-4">1.1.1</span> Descriptive Method</h4>
-<div class="outline-text-4" id="text-1-1-1">
+<div id="outline-container-orgcd4681d" class="outline-4">
+<h4 id="orgcd4681d"><span class="section-number-4">3.1.1</span> Descriptive Method</h4>
+<div class="outline-text-4" id="text-3-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org4d1af34"></a>Most Common Grammatical Structures In A Set Of Lyrics<br />
-<div class="outline-text-5" id="text-1-1-1-1">
+<li><a id="orgcd54973"></a>Most Common Grammatical Structures In A Set Of Lyrics<br />
+<div class="outline-text-5" id="text-3-1-1-1">
 <p>
 By filtering songs by metrics such as popularity, number of awards, etc&#x2026; we can use this software package to determine the most common grammatical phrase structure for different filtered categories.
 </p>
@@ -360,13 +897,13 @@ In the example below, you&rsquo;ll see that a simple noun-phrase is the most pop
 </ol>
 </div>
 
-<div id="outline-container-org6c4e064" class="outline-4">
-<h4 id="org6c4e064"><span class="section-number-4">1.1.2</span> Prescriptive Method</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-org751d925" class="outline-4">
+<h4 id="org751d925"><span class="section-number-4">3.1.2</span> Prescriptive Method</h4>
+<div class="outline-text-4" id="text-3-1-2">
 </div>
 <ol class="org-ol">
-<li><a id="org385543b"></a>Most Likely Word To Follow A Given Phrase<br />
-<div class="outline-text-5" id="text-1-1-2-1">
+<li><a id="orgf5525e0"></a>Most Likely Word To Follow A Given Phrase<br />
+<div class="outline-text-5" id="text-3-1-2-1">
 <p>
 To help songwriters think of new lyrics, we provide an API to receive a list of words that commonly follow/precede a given phrase.
 </p>
@@ -461,11 +998,11 @@ In the example below, we provide a seed suffix of &ldquo;bother me&rdquo; and as
 </div>
 </div>
 
-<div id="outline-container-org1ccfefb" class="outline-3">
-<h3 id="org1ccfefb"><span class="section-number-3">1.2</span> Datasets</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-orgb91051c" class="outline-3">
+<h3 id="orgb91051c"><span class="section-number-3">3.2</span> Datasets</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
-The dataset currently in use is in <code>/dark-corpus</code>. This dataset was generated from the publicly available lyrics at <a href="http://darklyrics.com">http://darklyrics.com</a>.
+The dataset currently in use was generated from the publicly available lyrics at <a href="http://darklyrics.com">http://darklyrics.com</a>.
 </p>
 
 <p>
@@ -474,13 +1011,13 @@ Further datasets will need to be provided by the end-user.
 </div>
 </div>
 
-<div id="outline-container-org8b56e0a" class="outline-3">
-<h3 id="org8b56e0a"><span class="section-number-3">1.3</span> Decision Support Functionality</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-org541df2d" class="outline-3">
+<h3 id="org541df2d"><span class="section-number-3">3.3</span> Decision Support Functionality</h3>
+<div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org19a500c" class="outline-4">
-<h4 id="org19a500c"><span class="section-number-4">1.3.1</span> Choosing Words For A Lyric Based On Markov Likelihood</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-orgf41fd57" class="outline-4">
+<h4 id="orgf41fd57"><span class="section-number-4">3.3.1</span> Choosing Words For A Lyric Based On Markov Likelihood</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <p>
 Entire phrases can be generated using the previously mentioned functionality of generating lists of likely prefix/suffix words.
 </p>
@@ -495,9 +1032,9 @@ The user can supply criteria such as restrictions on the number of syllables, nu
 </div>
 </div>
 
-<div id="outline-container-orge4b7a97" class="outline-4">
-<h4 id="orge4b7a97"><span class="section-number-4">1.3.2</span> Choosing Words To Complete A Lyric Based On Rhyme Quality</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-org59de772" class="outline-4">
+<h4 id="org59de772"><span class="section-number-4">3.3.2</span> Choosing Words To Complete A Lyric Based On Rhyme Quality</h4>
+<div class="outline-text-4" id="text-3-3-2">
 <p>
 Another part of the decision support functionality is filtering and ordering predicted words based on their rhyme quality.
 </p>
@@ -527,7 +1064,8 @@ In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfec
 </p>
 
 <div class="org-src-container">
-<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.darklimericks.linguistics.core <span style="color: #a9a1e1;">:as</span> linguistics<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+<pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.darklimericks.linguistics.core <span style="color: #a9a1e1;">:as</span> linguistics<span style="color: #c678dd;">]</span>
+         '<span style="color: #c678dd;">[</span>com.darklimericks.server.models <span style="color: #a9a1e1;">:as</span> models<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
 
 <span style="color: #51afef;">(</span><span style="color: #51afef;">let</span> <span style="color: #c678dd;">[</span>results
       <span style="color: #98be65;">(</span><span style="color: #ECBE7B;">linguistics</span>/rhymes-with-frequencies-and-rhyme-quality
@@ -554,10 +1092,166 @@ In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfec
 
 <colgroup>
 <col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">class java.lang.IllegalArgumentException</td>
+<td class="org-left">rhyme</td>
+<td class="org-right">frequency count</td>
+<td class="org-right">rhyme quality</td>
+</tr>
+
+<tr>
+<td class="org-left">technology</td>
+<td class="org-right">318</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-left">apology</td>
+<td class="org-right">68</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">pathology</td>
+<td class="org-right">42</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">mythology</td>
+<td class="org-right">27</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">psychology</td>
+<td class="org-right">24</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">theology</td>
+<td class="org-right">23</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">biology</td>
+<td class="org-right">20</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">ecology</td>
+<td class="org-right">11</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">chronology</td>
+<td class="org-right">10</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">astrology</td>
+<td class="org-right">9</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">biotechnology</td>
+<td class="org-right">8</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">nanotechnology</td>
+<td class="org-right">5</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">geology</td>
+<td class="org-right">3</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">ontology</td>
+<td class="org-right">2</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">morphology</td>
+<td class="org-right">2</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">seismology</td>
+<td class="org-right">1</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">urology</td>
+<td class="org-right">1</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">doxology</td>
+<td class="org-right">0</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">neurology</td>
+<td class="org-right">0</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-left">hypocrisy</td>
+<td class="org-right">723</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">democracy</td>
+<td class="org-right">238</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">atrocity</td>
+<td class="org-right">224</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">philosophy</td>
+<td class="org-right">181</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">equality</td>
+<td class="org-right">109</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-left">ideology</td>
+<td class="org-right">105</td>
+<td class="org-right">6</td>
 </tr>
 </tbody>
 </table>
@@ -565,11 +1259,11 @@ In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfec
 </div>
 </div>
 
-<div id="outline-container-orgf13759f" class="outline-3">
-<h3 id="orgf13759f"><span class="section-number-3">1.4</span> Featurizing, Parsing, Cleaning, And Wrangling Data</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-orga0687da" class="outline-3">
+<h3 id="orga0687da"><span class="section-number-3">3.4</span> Featurizing, Parsing, Cleaning, And Wrangling Data</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
-The data processing code is in <code>prhyme</code>
+The data processing code is in <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>
 </p>
 
 <p>
@@ -603,15 +1297,19 @@ words can be compared: &ldquo;Foo&rdquo; is the same as &ldquo;foo&rdquo;.
 </div>
 
 
-<div id="outline-container-org5c868f3" class="outline-3">
-<h3 id="org5c868f3"><span class="section-number-3">1.5</span> Data Exploration And Preparation</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-org16825c0" class="outline-3">
+<h3 id="org16825c0"><span class="section-number-3">3.5</span> Data Exploration And Preparation</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
 The primary data structure and algorithms supporting exploration of the data are a Markov Trie
 </p>
 
 <p>
 The Trie data structure supports a <code>lookup</code> function that returns the child trie at a certain lookup key and a <code>children</code> function that returns all of the immediate children of a particular Trie.
+</p>
+
+<p>
+All Trie code is hosted in the git repo located at <a href="https://github.com/eihli/clj-tightly-packed-trie">https://github.com/eihli/clj-tightly-packed-trie</a>.
 </p>
 
 <div class="org-src-container">
@@ -648,27 +1346,27 @@ The Trie data structure supports a <code>lookup</code> function that returns the
 </div>
 </div>
 
-<div id="outline-container-org1a53aca" class="outline-3">
-<h3 id="org1a53aca"><span class="section-number-3">1.6</span> <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-orgad4da42" class="outline-3">
+<h3 id="orgad4da42"><span class="section-number-3">3.6</span> <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</h3>
+<div class="outline-text-3" id="text-3-6">
 <ul class="org-ul">
 <li>graph of phrase complexity on one axis and rhyme quality on another axis.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9160b2a" class="outline-3">
-<h3 id="org9160b2a"><span class="section-number-3">1.7</span> <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</h3>
-<div class="outline-text-3" id="text-1-7">
+<div id="outline-container-org960bb46" class="outline-3">
+<h3 id="org960bb46"><span class="section-number-3">3.7</span> <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</h3>
+<div class="outline-text-3" id="text-3-7">
 <p>
 Interactive query capability at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5bb9e83" class="outline-3">
-<h3 id="org5bb9e83"><span class="section-number-3">1.8</span> <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</h3>
-<div class="outline-text-3" id="text-1-8">
+<div id="outline-container-org143d723" class="outline-3">
+<h3 id="org143d723"><span class="section-number-3">3.8</span> <span class="todo TODO">TODO</span> implementation of machine-learning methods and algorithms</h3>
+<div class="outline-text-3" id="text-3-8">
 <p>
 The machine learning method chosen for this software is a Hidden Markov Model.
 </p>
@@ -736,7 +1434,7 @@ The algorithm for generating predictions from the HMM is as follows.
 </pre>
 </div>
 
-<pre class="example" id="org9d447fd">
+<pre class="example" id="org3cc2ed4">
 [(("&lt;s&gt;" "call" "me")
   ("&lt;s&gt;" "call")
   ("&lt;s&gt;" "right" "&lt;/s&gt;")
@@ -812,11 +1510,12 @@ It also performs compaction and serialization. Song lyrics are typically provide
   <span style="color: #51afef;">)</span>
 </pre>
 </div>
+</div>
+</div>
 
-<p>
-Functionalities To Evaluate The Accuracy Of The Data Product
-</p>
-
+<div id="outline-container-org783a845" class="outline-3">
+<h3 id="org783a845"><span class="section-number-3">3.9</span> Functionalities To Evaluate The Accuracy Of The Data Product</h3>
+<div class="outline-text-3" id="text-3-9">
 <p>
 Since creative brainstorming is the goal, &ldquo;accuracy&rdquo; is subjective.
 </p>
@@ -887,9 +1586,9 @@ This standardized measure of accuracy can be used to compare different language 
 </div>
 </div>
 
-<div id="outline-container-org7791154" class="outline-3">
-<h3 id="org7791154"><span class="section-number-3">1.9</span> Security Features</h3>
-<div class="outline-text-3" id="text-1-9">
+<div id="outline-container-org30d2726" class="outline-3">
+<h3 id="org30d2726"><span class="section-number-3">3.10</span> Security Features</h3>
+<div class="outline-text-3" id="text-3-10">
 <p>
 Artists/Songwriters place a lot of value in the secrecy of their content. Therefore, all communication with the web-based interface occurs over a secure connection using HTTPS.
 </p>
@@ -904,9 +1603,9 @@ With this precaution in place, attackers will not be able to snoop the content t
 </div>
 </div>
 
-<div id="outline-container-org2118b36" class="outline-3">
-<h3 id="org2118b36"><span class="section-number-3">1.10</span> <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</h3>
-<div class="outline-text-3" id="text-1-10">
+<div id="outline-container-org2af4d15" class="outline-3">
+<h3 id="org2af4d15"><span class="section-number-3">3.11</span> <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</h3>
+<div class="outline-text-3" id="text-3-11">
 <ul class="org-ul">
 <li>Script to auto-update SSL cert</li>
 <li>Enable NGINX dashboard?</li>
@@ -914,41 +1613,41 @@ With this precaution in place, attackers will not be able to snoop the content t
 </div>
 </div>
 
-<div id="outline-container-org3e7ea9b" class="outline-3">
-<h3 id="org3e7ea9b"><span class="section-number-3">1.11</span> <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
+<div id="outline-container-org51581d8" class="outline-3">
+<h3 id="org51581d8"><span class="section-number-3">3.12</span> <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
 </div>
 </div>
 
 
-<div id="outline-container-orge2d60f8" class="outline-2">
-<h2 id="orge2d60f8"><span class="section-number-2">2</span> Documentation</h2>
-<div class="outline-text-2" id="text-2">
-<ol class="org-ol">
-<li>Create each of the following forms of documentation for the product you have developed:</li>
-</ol>
+<div id="outline-container-org78016b5" class="outline-2">
+<h2 id="org78016b5"><span class="section-number-2">4</span> D. Documentation</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Create each of the following forms of documentation for the product you have developed:
+</p>
 </div>
 
-<div id="outline-container-orgcc70df2" class="outline-3">
-<h3 id="orgcc70df2"><span class="section-number-3">2.1</span> Business Vision</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgde9a9b6" class="outline-3">
+<h3 id="orgde9a9b6"><span class="section-number-3">4.1</span> Business Vision</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Provide rhyming lyric suggestions optionally constrained by syllable count.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc216269" class="outline-3">
-<h3 id="orgc216269"><span class="section-number-3">2.2</span> Data Sets</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orge9c500f" class="outline-3">
+<h3 id="orge9c500f"><span class="section-number-3">4.2</span> Data Sets</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 See <code>resources/darklyrics-markov.tpt</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4fd130a" class="outline-3">
-<h3 id="org4fd130a"><span class="section-number-3">2.3</span> Data Analysis</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-orgfb34734" class="outline-3">
+<h3 id="orgfb34734"><span class="section-number-3">4.3</span> Data Analysis</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 See <code>src/com/owoga/darklyrics/core.clj</code>
 </p>
@@ -959,9 +1658,9 @@ See <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a
 </div>
 </div>
 
-<div id="outline-container-org33bec77" class="outline-3">
-<h3 id="org33bec77"><span class="section-number-3">2.4</span> Assessment</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-org800eb15" class="outline-3">
+<h3 id="org800eb15"><span class="section-number-3">4.4</span> Assessment</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 See visualization of rhyme suggestion in action.
 </p>
@@ -972,9 +1671,9 @@ See perplexity?
 </div>
 </div>
 
-<div id="outline-container-orgae6aaf1" class="outline-3">
-<h3 id="orgae6aaf1"><span class="section-number-3">2.5</span> Visualizations</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-org0ed7075" class="outline-3">
+<h3 id="org0ed7075"><span class="section-number-3">4.5</span> Visualizations</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 See visualization of smoothing technique.
 </p>
@@ -985,36 +1684,36 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-orgaad09e3" class="outline-3">
-<h3 id="orgaad09e3"><span class="section-number-3">2.6</span> Accuracy</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-orgde27d1f" class="outline-3">
+<h3 id="orgde27d1f"><span class="section-number-3">4.6</span> Accuracy</h3>
+<div class="outline-text-3" id="text-4-6">
 <p>
 •  assessment of the product’s accuracy
 </p>
 </div>
 </div>
 
-<div id="outline-container-org248156b" class="outline-3">
-<h3 id="org248156b"><span class="section-number-3">2.7</span> Testing</h3>
-<div class="outline-text-3" id="text-2-7">
+<div id="outline-container-orgd80a269" class="outline-3">
+<h3 id="orgd80a269"><span class="section-number-3">4.7</span> Testing</h3>
+<div class="outline-text-3" id="text-4-7">
 <p>
 •  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4c2c5cb" class="outline-3">
-<h3 id="org4c2c5cb"><span class="section-number-3">2.8</span> Source</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-org99c9655" class="outline-3">
+<h3 id="org99c9655"><span class="section-number-3">4.8</span> Source</h3>
+<div class="outline-text-3" id="text-4-8">
 <p>
 •  source code and executable file(s)
 </p>
 </div>
 </div>
 
-<div id="outline-container-org55bc8bd" class="outline-3">
-<h3 id="org55bc8bd"><span class="section-number-3">2.9</span> Quick Start</h3>
-<div class="outline-text-3" id="text-2-9">
+<div id="outline-container-org3600f98" class="outline-3">
+<h3 id="org3600f98"><span class="section-number-3">4.9</span> Quick Start</h3>
+<div class="outline-text-3" id="text-4-9">
 <p>
 •  a quick start guide summarizing the steps necessary to install and use the product
 </p>
@@ -1022,9 +1721,9 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-org3027af3" class="outline-2">
-<h2 id="org3027af3"><span class="section-number-2">3</span> Notes</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org16138d4" class="outline-2">
+<h2 id="org16138d4"><span class="section-number-2">5</span> Notes</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 http-kit doesn&rsquo;t support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.
 </p>
@@ -1033,7 +1732,7 @@ http-kit doesn&rsquo;t support https so no need to bother with keystore stuff li
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Eric Ihli</p>
-<p class="date">Created: 2021-07-13 Tue 20:39</p>
+<p class="date">Created: 2021-07-14 Wed 19:43</p>
 </div>
 </body>
 </html>
