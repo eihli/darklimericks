@@ -1,11 +1,9 @@
-#+TITLE: RhymeStorm - WGU CSCI Capstone Project
+#+TITLE: RhymeStorm™ - WGU CSCI Capstone Project
 
 :PROPERTIES:
 :END:
 
 * A. Letter Of Transmittal
-
-Create a letter of transmittal and a project proposal to convince senior, non-technical managers and executives to implement the data product you have designed. The proposal should include each of the following:
 
 ** Problem Summary
 
@@ -21,7 +19,9 @@ This is the process that songwriters go through all day. It's a process that get
 
 And this is a process that is perfect for machine learning. Machine learning can learn the most likely grammatical structure of phrases and can make predictions about likely words that follow a given sequence of other words. Computers can iterate through millions of words, checking for restrictions on rhyme, syllable count, and more. The most tedious part of lyric generation can be automated with machine learning software, leaving the songwriter free to cherry-pick from the best lyrics and make minor touch-ups to make them perfect.
 
-** Product
+** Product - RhymeStorm®
+
+RhymeStorm® is a tool to help songwriters brainstorm. It provides lyrics automatically generated based on training data from existing songs while adhering to restrictions based on rhyme scheme, meter, genre, and more.
 
 The machine learning part of software that I described above can be implemented with a simple machine learning technique known as a Hidden Markov Model.
 
@@ -145,15 +145,60 @@ The user interface can be implemented as a wireframe and extended as new functio
 
 Much of data science is exploratory and taking an iterative Agile approach can take advantage of delaying decisions while information is gathered.
 
-** deliverables associated with the design and development of the data product
+** Deliverables
 
-** the plan for implementation of your data product, including the anticipated outcomes from this development
+[[https://github.com/eihli/clj-tightly-packed-trie][Tightly Packed Trie]]
 
-** the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
+[[https://github.com/eihli/phonetics][Phonetics and Syllabification]]
 
-** the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
+[[https://github.com/eihli/prhyme][Data Processing, Markov, and Rhyme Algorithms]]
 
-** a projected timeline, including milestones, start and end dates, duration for each milestone, dependencies, and resources assigned to each task
+[[https://darklimericks.com/wgu][Web GUI and Documentation]]
+
+** Implementation Plan And Anticipations
+
+the plan for implementation of your data product, including the anticipated outcomes from this development
+
+I'll start by writing and releasing the supporting libraries and packages: Tries, Syllabification/Phonetics, Rhyming.
+
+Then I'll write a website that imports and uses those libraries.
+
+Since I'll be writing and releasing these packages iteratively as open source, I'll share them publicly as I progress and can use feedback to improve them before RhymeStorm® takes its final form.
+
+In anticipation of user growth, I'll be deploying the final product on DigitalOcean Droplets. They are virtual machines with resources that can be resized to meet growing demands or shrunk to save money in times of low traffic.
+
+** Requirements Validation And Verification
+
+the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
+
+For the known requirements, I'll perform personally perform manual tests and quality assurance. This is a small enough project that one individual can thoroughly test all of the primary requirements.
+
+Since the project is broken down into isolated sub-projects, unit tests will be added to the sub-projects to make sure they meet their own goals and performance standards.
+
+The final website will integrate multiple technologies and the integrations won't be ideal for unit testing. But as mentioned, the user acceptance requirements are not major and can be manually ensured.
+
+** Programming Environments And Costs
+
+the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
+
+One of the benefits of a Hidden Markov Model is its relative computational affordability when compared to other machine learning techniques, like Deep Neural Networks.
+
+We don't require a GPU or long training times on powerful computers. The over 200,000 songs obtained from http://darklyrics.com can be trained into a 4-gram Hidden Markov Model in just a few hours on a consumer laptop.
+
+The training process never uses more than 20 gigabytes of ram.
+
+All code was written and all models were trained on a Lenovo T15G with an Intel i9 2.4 ghz processor and 32gb of RAM.
+
+** Timeline And Milestones
+
+| Sprint |      Start |        End | Tasks                                                         |
+|--------+------------+------------+---------------------------------------------------------------|
+|      1 | 2021-07-01 | 2021-07-07 | Acquire corpus - Explore Modelling - Review Existing Material |
+|      2 | 2021-07-07 | 2021-07-21 | Data Cleanup - Feature Extraction - Lyric Generation (POC)    |
+|      3 | 2021-07-21 | 2021-07-28 | Lyric Generation Restrictions (Syllable-count, Rhyme, Etc...) |
+|      4 | 2021-07-28 | 2021-08-14 | Train Full-scale Model - Performance Tuning                   |
+|      5 | 2021-08-14 | 2021-08-21 | Create Web Interface And Visualizations                       |
+|      6 | 2021-08-21 | 2021-09-07 | QA - Testing - Deploy And Release Web App                     |
 
 * C. RhymeStorm Capstone Requirements Documentation
 
