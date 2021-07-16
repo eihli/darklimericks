@@ -5,7 +5,6 @@
             [reagent.core :as r]))
 
 
-
 (defn play-data [& names]
   (for [n names
         i (range 20)]

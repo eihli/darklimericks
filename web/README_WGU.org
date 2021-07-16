@@ -13,7 +13,7 @@ The document you are reading now contains or points to each of the requirements 
 
 The section immediately following this contains notes on how to view and run the software locally. In addition, I'm hosting a demo of the application at https://darklimericks.com/wgu.
 
-After I describe the steps to initialize a development environment, you'll find a [[Letter Of Transmittal]], [[#executive-summary][Technical Executive Summary]], [[#requirements-documentation][links to the final product and details of how it meets each requirement]], and the [[#remaining-documentation][remaining required documentation]].
+After I describe the steps to initialize a development environment, you'll find a [[#letter-of-transmittal][Letter Of Transmittal]], [[#executive-summary][Technical Executive Summary]], [[#requirements-documentation][links to the final product and details of how it meets each requirement]], and the [[#remaining-documentation][remaining required documentation]].
 
 * Evaluation Technical Documentation
 
@@ -33,12 +33,16 @@ After I describe the steps to initialize a development environment, you'll find 
 - [[https://www.docker.com/][Docker]]
 
 *** Steps
-
 1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
-2. Navigate to the root directory of this git repo and run ~java -jar darklimericks-dev.jar~
-3. Visit http://localhost:8000/wgu
+   a. The ~run.sh~ scripts only need to run once. They initialize development data containers. Subsequent development can continue with ~docker start db && docker start kv~.
+2. The application's ~jar~ builds with a ~make~ run from the root directory. (See [[file:../Makefile][Makefile]]).
+3. Navigate to the root directory of this git repo and run ~java -jar darklimericks-dev.jar~
+4. Visit http://localhost:8000/wgu
 
 * A. Letter Of Transmittal
+:PROPERTIES:
+:CUSTOM_ID: letter-of-transmittal
+:END:
 
 ** Problem Summary
 
