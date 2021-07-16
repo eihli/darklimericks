@@ -264,6 +264,25 @@
              :opts {}}
             (views/wgu request))}))
 
+(defn lyric-suggestions [db cache]
+  (fn [request]
+    (let [suggestions
+          (repeatedly
+           5
+           #(linguistics/lyric-suggestions
+             (-> request :params :rhyme-target)
+             models/markov-trie
+             models/database))]
+      {:status 201
+       :headers {"Content-Type" "text/html; charset=utf-8"}
+       :body (views/wrap-with-js
+              {:db db
+               :request request
+               :opts {}}
+              (views/lyric-suggestions
+               request
+               suggestions))})))
+
 (defn show-rhyme-suggestion [db cache]
   (fn [request]
     (let [suggestions (linguistics/rhymes-with-frequencies-and-rhyme-quality

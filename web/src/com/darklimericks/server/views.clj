@@ -298,6 +298,13 @@
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
 
+(defn lyric-suggestions
+  [request suggestions]
+  [:div
+   (wgu request)
+   (for [suggestion suggestions]
+     [:div suggestion])])
+
 (defn show-rhyme-suggestion
   [request suggestions]
   [:div

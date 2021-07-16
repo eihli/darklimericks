@@ -5,7 +5,8 @@
   "src/test"]
 
  :dependencies
- [[metasoarous/oz "1.6.0-alpha34"]]
+ [[metasoarous/oz "1.6.0-alpha34"]
+  [cljs-ajax/cljs-ajax "0.8.3"]]
 
  :builds
  {:frontend

@@ -309,11 +309,33 @@
            ["IH2" "N" "V" "IH2" "Z" "AH0" "B" "IH1" "L" "AH0" "T" "IY0"]))
 
   )
+
 (comment
   (markov/rhymes models/rhyme-trie-unstressed-trailing-consonants (phonetics/get-phones "food"))
   (rhymes "food")
 
   (get models/markov-trie [(models/database "food")])
   (rhymes-with-frequencies "technology" models/markov-trie models/database)
+
+  )
+
+
+(defn lyric-suggestions [seed-phrase trie database]
+  (let [realize-seed (fn [seed]
+                       (string/join " " (-> (map database (reverse seed))
+                                            butlast
+                                            rest)))]
+    (loop [seed (vec (reverse (map #(get database % 0) (string/split seed-phrase #" "))))]
+      (cond
+        (< 20 (count seed)) (realize-seed seed)
+        (= (database prhyme/BOS) (peek seed)) (realize-seed seed)
+        :else (recur (conj seed (markov/get-next-markov
+                                 trie
+                                 seed
+                                 (partial remove (fn [child]
+                                                   (= (.key child) (database prhyme/EOS)))))))))))
+
+(comment
+  (lyric-suggestions "bother me </s>" models/markov-trie models/database)
 
   )

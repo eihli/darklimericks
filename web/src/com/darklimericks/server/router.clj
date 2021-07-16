@@ -37,7 +37,7 @@
                 ["/wgu"
                  {:name ::wgu
                   :get {:handler (handlers/wgu db cache)}
-                  :post {:handler (handlers/show-rhyme-suggestion db cache)}}]
+                  :post {:handler (handlers/lyric-suggestions db cache)}}]
                 ["/.well-known/*" (ring/create-file-handler
                                    {:root "resources/public/.well-known"})]]]
     (timbre/info "Starting router.")
