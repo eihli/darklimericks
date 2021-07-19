@@ -8,7 +8,9 @@
             [com.owoga.phonetics :as phonetics]
             [com.owoga.phonetics.syllabify :as syllabify]
             [com.owoga.phonetics.stress-manip :as stress-manip]
-            [clojure.math.combinatorics :as combinatorics]))
+            [clojure.math.combinatorics :as combinatorics]
+            [com.owoga.prhyme.nlp.core :as nlp]
+            [com.owoga.prhyme.data-transform :as data-transform]))
 
 (defn gen-artist []
   (->> [(rand-nth (seq dict/adjectives))
@@ -319,12 +321,59 @@
 
   )
 
+(defn rhymes-by-quality
+  [seed-phrase]
+  (->> seed-phrase
+       (prhyme/phrase->all-phones)
+       (map first)
+       (map
+        (fn [phones]
+          [phones (markov/rhymes
+                   models/rhyme-trie-unstressed-trailing-consonants
+                   phones)]))
+       (map (fn append-quality-of-rhyme [[phones1 words]]
+              [phones1 (->> (mapcat
+                             prhyme/phrase->all-phones
+                             (reduce into #{} (map second words)))
+                            (map (fn [[phones2 word]]
+                                   [phones2
+                                    word
+                                    (prhyme/quality-of-rhyme-phones
+                                     phones1
+                                     phones2)])))]))
+       (map (fn sort-by-quality-of-rhyme [[phones1 words]]
+              [phones1 (sort-by (fn [[_ _ quality]]
+                                  (- quality))
+                                words)]))
+       (mapcat second)
+       (sort-by #(- (nth % 2)))
+       (take 20)
+       (map second)))
+
+(comment
+  (rhymes-by-quality "bother me")
+
+  )
+
+(defn open-nlp-perplexity
+  "Returns the perplexity of the parse tree using OpenNLP.
+  This is an alternative to the perplexity of the Markov model.
+  Normalized per word because long sentences are naturally more perplex."
+  [phrase]
+  (->> phrase
+       nlp/tokenize
+       (string/join " ")
+       (nlp/most-likely-parse)
+       ((fn [[line perplexity]]
+          [line (/ perplexity (count (string/split line #" ")))]))
+       second))
 
 (defn lyric-suggestions [seed-phrase trie database]
   (let [realize-seed (fn [seed]
-                       (string/join " " (-> (map database (reverse seed))
-                                            butlast
-                                            rest)))]
+                       (data-transform/untokenize
+                        (-> (map database (reverse seed))
+                            butlast
+                            rest)))]
     (loop [seed (vec (reverse (map #(get database % 0) (string/split seed-phrase #" "))))]
       (cond
         (< 20 (count seed)) (realize-seed seed)
@@ -335,7 +384,28 @@
                                  (partial remove (fn [child]
                                                    (= (.key child) (database prhyme/EOS)))))))))))
 
+(defn phrase->quality-of-rhyme
+  "Gets the quality of rhyme of the thie highest quality pronunciation of all
+  combinations of phrases."
+  [phrase1 phrase2]
+  (let [phones1 (prhyme/phrase->all-phones phrase1)
+        phones2 (prhyme/phrase->all-phones phrase2)
+        all-possible-rhyme-combinations (combinatorics/cartesian-product
+                                         phones1
+                                         phones2)]
+    (->> all-possible-rhyme-combinations
+         (map (partial map first))
+         (map (juxt identity
+                    (partial apply quality-of-rhyme-phones)))
+         (sort-by (comp - second))
+         first)))
+
 (comment
-  (lyric-suggestions "bother me </s>" models/markov-trie models/database)
+  (phrase->quality-of-rhyme "boss hog" "brain fog")
+
+  (->> #(lyric-suggestions "bother me </s>" models/markov-trie models/database)
+       repeatedly
+       (take 5)
+       (map (juxt identity open-nlp-perplexity (partial phrase->quality-of-rhyme "bother me"))))
 
   )

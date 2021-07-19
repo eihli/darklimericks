@@ -29,28 +29,34 @@
      (every? phonetics/consonant (butlast phones)))))
 
 (comment
-  (let [result {'[a 8]
-                [[[["P" "AE1" "S"] "pass"]
-                  [["P" "ER0" "EH1" "N" "IY0" "AH0" "L" "IY0"] "perennially"]
-                  [["Y" "UW1"] "you"]
-                  [["T" "UW1"] "to"]]
-                 [[["OW1" "V" "ER0" "P" "AE2" "S"] "overpass"]
-                  [["AH0" "N"] "an"]
-                  [["AO1" "N"] "on"]
-                  [["M" "AH0" "N" "IH2" "P" "Y" "AH0" "L" "EY1" "SH" "AH0" "N"]
-                   "manipulation"]]
-                 [[["M" "IH1" "D" "AH0" "L" "K" "L" "AE1" "S"] "middle-class"]
-                  [["HH" "AY1" "D" "IH0" "NG"] "hiding"]
-                  [["M" "AA1" "N" "S" "T" "ER0"] "monster"]
-                  [["K" "R" "UW1" "AH0" "L"] "cruel"]]],
-                '[b 5]
-                [[[["R" "EY1" "S"] "race"]
-                  [["M" "AH0" "T" "IH1" "R" "IY0" "AH0" "L"] "material"]]
-                 [[["B" "AO1" "R" "G" "EY0" "S"] "borges"]
-                  [["IY2" "K" "W" "AH0" "L" "IH1" "B" "R" "IY0" "AH0" "M"] "equilibrium"]]]}
-        [[a1 a2 a2] [b1 b2]] (vals result)]
-    (->> [a1 a2 b1]
-         (map reverse)
-         (map (partial map second))))
+  (->> ["AA1" "ER0" "IY0"]
+       (markov/rhymes rhyme-trie-unstressed-trailing-consonants)
+       (map (fn append-quality-of-rhyme [[phones1 words]]
+              [phones1 (->> (mapcat prhyme/phrase->all-phones words)
+                            (map (fn [[phones2 word]]
+                                   [phones2 word (prhyme/quality-of-rhyme-phones phones1 phones2)])))]))
+       (mapcat (fn sort-by-quality-of-rhyme [[phones1 words]]
+                 [phones1 (sort-by (fn [[_ _ quality]]
+                                     (- quality))
+                                   words)]))
+       (take 20))
+
+  (->> "bother me"
+       (prhyme/phrase->all-phones)
+       (map first)
+       (map
+        (fn [phones]
+          [phones (markov/rhymes rhyme-trie-unstressed-trailing-consonants phones)]))
+       (map (fn append-quality-of-rhyme [[phones1 words]]
+              [phones1 (->> (mapcat prhyme/phrase->all-phones (reduce into #{} (map second words)))
+                            (map (fn [[phones2 word]]
+                                   [phones2 word (prhyme/quality-of-rhyme-phones phones1 phones2)])))]))
+       (map (fn sort-by-quality-of-rhyme [[phones1 words]]
+              [phones1 (sort-by (fn [[_ _ quality]]
+                                  (- quality))
+                                words)]))
+       (mapcat second)
+       (sort-by #(- (nth % 2)))
+       (take 20))
 
   )
