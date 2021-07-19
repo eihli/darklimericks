@@ -400,8 +400,34 @@
          (sort-by (comp - second))
          first)))
 
+(defn wgu-lyric-suggestions
+  [phrase]
+  (let [rhymes (rhymes-by-quality phrase)
+        seeds (map vector rhymes (repeat "</s>"))
+        lyrics (map #(lyric-suggestions
+                      (string/join " " %)
+                      models/markov-trie
+                      models/database)
+                    seeds)]
+    (->> lyrics
+         (map (juxt identity open-nlp-perplexity))
+         (sort-by (comp - second)))))
+
 (comment
+  (wgu-lyric-suggestions "technology")
+
   (phrase->quality-of-rhyme "boss hog" "brain fog")
+
+  (let [rhymes (rhymes-by-quality "bother me")
+        seeds (map vector rhymes (repeat "</s>"))
+        lyrics (map #(lyric-suggestions
+                      (string/join " " %)
+                      models/markov-trie
+                      models/database)
+                    seeds)]
+    (->> lyrics
+         (map (juxt identity open-nlp-perplexity))
+         (sort-by (comp - second))))
 
   (->> #(lyric-suggestions "bother me </s>" models/markov-trie models/database)
        repeatedly
