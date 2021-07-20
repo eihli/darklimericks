@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-15 Thu 20:35 -->
+<!-- 2021-07-20 Tue 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RhymeStorm™ - WGU CSCI Capstone Project</title>
@@ -215,28 +215,6 @@
     /*]]>*///-->
 // @license-end
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
-</script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -245,100 +223,106 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcf0544d">1. WGU Evaluator Notes</a></li>
-<li><a href="#org64fa4b7">2. Evaluation Technical Documentation</a>
+<li><a href="#org2115bfa">1. WGU Evaluator Notes</a></li>
+<li><a href="#org48ecf6f">2. Evaluation Technical Documentation</a>
 <ul>
-<li><a href="#org9538dc9">2.1. How To Initialize Development Environment</a>
+<li><a href="#org993f2a9">2.1. How To Initialize Development Environment</a>
 <ul>
-<li><a href="#org37e443d">2.1.1. Required Software</a></li>
+<li><a href="#org38d1124">2.1.1. Required Software</a></li>
+<li><a href="#org3508387">2.1.2. Steps</a></li>
 </ul>
 </li>
-<li><a href="#org65544b1">2.2. How To Run Software Locally</a>
+<li><a href="#org377971f">2.2. How To Run Software Locally</a>
 <ul>
-<li><a href="#org3ba66a2">2.2.1. Requirements</a></li>
-<li><a href="#orge8baaa9">2.2.2. Steps</a></li>
+<li><a href="#org6d88b9c">2.2.1. Requirements</a></li>
+<li><a href="#orgfa31bb6">2.2.2. Steps</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#letter-of-transmittal">3. A. Letter Of Transmittal</a>
 <ul>
-<li><a href="#orgd1c817d">3.1. Problem Summary</a></li>
-<li><a href="#orgb3caa29">3.2. Benefits</a></li>
-<li><a href="#orgacee2de">3.3. Product - RhymeStorm™</a></li>
-<li><a href="#orgca28427">3.4. Data</a></li>
-<li><a href="#orgd88d4e7">3.5. Objectives</a></li>
-<li><a href="#org8887fb3">3.6. Development Methodology - Agile</a></li>
-<li><a href="#org9799613">3.7. Costs</a></li>
-<li><a href="#orgb013d28">3.8. <span class="done NO">NO</span> the impact of the solution on stakeholders</a></li>
-<li><a href="#org882b631">3.9. Ethical And Legal Considerations</a></li>
-<li><a href="#org56715a0">3.10. Expertise</a></li>
+<li><a href="#orgaffd16b">3.1. Problem Summary</a></li>
+<li><a href="#org637a93f">3.2. Benefits</a></li>
+<li><a href="#orgc0f3749">3.3. Product - RhymeStorm™</a></li>
+<li><a href="#orgf80951f">3.4. Data</a></li>
+<li><a href="#orga988500">3.5. Objectives</a></li>
+<li><a href="#org6ac2e9b">3.6. Development Methodology - Agile</a></li>
+<li><a href="#org97ae577">3.7. Costs</a></li>
+<li><a href="#org47c8f70">3.8. Stakeholder Impact</a></li>
+<li><a href="#org844af3d">3.9. Ethical And Legal Considerations</a></li>
+<li><a href="#orgb712f10">3.10. Expertise</a></li>
 </ul>
 </li>
 <li><a href="#executive-summary">4. B. Executive Summary - RhymeStorm™ Technical Notes And Requirements</a>
 <ul>
-<li><a href="#orgb424ec4">4.1. Decision Support Opportunity</a></li>
-<li><a href="#org30a706b">4.2. Customer Needs And Product Description</a></li>
-<li><a href="#orgf378a60">4.3. Existing Products</a></li>
-<li><a href="#org490fc7a">4.4. Available Data And Future Data Lifecycle</a></li>
-<li><a href="#orgb1291a7">4.5. Methodology - Agile</a></li>
-<li><a href="#org1eebc92">4.6. Deliverables</a></li>
-<li><a href="#org1adc854">4.7. Implementation Plan And Anticipations</a></li>
-<li><a href="#org21636b7">4.8. Requirements Validation And Verification</a></li>
-<li><a href="#org2ca6ded">4.9. Programming Environments And Costs</a></li>
-<li><a href="#org8dd3310">4.10. Timeline And Milestones</a></li>
+<li><a href="#org9db3809">4.1. Decision Support Opportunity</a></li>
+<li><a href="#orgfe15174">4.2. Customer Needs And Product Description</a></li>
+<li><a href="#orge9f9662">4.3. Existing Products</a></li>
+<li><a href="#org7a10362">4.4. Available Data And Future Data Lifecycle</a></li>
+<li><a href="#org11d880e">4.5. Methodology - Agile</a></li>
+<li><a href="#org9525387">4.6. Deliverables</a></li>
+<li><a href="#org2e15caa">4.7. Implementation Plan And Anticipations</a></li>
+<li><a href="#org7e3c281">4.8. Requirements Validation And Verification</a></li>
+<li><a href="#orgfb9db4d">4.9. Programming Environments And Costs</a></li>
+<li><a href="#orgf165727">4.10. Timeline And Milestones</a></li>
 </ul>
 </li>
 <li><a href="#requirements-documentation">5. C. RhymeStormg™ Capstone Requirements Documentation</a>
 <ul>
-<li><a href="#org7d7bb0f">5.1. Descriptive And Predictive Methods</a>
+<li><a href="#org86f4885">5.1. Descriptive And Predictive Methods</a>
 <ul>
-<li><a href="#orge9f152e">5.1.1. Descriptive Method</a></li>
-<li><a href="#org1185af5">5.1.2. Prescriptive Method</a></li>
+<li><a href="#org1fcfb01">5.1.1. Descriptive Method</a></li>
+<li><a href="#org09c7cde">5.1.2. Prescriptive Method</a></li>
 </ul>
 </li>
-<li><a href="#orgb2c5949">5.2. Datasets</a></li>
-<li><a href="#org3e0b022">5.3. Decision Support Functionality</a>
+<li><a href="#org4d34435">5.2. Datasets</a></li>
+<li><a href="#org7756ad2">5.3. Decision Support Functionality</a>
 <ul>
-<li><a href="#org21ff96c">5.3.1. Choosing Words For A Lyric Based On Markov Likelihood</a></li>
-<li><a href="#orgd455635">5.3.2. Choosing Words To Complete A Lyric Based On Rhyme Quality</a></li>
+<li><a href="#org8d918a6">5.3.1. Choosing Words For A Lyric Based On Markov Likelihood</a></li>
+<li><a href="#orgd2cd228">5.3.2. Choosing Words To Complete A Lyric Based On Rhyme Quality</a></li>
 </ul>
 </li>
-<li><a href="#org7a3aa1f">5.4. Featurizing, Parsing, Cleaning, And Wrangling Data</a></li>
-<li><a href="#org82aea6c">5.5. Data Exploration And Preparation</a></li>
-<li><a href="#orgd48d161">5.6. <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</a></li>
-<li><a href="#orgf362966">5.7. <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</a></li>
-<li><a href="#orgcc5e9da">5.8. Implementation Of Machine Learning Methods</a></li>
-<li><a href="#org2522c08">5.9. Functionalities To Evaluate The Accuracy Of The Data Product</a></li>
-<li><a href="#org6b49a69">5.10. Security Features</a></li>
-<li><a href="#orgd968943">5.11. <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</a></li>
-<li><a href="#org6e1c77f">5.12. <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</a></li>
+<li><a href="#org441bc33">5.4. Featurizing, Parsing, Cleaning, And Wrangling Data</a></li>
+<li><a href="#orgbec0c70">5.5. Data Exploration And Preparation</a></li>
+<li><a href="#org471d20b">5.6. Data Visualization Functionalities For Data Exploration And Inspection</a></li>
+<li><a href="#org418ee90">5.7. Implementation Of Interactive Queries</a>
+<ul>
+<li><a href="#orga1092af">5.7.1. Generate Rhyming Lyrics</a></li>
+<li><a href="#orga23b2fa">5.7.2. Complete Lyric Containing Suffix</a></li>
+</ul>
+</li>
+<li><a href="#orgb916b7a">5.8. Implementation Of Machine Learning Methods</a></li>
+<li><a href="#orgc60ea27">5.9. Functionalities To Evaluate The Accuracy Of The Data Product</a></li>
+<li><a href="#org9979562">5.10. Security Features</a></li>
+<li><a href="#org48dbb95">5.11. <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</a></li>
+<li><a href="#orgcbfbcd6">5.12. <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</a></li>
 </ul>
 </li>
 <li><a href="#remaining-documentation">6. D. Documentation</a>
 <ul>
-<li><a href="#org4cb78c4">6.1. Business Vision</a>
+<li><a href="#org2cd21f7">6.1. Business Vision</a>
 <ul>
-<li><a href="#orgc2cb322">6.1.1. Requirements</a></li>
+<li><a href="#org0eb1e34">6.1.1. Requirements</a></li>
 </ul>
 </li>
-<li><a href="#org20edff8">6.2. Data Sets</a></li>
-<li><a href="#org5be111b">6.3. Data Analysis</a></li>
-<li><a href="#org63b0064">6.4. Assessment</a></li>
-<li><a href="#orgc008f9b">6.5. Visualizations</a></li>
-<li><a href="#org2bb0650">6.6. Accuracy</a></li>
-<li><a href="#org378c3bd">6.7. Testing</a></li>
-<li><a href="#org4a20d75">6.8. Source</a></li>
-<li><a href="#orgb705964">6.9. Quick Start</a></li>
+<li><a href="#org3922897">6.2. Data Sets</a></li>
+<li><a href="#org6d5a38a">6.3. Data Analysis</a></li>
+<li><a href="#org4630c25">6.4. Assessment</a></li>
+<li><a href="#org3ddf117">6.5. Visualizations</a></li>
+<li><a href="#orgd0a3ebf">6.6. Accuracy</a></li>
+<li><a href="#org2de8289">6.7. Testing</a></li>
+<li><a href="#orgc938e4f">6.8. Source</a></li>
+<li><a href="#org632e3c8">6.9. Quick Start</a></li>
 </ul>
 </li>
-<li><a href="#orgdf25233">7. Notes</a></li>
+<li><a href="#orge0f904e">7. Notes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcf0544d" class="outline-2">
-<h2 id="orgcf0544d"><span class="section-number-2">1</span> WGU Evaluator Notes</h2>
+<div id="outline-container-org2115bfa" class="outline-2">
+<h2 id="org2115bfa"><span class="section-number-2">1</span> WGU Evaluator Notes</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Hello! I hope you enjoy your time with this evaluation!
@@ -362,32 +346,51 @@ After I describe the steps to initialize a development environment, you&rsquo;ll
 </div>
 </div>
 
-<div id="outline-container-org64fa4b7" class="outline-2">
-<h2 id="org64fa4b7"><span class="section-number-2">2</span> Evaluation Technical Documentation</h2>
+<div id="outline-container-org48ecf6f" class="outline-2">
+<h2 id="org48ecf6f"><span class="section-number-2">2</span> Evaluation Technical Documentation</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+It&rsquo;s probably not necessary for you to replicate my development environment in order to evaluate this project. You can access the deployed application at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a> and the libraries and supporting code that I wrote for this project at <a href="https://github.com/eihli/clj-tightly-packed-trie">https://github.com/eihli/clj-tightly-packed-trie</a>, <a href="https://github.com/eihli/syllabify">https://github.com/eihli/syllabify</a>, and <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>. The web server and web application is not hosted publicly but you will find it uploaded with my submission as a <code>.tar</code> archive.
+</p>
 </div>
-<div id="outline-container-org9538dc9" class="outline-3">
-<h3 id="org9538dc9"><span class="section-number-3">2.1</span> How To Initialize Development Environment</h3>
+
+<div id="outline-container-org993f2a9" class="outline-3">
+<h3 id="org993f2a9"><span class="section-number-3">2.1</span> How To Initialize Development Environment</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org37e443d" class="outline-4">
-<h4 id="org37e443d"><span class="section-number-4">2.1.1</span> Required Software</h4>
+<div id="outline-container-org38d1124" class="outline-4">
+<h4 id="org38d1124"><span class="section-number-4">2.1.1</span> Required Software</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <ul class="org-ul">
 <li><a href="https://www.docker.com/">Docker</a></li>
 <li><a href="https://clojure.org/releases/downloads">Clojure Version 1.10+</a></li>
-<li><a href="https://nodejs.org/en/download/">NodeJS</a></li>
+<li><a href="https://github.com/clojure-emacs/cider">Emacs and CIDER</a></li>
 </ul>
+</div>
+</div>
+
+<div id="outline-container-org3508387" class="outline-4">
+<h4 id="org3508387"><span class="section-number-4">2.1.2</span> Steps</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<ol class="org-ol">
+<li>Run <code>./db/run.sh &amp;&amp; ./kv/run.sh</code> to start the docker containers for the database and key-value store.
+<ol class="org-ol">
+<li>The <code>run.sh</code> scripts only need to run once. They initialize development data containers. Subsequent development can continue with <code>docker start db &amp;&amp; docker start kv</code>.</li>
+</ol></li>
+<li>Start a Clojure REPL in Emacs, evaluate the <code>dev/user.clj</code> namespace, and run <code>(init)</code></li>
+<li>Visit <code>http://localhost:8000/wgu</code></li>
+</ol>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org65544b1" class="outline-3">
-<h3 id="org65544b1"><span class="section-number-3">2.2</span> How To Run Software Locally</h3>
+
+<div id="outline-container-org377971f" class="outline-3">
+<h3 id="org377971f"><span class="section-number-3">2.2</span> How To Run Software Locally</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org3ba66a2" class="outline-4">
-<h4 id="org3ba66a2"><span class="section-number-4">2.2.1</span> Requirements</h4>
+<div id="outline-container-org6d88b9c" class="outline-4">
+<h4 id="org6d88b9c"><span class="section-number-4">2.2.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ul class="org-ul">
 <li><a href="https://www.java.com/download/ie_manual.jsp">Java</a></li>
@@ -396,8 +399,8 @@ After I describe the steps to initialize a development environment, you&rsquo;ll
 </div>
 </div>
 
-<div id="outline-container-orge8baaa9" class="outline-4">
-<h4 id="orge8baaa9"><span class="section-number-4">2.2.2</span> Steps</h4>
+<div id="outline-container-orgfa31bb6" class="outline-4">
+<h4 id="orgfa31bb6"><span class="section-number-4">2.2.2</span> Steps</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <ol class="org-ol">
 <li>Run <code>./db/run.sh &amp;&amp; ./kv/run.sh</code> to start the docker containers for the database and key-value store.
@@ -405,7 +408,7 @@ After I describe the steps to initialize a development environment, you&rsquo;ll
 <li>The <code>run.sh</code> scripts only need to run once. They initialize development data containers. Subsequent development can continue with <code>docker start db &amp;&amp; docker start kv</code>.</li>
 </ol></li>
 <li>The application&rsquo;s <code>jar</code> builds with a <code>make</code> run from the root directory. (See <a href="../Makefile">Makefile</a>).</li>
-<li>Navigate to the root directory of this git repo and run <code>java -jar darklimericks-dev.jar</code></li>
+<li>Navigate to the root directory of this git repo and run <code>java -jar darklimericks.jar</code></li>
 <li>Visit <a href="http://localhost:8000/wgu">http://localhost:8000/wgu</a></li>
 </ol>
 </div>
@@ -418,8 +421,8 @@ After I describe the steps to initialize a development environment, you&rsquo;ll
 <div class="outline-text-2" id="text-letter-of-transmittal">
 </div>
 
-<div id="outline-container-orgd1c817d" class="outline-3">
-<h3 id="orgd1c817d"><span class="section-number-3">3.1</span> Problem Summary</h3>
+<div id="outline-container-orgaffd16b" class="outline-3">
+<h3 id="orgaffd16b"><span class="section-number-3">3.1</span> Problem Summary</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Songwriters, artists, and record labels can save time and discover better lyrics with the help of a machine learning tool that supports their creative endeavours.
@@ -431,8 +434,8 @@ Songwriters have several old-fashioned tools at their disposal including diction
 </div>
 </div>
 
-<div id="outline-container-orgb3caa29" class="outline-3">
-<h3 id="orgb3caa29"><span class="section-number-3">3.2</span> Benefits</h3>
+<div id="outline-container-org637a93f" class="outline-3">
+<h3 id="org637a93f"><span class="section-number-3">3.2</span> Benefits</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 How many sensible phrases can you think of that rhyme with &ldquo;war on poverty&rdquo;? What if I say that there&rsquo;s a restriction to only come up with phrases that are exactly 14 syllables? That&rsquo;s a common restriction when a songwriter is trying to match the meter of a previous line. What if I add another restriction that there must be primary stress at certain spots in that 14 syllable phrase?
@@ -448,8 +451,8 @@ And this is a process that is perfect for machine learning. Machine learning can
 </div>
 </div>
 
-<div id="outline-container-orgacee2de" class="outline-3">
-<h3 id="orgacee2de"><span class="section-number-3">3.3</span> Product - RhymeStorm™</h3>
+<div id="outline-container-orgc0f3749" class="outline-3">
+<h3 id="orgc0f3749"><span class="section-number-3">3.3</span> Product - RhymeStorm™</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 RhymeStorm™ is a tool to help songwriters brainstorm. It provides lyrics automatically generated based on training data from existing songs while adhering to restrictions based on rhyme scheme, meter, genre, and more.
@@ -477,8 +480,8 @@ This auto-complete functionality will be similar to the auto-complete that is co
 </div>
 </div>
 
-<div id="outline-container-orgca28427" class="outline-3">
-<h3 id="orgca28427"><span class="section-number-3">3.4</span> Data</h3>
+<div id="outline-container-orgf80951f" class="outline-3">
+<h3 id="orgf80951f"><span class="section-number-3">3.4</span> Data</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 The initial model will be trained on the lyrics from <a href="http://darklyrics.com">http://darklyrics.com</a>. This is a publicly available data set with minimal meta-data. Record labels will have more valuable datasets that will include meta-data along with lyrics, such as the date the song was popular, the number of radio plays of the song, the profit of the song/artist, etc&#x2026;
@@ -490,8 +493,8 @@ The software can be augmented with additional algorithms to account for the type
 </div>
 </div>
 
-<div id="outline-container-orgd88d4e7" class="outline-3">
-<h3 id="orgd88d4e7"><span class="section-number-3">3.5</span> Objectives</h3>
+<div id="outline-container-orga988500" class="outline-3">
+<h3 id="orga988500"><span class="section-number-3">3.5</span> Objectives</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 This software will accomplish its primary objective if it makes its way into the daily toolkit of a handful of singers/songwriters.
@@ -502,17 +505,17 @@ Several secondary objectives are also desirable and reasonably expected. The arc
 </p>
 
 <p>
-For example, the Markov Model can be conveniently backed by a Trie data structure. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
+For example, the <a href="https://en.wikipedia.org/wiki/Hidden_Markov_model">Markov Model</a> can be conveniently backed by a <a href="https://en.wikipedia.org/wiki/Trie">Trie data structure</a>. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
 </p>
 
 <p>
-Another example is the package that turns phrases into phones. That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
+Another example is the package that turns phrases into phones (symbols of pronunciation). That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8887fb3" class="outline-3">
-<h3 id="org8887fb3"><span class="section-number-3">3.6</span> Development Methodology - Agile</h3>
+<div id="outline-container-org6ac2e9b" class="outline-3">
+<h3 id="org6ac2e9b"><span class="section-number-3">3.6</span> Development Methodology - Agile</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 This project will be developed with an iterative Agile methodology. Since a large part of data science and machine learning is exploration, this project will benefit from ongoing exploration in tandem with development.
@@ -528,8 +531,8 @@ The prices quoted below are for an initial minimum-viable-product that will serv
 </div>
 </div>
 
-<div id="outline-container-org9799613" class="outline-3">
-<h3 id="org9799613"><span class="section-number-3">3.7</span> Costs</h3>
+<div id="outline-container-org97ae577" class="outline-3">
+<h3 id="org97ae577"><span class="section-number-3">3.7</span> Costs</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Funding requirements are minimal. The initial dataset is public and freely available. On a typical consumer laptop, Hidden Markov Models can be trained on fairly large datasets in short time and the training doesn&rsquo;t require the use of expensive hardware like the GPUs used to train Deep Neural Networks.
@@ -614,17 +617,17 @@ These are my estimates for the time and cost of different aspects of initial dev
 </div>
 
 
-<div id="outline-container-orgb013d28" class="outline-3">
-<h3 id="orgb013d28"><span class="section-number-3">3.8</span> <span class="done NO">NO</span> the impact of the solution on stakeholders</h3>
+<div id="outline-container-org47c8f70" class="outline-3">
+<h3 id="org47c8f70"><span class="section-number-3">3.8</span> Stakeholder Impact</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
-This seems redundant or irrelevant. The only stakeholders in the project I&rsquo;m describing would be the record labels or songwriters and the impact on them is described in the <a href="#orgb3caa29">3.2</a> section above.
+The only stakeholders in the project will be the record labels or songwriters. I describe the only impact to them in the <a href="#org637a93f">3.2</a> section above.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org882b631" class="outline-3">
-<h3 id="org882b631"><span class="section-number-3">3.9</span> Ethical And Legal Considerations</h3>
+<div id="outline-container-org844af3d" class="outline-3">
+<h3 id="org844af3d"><span class="section-number-3">3.9</span> Ethical And Legal Considerations</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Web scraping, the method used to obtain the initial dataset from <a href="http://darklyrics.com">http://darklyrics.com</a>, is protected given the ruling in <a href="https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn">https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn</a>.
@@ -636,8 +639,8 @@ The use of publicly available data in generative works is less clear. But Micros
 </div>
 </div>
 
-<div id="outline-container-org56715a0" class="outline-3">
-<h3 id="org56715a0"><span class="section-number-3">3.10</span> Expertise</h3>
+<div id="outline-container-orgb712f10" class="outline-3">
+<h3 id="orgb712f10"><span class="section-number-3">3.10</span> Expertise</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 I have 10 years experience as a programmer and have worked extensively on both frontend technologies like HTML/JavaScript, backend technologies like Django, and building libraries/packages/frameworks.
@@ -658,8 +661,8 @@ Write an executive summary directed to IT professionals that addresses each of t
 </p>
 </div>
 
-<div id="outline-container-orgb424ec4" class="outline-3">
-<h3 id="orgb424ec4"><span class="section-number-3">4.1</span> Decision Support Opportunity</h3>
+<div id="outline-container-org9db3809" class="outline-3">
+<h3 id="org9db3809"><span class="section-number-3">4.1</span> Decision Support Opportunity</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Songwriters expend a lot of time and effort finding the perfect rhyming word or phrase. RhymeStorm™ is going to amplify user&rsquo;s creative abilities by searching its machine learning model for sensible and proven-successful words and phrases that meet the rhyme scheme and meter requirements requested by the user.
@@ -671,8 +674,8 @@ When a songwriter needs to find likely phrases that rhyme with &ldquo;war on pov
 </div>
 </div>
 
-<div id="outline-container-org30a706b" class="outline-3">
-<h3 id="org30a706b"><span class="section-number-3">4.2</span> Customer Needs And Product Description</h3>
+<div id="outline-container-orgfe15174" class="outline-3">
+<h3 id="orgfe15174"><span class="section-number-3">4.2</span> Customer Needs And Product Description</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Songwriters spend money on dictionaries, compilations of slang, thesauruses, and phrase dictionaries. They spend their time daydreaming, brainstorming, contemplating, and mixing and matching the knowledge they acquire through these traditional means.
@@ -692,8 +695,8 @@ Computers can process and sort this information and sort the results by quality 
 </div>
 </div>
 
-<div id="outline-container-orgf378a60" class="outline-3">
-<h3 id="orgf378a60"><span class="section-number-3">4.3</span> Existing Products</h3>
+<div id="outline-container-orge9f9662" class="outline-3">
+<h3 id="orge9f9662"><span class="section-number-3">4.3</span> Existing Products</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 We&rsquo;re all familiar with dictionaries, thesauruses, and their shortcomings.
@@ -709,8 +712,8 @@ RhymeZone is limited in its capability. It doesn&rsquo;t do well finding rhymes 
 </div>
 </div>
 
-<div id="outline-container-org490fc7a" class="outline-3">
-<h3 id="org490fc7a"><span class="section-number-3">4.4</span> Available Data And Future Data Lifecycle</h3>
+<div id="outline-container-org7a10362" class="outline-3">
+<h3 id="org7a10362"><span class="section-number-3">4.4</span> Available Data And Future Data Lifecycle</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 The initial dataset will be gathered by downloading lyrics from <a href="http://darklyrics.com">http://darklyrics.com</a> and future models can be generated by downloading lyrics from other websites. Alternatively, data can be provided by record labels and combined with meta-data that the record label may have, such as how many radio plays each song gets and how much profit they make from each song.
@@ -734,8 +737,8 @@ Each new model can be uploaded to the web server and users can select which mode
 </div>
 </div>
 
-<div id="outline-container-orgb1291a7" class="outline-3">
-<h3 id="orgb1291a7"><span class="section-number-3">4.5</span> Methodology - Agile</h3>
+<div id="outline-container-org11d880e" class="outline-3">
+<h3 id="org11d880e"><span class="section-number-3">4.5</span> Methodology - Agile</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 RhymeStorm™ development will proceed with an iterative Agile methodology. It will be composed of several independent modules that can be worked on independently, in parallel, and iteratively.
@@ -759,11 +762,17 @@ Much of data science is exploratory and taking an iterative Agile approach can t
 </div>
 </div>
 
-<div id="outline-container-org1eebc92" class="outline-3">
-<h3 id="org1eebc92"><span class="section-number-3">4.6</span> Deliverables</h3>
+<div id="outline-container-org9525387" class="outline-3">
+<h3 id="org9525387"><span class="section-number-3">4.6</span> Deliverables</h3>
 <div class="outline-text-3" id="text-4-6">
+<ul class="org-ul">
+<li>Supporting libraries source code</li>
+<li>Application source code</li>
+<li>Deployed application</li>
+</ul>
+
 <p>
-Three aspects of this project are available as open source repositories on Github.
+The supporting libraries of this project are available as open source repositories on Github.
 </p>
 
 <p>
@@ -788,13 +797,9 @@ The trained data model and web interface has been deployed at the following addr
 </div>
 </div>
 
-<div id="outline-container-org1adc854" class="outline-3">
-<h3 id="org1adc854"><span class="section-number-3">4.7</span> Implementation Plan And Anticipations</h3>
+<div id="outline-container-org2e15caa" class="outline-3">
+<h3 id="org2e15caa"><span class="section-number-3">4.7</span> Implementation Plan And Anticipations</h3>
 <div class="outline-text-3" id="text-4-7">
-<p>
-the plan for implementation of your data product, including the anticipated outcomes from this development
-</p>
-
 <p>
 I&rsquo;ll start by writing and releasing the supporting libraries and packages: Tries, Syllabification/Phonetics, Rhyming.
 </p>
@@ -813,8 +818,8 @@ In anticipation of user growth, I&rsquo;ll be deploying the final product on Dig
 </div>
 </div>
 
-<div id="outline-container-org21636b7" class="outline-3">
-<h3 id="org21636b7"><span class="section-number-3">4.8</span> Requirements Validation And Verification</h3>
+<div id="outline-container-org7e3c281" class="outline-3">
+<h3 id="org7e3c281"><span class="section-number-3">4.8</span> Requirements Validation And Verification</h3>
 <div class="outline-text-3" id="text-4-8">
 <p>
 the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
@@ -834,8 +839,8 @@ The final website will integrate multiple technologies and the integrations won&
 </div>
 </div>
 
-<div id="outline-container-org2ca6ded" class="outline-3">
-<h3 id="org2ca6ded"><span class="section-number-3">4.9</span> Programming Environments And Costs</h3>
+<div id="outline-container-orgfb9db4d" class="outline-3">
+<h3 id="orgfb9db4d"><span class="section-number-3">4.9</span> Programming Environments And Costs</h3>
 <div class="outline-text-3" id="text-4-9">
 <p>
 the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
@@ -859,8 +864,8 @@ All code was written and all models were trained on a Lenovo T15G with an Intel 
 </div>
 </div>
 
-<div id="outline-container-org8dd3310" class="outline-3">
-<h3 id="org8dd3310"><span class="section-number-3">4.10</span> Timeline And Milestones</h3>
+<div id="outline-container-orgf165727" class="outline-3">
+<h3 id="orgf165727"><span class="section-number-3">4.10</span> Timeline And Milestones</h3>
 <div class="outline-text-3" id="text-4-10">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -938,16 +943,16 @@ RhymeStorm™ is an application to help singers and songwriters brainstorm new l
 </p>
 </div>
 
-<div id="outline-container-org7d7bb0f" class="outline-3">
-<h3 id="org7d7bb0f"><span class="section-number-3">5.1</span> Descriptive And Predictive Methods</h3>
+<div id="outline-container-org86f4885" class="outline-3">
+<h3 id="org86f4885"><span class="section-number-3">5.1</span> Descriptive And Predictive Methods</h3>
 <div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-orge9f152e" class="outline-4">
-<h4 id="orge9f152e"><span class="section-number-4">5.1.1</span> Descriptive Method</h4>
+<div id="outline-container-org1fcfb01" class="outline-4">
+<h4 id="org1fcfb01"><span class="section-number-4">5.1.1</span> Descriptive Method</h4>
 <div class="outline-text-4" id="text-5-1-1">
 </div>
 <ol class="org-ol">
-<li><a id="org9bf6552"></a>Most Common Grammatical Structures In A Set Of Lyrics<br />
+<li><a id="org49a0c29"></a>Most Common Grammatical Structures In A Set Of Lyrics<br />
 <div class="outline-text-5" id="text-5-1-1-1">
 <p>
 By filtering songs by metrics such as popularity, number of awards, etc&#x2026; we can use this software package to determine the most common grammatical phrase structure for different filtered categories.
@@ -994,28 +999,28 @@ In the example below, you&rsquo;ll see that a simple noun-phrase is the most pop
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">(TOP (S (S (S (S (S (NP (NN)) (VP (VBP) (S (NP (JJ) (NNS)) (VP (VBD) (S (VP (TO) (VP (VB)))))))) nil (CC) (S (NP (PRP)) (VP (VBP) (ADJP (RB) (JJ)) (S (VP (TO) (VP (VB) (NP (PRP)) (SBAR (S (NP (DT) (NN)) (VP (VBZ) (RB) (PP (IN) (NP (JJ)))))))))))) (.) (NP (PRP)) (VP (MD) (VP (VB)))) nil (IN) (S (NP (PRP)) (VP (MD) (VP (VB) (S (VP (TO) (VP (VB)))))))) (.) (S (CC) (NP (PRP)) (VP (VBP) (ADJP (RB) (JJ)) (SBAR (S (NP (DT)) (VP (VBZ) (NP (NP (RB) (DT) (NN)) (SBAR (S (NP (PRP)) (VP (VBZ) (SBAR (S (NP (PRP)) (VP (MD) (ADVP (RB)) (VP (VB) (S (NP (PRP)) (ADJP (JJ))) (SBAR (IN) (S (VP (VBP) (NP (DT) (JJ) (NN)))))))))))))))))) (.)))</td>
-<td class="org-right">1</td>
+<td class="org-left">(TOP (NP (NNP) (.)))</td>
+<td class="org-right">6</td>
 </tr>
 
 <tr>
-<td class="org-left">(INC (NP (DT) (JJ) (NN)) (.) (NP (DT) (NN)) (VBZ) (ADJP (JJ)) (.) (NP (PRP)) (VP (VB)) (CC) (VB) (IN) (NP (NNS)) (.) (CC) (NP (NN)) (VBZ) (ADVP (RB)) (VP (VBD)) (.) (NP (PRP)) (VBP) (IN) (NP (PRP)) (:) (NP (PRP)) (VBP) (IN) (NP (PRP)) (.) (JJ) (NN) (VBZ) (ADJP (JJ)) (ADVP (RB)) (.) (CC) (JJ) (IN) (VBG) (NP (PRP$) (JJ) (NN)) (.) (CC) (NP (NN)) (VBZ) (VP (VBN)) (.) (NNP) (NN) (.))</td>
-<td class="org-right">1</td>
+<td class="org-left">(TOP (S (NP (PRP)) (VP (VBP) (ADJP (JJ))) (.)))</td>
+<td class="org-right">6</td>
 </tr>
 
 <tr>
-<td class="org-left">(TOP (S (S (S (S (NP (PRP)) (VP (VBZ) (ADJP (JJ)) (S (VP (TO) (VP (VB)))))) (.) (S (SBAR (WHADVP (WRB)) (S (S (NP (DT) (NN)) (VP (VBZ) (VP (VBN) (PP (IN) (NP (PRP\() (VBN) (NN)))))) (.) (NP (PRP)) (VP (VBP) (PP (IN) (NP (PRP\)) (JJ) (NN))) (PP (IN) (NP (PRP\() (JJ) (NN)))))) (NP (PRP)) (VP (VBP) (NP (CD) (NNS)) (SBAR (RB) (.) (S (NP (PRP)) (VP (VBZ) (RB) (NP (PRP\)) (NNS)) (SBAR (IN) (S (NP (NP (NN)) (SBAR (S (NP (PRP)) (VP (VBZ) (NP (ADJP (JJR)) (DT) (NN) (SBAR (IN) (S (NP (PRP)) (ADVP (RB)) (VP (VBP))))))))) (.) (NP (PRP)) (VP (VBP) (CC) (VP (VBP) (S (NP (NN)) (ADVP (RB)) (VP (VBG) (S (VP (TO) (VP (VB) (NP (DT) (NN))))))))))))))))) (.) (NP (PRP$) (NNS)) (VP (NN))) (IN) (S (S (NP (NP (DT) (NN)) (SBAR (S (NP (CD) (NNS)) (ADVP (RB)) (NP (PRP)) (VP (VBP) (ADJP (VBN)))))) (.) (NP (PRP)) (VP (VP (VBP) (NP (DT) (NN))) (CC) (VP (VB) (NP (DT) (JJ) (NN))))) (.) (NP (DT) (JJ) (NN)) (VP (VBZ) (PP (IN) (CC)) (VP (IN)))) (.)))</td>
-<td class="org-right">1</td>
+<td class="org-left">(INC (NP (JJ) (NN)) nil (IN) (NP (DT)) (NP (PRP)) (VBP))</td>
+<td class="org-right">4</td>
 </tr>
 
 <tr>
-<td class="org-left">(TOP (S (S (S (S (NP (NP (NNP)) (SBAR (S (NP (NP (NP (PRP\() (NNS)) (PP (IN) (NP (JJ) (NNS)))) nil (NP (NP (NNP)) (PP (IN) (NP (DT) (JJ) (NNS))))) (VP (VBD) (SBAR (S (NP (NN)) (VP (VBZ) (NP (PRP\)) (NN)) (SBAR (IN) (S (NP (PRP)) (VP (VBD) (VP (VBG) (NP (JJ) (NNS))))))))))))) (.) (S (NP (NN)) (VP (VBZ) (ADVP (RB) (CC) (RB) (JJ)))) (.) (S (PP (IN) (NP (PRP\() (NN))) (.) (NP (DT) (VBN) (NN)) (VP (VBZ) (VP (VBN))))) (.) (NP (PRP\)) (NN) (NNS)) (SBAR (IN) (S (NP (DT)) (VP (VBZ) (NP (NP (PRP\() (NN)) (PP (IN) (NP (JJ) (NN)))))))) (.) (NP (PRP\)) (NN)) (VP (VBD) (RB) (VP (VB) (S (NP (PRP)) (ADJP (DT) (JJR)))))) (.) (VP (VB) (SBAR (S (S (NP (PRP$) (NNS)) (.) (VP (VB) (S (NP (JJ) (JJ) (NNS)) (.) (VP (VB) (ADJP (JJ)))))) (VP (VBZ) (RB) (PP (IN) (NP (NN))))))) (.)))</td>
-<td class="org-right">1</td>
+<td class="org-left">(TOP (NP (NP (JJ) (NN)) nil (NP (NN) (CC) (NN))))</td>
+<td class="org-right">4</td>
 </tr>
 
 <tr>
-<td class="org-left">(TOP (S (S (S (ADVP (RB)) (PP (PP (IN) (NP (NN) (NNS))) (CC) (PP (IN) (NP (NP (JJ) (NNS)) (SBAR (S (NP (PRP)) (VP (MD) (ADVP (RB)) (S (NP (NNS)) (VP (VBP) (PP (IN) (NP (NP (NP (DT) (NN)) (PP (IN) (NP (DT) (JJ) (NN)))) (SBAR (S (NP (PRP)) (ADVP (RB)) (VP (VBP) (NP (DT) (JJ) (NN))))))))))))))) (.) (CC) (S (ADVP (RB)) (NP (NNS)) (VP (VBP) (ADVP (RB)) (NP (NP (NN)) (CC) (NP (NP (NP (DT) (NN)) (PP (IN) (NP (NNS)))) (PP (IN) (NP (NN))))))) (.) (NP (NNP)) (VP (VBD) (PP (IN) (NP (NP (DT) (NN)) (PP (IN) (NP (NNS))))))) (.) (RB) (S (NP (DT)) (VP (VBZ) (S (JJ) nil (S (ADVP (RB)) (NP (PRP)) (VP (VBP) (SBAR (IN) (S (NP (PRP)) (VP (VBD) (RB) (VP (VB) (SBAR (S (NP (PRP)) (VP (MD) (VP (VB) (ADJP (JJR))))))))))))))) (.) (S (SBAR (IN) (S (NP (PRP)) (VP (VBD) (RB) (VP (VB) (PP (IN) (NP (DT) (JJ) (CC) (CD))))))) (NP (PRP)) (VP (MD) (VP (VB) (NP (NP (PRP\() (NN)) (CC) (NP (PRP\)) (NNS))))))) (.) () (NP (NNS)) (VP (MD) (VP (VB) (ADVP (RB)))) (.)))</td>
-<td class="org-right">1</td>
+<td class="org-left">(TOP (S (NP (JJ) (NN)) nil (VP (VBG) (ADJP (JJ)))))</td>
+<td class="org-right">4</td>
 </tr>
 </tbody>
 </table>
@@ -1024,12 +1029,12 @@ In the example below, you&rsquo;ll see that a simple noun-phrase is the most pop
 </ol>
 </div>
 
-<div id="outline-container-org1185af5" class="outline-4">
-<h4 id="org1185af5"><span class="section-number-4">5.1.2</span> Prescriptive Method</h4>
+<div id="outline-container-org09c7cde" class="outline-4">
+<h4 id="org09c7cde"><span class="section-number-4">5.1.2</span> Prescriptive Method</h4>
 <div class="outline-text-4" id="text-5-1-2">
 </div>
 <ol class="org-ol">
-<li><a id="org507497f"></a>Most Likely Word To Follow A Given Phrase<br />
+<li><a id="org8b40fa4"></a>Most Likely Word To Follow A Given Phrase<br />
 <div class="outline-text-5" id="text-5-1-2-1">
 <p>
 To help songwriters think of new lyrics, we provide an API to receive a list of words that commonly follow/precede a given phrase.
@@ -1125,8 +1130,8 @@ In the example below, we provide a seed suffix of &ldquo;bother me&rdquo; and as
 </div>
 </div>
 
-<div id="outline-container-orgb2c5949" class="outline-3">
-<h3 id="orgb2c5949"><span class="section-number-3">5.2</span> Datasets</h3>
+<div id="outline-container-org4d34435" class="outline-3">
+<h3 id="org4d34435"><span class="section-number-3">5.2</span> Datasets</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 The dataset currently in use was generated from the publicly available lyrics at <a href="http://darklyrics.com">http://darklyrics.com</a>.
@@ -1138,12 +1143,12 @@ Further datasets will need to be provided by the end-user.
 </div>
 </div>
 
-<div id="outline-container-org3e0b022" class="outline-3">
-<h3 id="org3e0b022"><span class="section-number-3">5.3</span> Decision Support Functionality</h3>
+<div id="outline-container-org7756ad2" class="outline-3">
+<h3 id="org7756ad2"><span class="section-number-3">5.3</span> Decision Support Functionality</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-org21ff96c" class="outline-4">
-<h4 id="org21ff96c"><span class="section-number-4">5.3.1</span> Choosing Words For A Lyric Based On Markov Likelihood</h4>
+<div id="outline-container-org8d918a6" class="outline-4">
+<h4 id="org8d918a6"><span class="section-number-4">5.3.1</span> Choosing Words For A Lyric Based On Markov Likelihood</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <p>
 Entire phrases can be generated using the previously mentioned functionality of generating lists of likely prefix/suffix words.
@@ -1159,8 +1164,8 @@ The user can supply criteria such as restrictions on the number of syllables, nu
 </div>
 </div>
 
-<div id="outline-container-orgd455635" class="outline-4">
-<h4 id="orgd455635"><span class="section-number-4">5.3.2</span> Choosing Words To Complete A Lyric Based On Rhyme Quality</h4>
+<div id="outline-container-orgd2cd228" class="outline-4">
+<h4 id="orgd2cd228"><span class="section-number-4">5.3.2</span> Choosing Words To Complete A Lyric Based On Rhyme Quality</h4>
 <div class="outline-text-4" id="text-5-3-2">
 <p>
 Another part of the decision support functionality is filtering and ordering predicted words based on their rhyme quality.
@@ -1219,166 +1224,14 @@ In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfec
 
 <colgroup>
 <col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-right" />
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">rhyme</td>
-<td class="org-right">frequency count</td>
-<td class="org-right">rhyme quality</td>
+<td class="org-left">class java.lang.IllegalStateException</td>
 </tr>
 
 <tr>
-<td class="org-left">technology</td>
-<td class="org-right">318</td>
-<td class="org-right">8</td>
-</tr>
-
-<tr>
-<td class="org-left">apology</td>
-<td class="org-right">68</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">pathology</td>
-<td class="org-right">42</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">mythology</td>
-<td class="org-right">27</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">psychology</td>
-<td class="org-right">24</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">theology</td>
-<td class="org-right">23</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">biology</td>
-<td class="org-right">20</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">ecology</td>
-<td class="org-right">11</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">chronology</td>
-<td class="org-right">10</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">astrology</td>
-<td class="org-right">9</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">biotechnology</td>
-<td class="org-right">8</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">nanotechnology</td>
-<td class="org-right">5</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">geology</td>
-<td class="org-right">3</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">ontology</td>
-<td class="org-right">2</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">morphology</td>
-<td class="org-right">2</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">seismology</td>
-<td class="org-right">1</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">urology</td>
-<td class="org-right">1</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">doxology</td>
-<td class="org-right">0</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">neurology</td>
-<td class="org-right">0</td>
-<td class="org-right">7</td>
-</tr>
-
-<tr>
-<td class="org-left">hypocrisy</td>
-<td class="org-right">723</td>
-<td class="org-right">6</td>
-</tr>
-
-<tr>
-<td class="org-left">democracy</td>
-<td class="org-right">238</td>
-<td class="org-right">6</td>
-</tr>
-
-<tr>
-<td class="org-left">atrocity</td>
-<td class="org-right">224</td>
-<td class="org-right">6</td>
-</tr>
-
-<tr>
-<td class="org-left">philosophy</td>
-<td class="org-right">181</td>
-<td class="org-right">6</td>
-</tr>
-
-<tr>
-<td class="org-left">equality</td>
-<td class="org-right">109</td>
-<td class="org-right">6</td>
-</tr>
-
-<tr>
-<td class="org-left">ideology</td>
-<td class="org-right">105</td>
-<td class="org-right">6</td>
+<td class="org-left">[[&ldquo;rhyme&rdquo; &ldquo;frequency count&rdquo; &ldquo;rhyme quality&rdquo;] [&ldquo;technology&rdquo; 318 8] [&ldquo;apology&rdquo; 68 7] [&ldquo;pathology&rdquo; 42 7] [&ldquo;mythology&rdquo; 27 7] [&ldquo;psychology&rdquo; 24 7] [&ldquo;theology&rdquo; 23 7] [&ldquo;biology&rdquo; 20 7] [&ldquo;ecology&rdquo; 11 7] [&ldquo;chronology&rdquo; 10 7] [&ldquo;astrology&rdquo; 9 7] [&ldquo;biotechnology&rdquo; 8 7] [&ldquo;nanotechnology&rdquo; 5 7] [&ldquo;geology&rdquo; 3 7] [&ldquo;ontology&rdquo; 2 7] [&ldquo;morphology&rdquo; 2 7] [&ldquo;seismology&rdquo; 1 7] [&ldquo;urology&rdquo; 1 7] [&ldquo;doxology&rdquo; 0 7] [&ldquo;neurology&rdquo; 0 7] [&ldquo;hypocrisy&rdquo; 723 6] [&ldquo;democracy&rdquo; 238 6] [&ldquo;atrocity&rdquo; 224 6] [&ldquo;philosophy&rdquo; 181 6] [&ldquo;equality&rdquo; 109 6] [&ldquo;ideology&rdquo; 105 6]]</td>
 </tr>
 </tbody>
 </table>
@@ -1386,8 +1239,8 @@ In the example below, you&rsquo;ll see that the first 20 or so rhymes are perfec
 </div>
 </div>
 
-<div id="outline-container-org7a3aa1f" class="outline-3">
-<h3 id="org7a3aa1f"><span class="section-number-3">5.4</span> Featurizing, Parsing, Cleaning, And Wrangling Data</h3>
+<div id="outline-container-org441bc33" class="outline-3">
+<h3 id="org441bc33"><span class="section-number-3">5.4</span> Featurizing, Parsing, Cleaning, And Wrangling Data</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 The data processing code is in <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>
@@ -1424,8 +1277,8 @@ words can be compared: &ldquo;Foo&rdquo; is the same as &ldquo;foo&rdquo;.
 </div>
 
 
-<div id="outline-container-org82aea6c" class="outline-3">
-<h3 id="org82aea6c"><span class="section-number-3">5.5</span> Data Exploration And Preparation</h3>
+<div id="outline-container-orgbec0c70" class="outline-3">
+<h3 id="orgbec0c70"><span class="section-number-3">5.5</span> Data Exploration And Preparation</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 The primary data structure and algorithms supporting exploration of the data are a Markov Trie
@@ -1473,26 +1326,312 @@ All Trie code is hosted in the git repo located at <a href="https://github.com/e
 </div>
 </div>
 
-<div id="outline-container-orgd48d161" class="outline-3">
-<h3 id="orgd48d161"><span class="section-number-3">5.6</span> <span class="todo TODO">TODO</span> Data Visualization Functionalities For Data Exploration And Inspection</h3>
+<div id="outline-container-org471d20b" class="outline-3">
+<h3 id="org471d20b"><span class="section-number-3">5.6</span> Data Visualization Functionalities For Data Exploration And Inspection</h3>
 <div class="outline-text-3" id="text-5-6">
-<ul class="org-ul">
-<li>graph of phrase complexity on one axis and rhyme quality on another axis.</li>
-</ul>
-</div>
+<p>
+The functionality to explore and visualize data is baked into the Trie data structure.
+</p>
+
+<p>
+By simply viewing the Trie in a Clojure REPL, you can inspect the Trie&rsquo;s structure.
+</p>
+
+<pre class="example" id="org32eab94">
+  (let [initialized-trie (-&gt;&gt; (trie/make-trie "dog" "dog" "dot" "dot" "do" "do"))]
+    initialized-trie)
+    ;; =&gt; {(\d \o \g) "dog", (\d \o \t) "dot", (\d \o) "do", (\d) nil}
+</pre>
+
+<p>
+This functionality is provided by the implementations of the <code>Associative</code> and <code>IPersistentMap</code> interfaces.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure">clojure.lang.Associative
+<span style="color: #51afef;">(</span>assoc <span style="color: #c678dd;">[</span>trie opath ovalue<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>empty? opath<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>IntKeyTrie. key ovalue children-<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>IntKeyTrie. key value <span style="color: #a9a1e1;">(</span>update
+                      children-
+                      <span style="color: #51afef;">(</span>first opath<span style="color: #51afef;">)</span>
+                      <span style="color: #51afef;">(</span>fnil assoc <span style="color: #c678dd;">(</span>IntKeyTrie. <span style="color: #98be65;">(</span>first opath<span style="color: #98be65;">)</span> <span style="color: #a9a1e1;">nil</span> <span style="color: #98be65;">(</span>fast-sorted-map<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+                      <span style="color: #51afef;">(</span>rest opath<span style="color: #51afef;">)</span>
+                      ovalue<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>entryAt <span style="color: #c678dd;">[</span>trie key<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>clojure.lang.MapEntry. key <span style="color: #98be65;">(</span>get trie key<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>containsKey <span style="color: #c678dd;">[</span>trie key<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>boolean <span style="color: #98be65;">(</span>get trie key<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+
+clojure.lang.IPersistentMap
+<span style="color: #51afef;">(</span>assocEx <span style="color: #c678dd;">[</span>trie key val<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span><span style="color: #51afef;">if</span> <span style="color: #98be65;">(</span>contains? trie key<span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span><span style="color: #51afef;">throw</span> <span style="color: #a9a1e1;">(</span>Exception. <span style="color: #51afef;">(</span>format <span style="color: #98be65;">"Value already exists at key %s."</span> key<span style="color: #51afef;">)</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>
+    <span style="color: #98be65;">(</span>assoc trie key val<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+<span style="color: #51afef;">(</span>without <span style="color: #c678dd;">[</span>trie key<span style="color: #c678dd;">]</span>
+  <span style="color: #c678dd;">(</span>-without trie key<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+</pre>
 </div>
 
-<div id="outline-container-orgf362966" class="outline-3">
-<h3 id="orgf362966"><span class="section-number-3">5.7</span> <span class="todo TODO">TODO</span> Implementation Of Interactive Queries</h3>
-<div class="outline-text-3" id="text-5-7">
 <p>
-Interactive query capability at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a>.
+The Hidden Markov Model data structure doesn&rsquo;t lend itself to any useful graphical type of visualization or exploration.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgcc5e9da" class="outline-3">
-<h3 id="orgcc5e9da"><span class="section-number-3">5.8</span> Implementation Of Machine Learning Methods</h3>
+<div id="outline-container-org418ee90" class="outline-3">
+<h3 id="org418ee90"><span class="section-number-3">5.7</span> Implementation Of Interactive Queries</h3>
+<div class="outline-text-3" id="text-5-7">
+</div>
+<div id="outline-container-orga1092af" class="outline-4">
+<h4 id="orga1092af"><span class="section-number-4">5.7.1</span> Generate Rhyming Lyrics</h4>
+<div class="outline-text-4" id="text-5-7-1">
+<p>
+This interactive query will return a list of rhyming phrases to any word or phrase you enter.
+</p>
+
+<p>
+For example, the phrase <code>don't bother me</code> returns the following results.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Rhyme</td>
+<td class="org-right">Quality</td>
+<td class="org-left">Lyric</td>
+<td class="org-right">Perplexity</td>
+</tr>
+
+<tr>
+<td class="org-left">forsee</td>
+<td class="org-right">5</td>
+<td class="org-left">i&rsquo;m not one of us forsee</td>
+<td class="org-right">-0.150812027039802</td>
+</tr>
+
+<tr>
+<td class="org-left">wholeheartedly</td>
+<td class="org-right">5</td>
+<td class="org-left">purification has replaced wholeheartedly</td>
+<td class="org-right">-0.23227389702753784</td>
+</tr>
+
+<tr>
+<td class="org-left">merci</td>
+<td class="org-right">5</td>
+<td class="org-left">domine, non merci</td>
+<td class="org-right">-0.2567394520839273</td>
+</tr>
+
+<tr>
+<td class="org-left">oversea</td>
+<td class="org-right">5</td>
+<td class="org-left">i let&rsquo;s torch oversea</td>
+<td class="org-right">-0.3940312599117676</td>
+</tr>
+
+<tr>
+<td class="org-left">me</td>
+<td class="org-right">4</td>
+<td class="org-left">that is found in me</td>
+<td class="org-right">-0.12708613143793374</td>
+</tr>
+
+<tr>
+<td class="org-left">thee</td>
+<td class="org-right">4</td>
+<td class="org-left">you ask thee</td>
+<td class="org-right">-0.20919974848757947</td>
+</tr>
+
+<tr>
+<td class="org-left">free</td>
+<td class="org-right">4</td>
+<td class="org-left">direct from me free</td>
+<td class="org-right">-0.29056603191271085</td>
+</tr>
+
+<tr>
+<td class="org-left">harmony</td>
+<td class="org-right">3</td>
+<td class="org-left">it&rsquo;s time to go, this harmony</td>
+<td class="org-right">-0.06634608923365708</td>
+</tr>
+
+<tr>
+<td class="org-left">society</td>
+<td class="org-right">3</td>
+<td class="org-left">mutilation rejected by society</td>
+<td class="org-right">-0.10624747249791901</td>
+</tr>
+
+<tr>
+<td class="org-left">prophecy</td>
+<td class="org-right">3</td>
+<td class="org-left">take us to the brink of disaster dreamer just a savage prophecy</td>
+<td class="org-right">-0.13097443386137644</td>
+</tr>
+
+<tr>
+<td class="org-left">honesty</td>
+<td class="org-right">3</td>
+<td class="org-left">for you my threw all that can be the power not honesty</td>
+<td class="org-right">-0.2423380760939454</td>
+</tr>
+
+<tr>
+<td class="org-left">constantly</td>
+<td class="org-right">3</td>
+<td class="org-left">i thrust my sword into the dragon&rsquo;s annihilation that constantly</td>
+<td class="org-right">-0.2474276676860057</td>
+</tr>
+
+<tr>
+<td class="org-left">reality</td>
+<td class="org-right">2</td>
+<td class="org-left">smack of reality</td>
+<td class="org-right">-0.14811632033013192</td>
+</tr>
+
+<tr>
+<td class="org-left">eternity</td>
+<td class="org-right">2</td>
+<td class="org-left">with trust in loneliness in eternity</td>
+<td class="org-right">-0.1507561510378151</td>
+</tr>
+
+<tr>
+<td class="org-left">misery</td>
+<td class="org-right">2</td>
+<td class="org-left">reminiscing over misery</td>
+<td class="org-right">-0.29506597978960253</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The interactive query for the above can be found at <a href="https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me">https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me</a>. Note that, since these lyrics are randomly generated, your results will vary.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga23b2fa" class="outline-4">
+<h4 id="orga23b2fa"><span class="section-number-4">5.7.2</span> Complete Lyric Containing Suffix</h4>
+<div class="outline-text-4" id="text-5-7-2">
+<p>
+This interactive query will return a list of lyrics completing the given suffix with randomly generated prefixes.
+</p>
+
+<p>
+For example, let&rsquo;s say a songwriter liked the phrase <code>rejected by society</code> above, but they want to brainstorm different beginnings of that line.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Lyric</td>
+<td class="org-right">OpenNLP Perplexity</td>
+<td class="org-right">Per-word OpenNLP Perplexity</td>
+</tr>
+
+<tr>
+<td class="org-left">we have rejected by society</td>
+<td class="org-right">-0.6593112258099724</td>
+<td class="org-right">-0.03878301328293955</td>
+</tr>
+
+<tr>
+<td class="org-left">she rejected by society</td>
+<td class="org-right">-1.0992937688019973</td>
+<td class="org-right">-0.07852098348585694</td>
+</tr>
+
+<tr>
+<td class="org-left">i was despised and rejected by society</td>
+<td class="org-right">-3.5925278871864497</td>
+<td class="org-right">-0.15619686466028043</td>
+</tr>
+
+<tr>
+<td class="org-left">the exiled and rejected by society</td>
+<td class="org-right">-3.6944350673672144</td>
+<td class="org-right">-0.21731970984513027</td>
+</tr>
+
+<tr>
+<td class="org-left">to smell the death mutilation rejected by society</td>
+<td class="org-right">-5.899263654566813</td>
+<td class="org-right">-0.2458026522736172</td>
+</tr>
+
+<tr>
+<td class="org-left">time goes yearning again only to be rejected by society</td>
+<td class="org-right">-2.764028722852962</td>
+<td class="org-right">-0.08375844614705946</td>
+</tr>
+
+<tr>
+<td class="org-left">you won&rsquo;t survive the mutilation rejected by society</td>
+<td class="org-right">-2.5299544352623986</td>
+<td class="org-right">-0.09035551554508567</td>
+</tr>
+
+<tr>
+<td class="org-left">your rejected by society</td>
+<td class="org-right">-1.4840658880458661</td>
+<td class="org-right">-0.10600470628899043</td>
+</tr>
+
+<tr>
+<td class="org-left">dividing lands, rejected by society</td>
+<td class="org-right">-2.2975947244849793</td>
+<td class="org-right">-0.12764415136027663</td>
+</tr>
+
+<tr>
+<td class="org-left">a voice summons all angry exiled and rejected by society</td>
+<td class="org-right">-9.900290597751827</td>
+<td class="org-right">-0.17679090353128263</td>
+</tr>
+
+<tr>
+<td class="org-left">protect the rejected by society</td>
+<td class="org-right">-4.210741684291847</td>
+<td class="org-right">-0.28071611228612314</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The interactive query for the above can be found at <a href="https://darklimericks.com/wgu/rhyming-lyric?rhyming-lyric-target=rejected+by+society">https://darklimericks.com/wgu/rhyming-lyric?rhyming-lyric-target=rejected+by+society</a>. Note again that your results will vary.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb916b7a" class="outline-3">
+<h3 id="orgb916b7a"><span class="section-number-3">5.8</span> Implementation Of Machine Learning Methods</h3>
 <div class="outline-text-3" id="text-5-8">
 <p>
 The machine learning method chosen for this software is a Hidden Markov Model.
@@ -1562,18 +1701,10 @@ The algorithm for generating predictions from the HMM is as follows.
 </pre>
 </div>
 
-<pre class="example" id="org6bdd99a">
-[(("&lt;s&gt;" "pain")
-  ("&lt;s&gt;" "lone" "i")
-  ("&lt;s&gt;" "lone")
-  ("&lt;s&gt;" "black" "is")
-  ("&lt;s&gt;" "black")
-  ("&lt;s&gt;" "to" "rip")
-  ("&lt;s&gt;" "to")
-  ("&lt;s&gt;" "too" "late")
-  ("&lt;s&gt;" "too")
-  ("&lt;s&gt;" "how" "wrong"))]
+<pre class="example">
+class java.lang.IllegalStateException
 </pre>
+
 
 <p>
 The results above show a sample of 10 elements in a 1-to-3-gram trie
@@ -1651,8 +1782,8 @@ It also performs compaction and serialization. Song lyrics are typically provide
 </div>
 </div>
 
-<div id="outline-container-org2522c08" class="outline-3">
-<h3 id="org2522c08"><span class="section-number-3">5.9</span> Functionalities To Evaluate The Accuracy Of The Data Product</h3>
+<div id="outline-container-orgc60ea27" class="outline-3">
+<h3 id="orgc60ea27"><span class="section-number-3">5.9</span> Functionalities To Evaluate The Accuracy Of The Data Product</h3>
 <div class="outline-text-3" id="text-5-9">
 <p>
 Since creative brainstorming is the goal, &ldquo;accuracy&rdquo; is subjective.
@@ -1719,8 +1850,8 @@ This standardized measure of accuracy can be used to compare different language 
 </div>
 </div>
 
-<div id="outline-container-org6b49a69" class="outline-3">
-<h3 id="org6b49a69"><span class="section-number-3">5.10</span> Security Features</h3>
+<div id="outline-container-org9979562" class="outline-3">
+<h3 id="org9979562"><span class="section-number-3">5.10</span> Security Features</h3>
 <div class="outline-text-3" id="text-5-10">
 <p>
 Artists/Songwriters place a lot of value in the secrecy of their content. Therefore, all communication with the web-based interface occurs over a secure connection using HTTPS.
@@ -1736,21 +1867,25 @@ With this precaution in place, attackers will not be able to snoop the content t
 </div>
 </div>
 
-<div id="outline-container-orgd968943" class="outline-3">
-<h3 id="orgd968943"><span class="section-number-3">5.11</span> <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</h3>
+<div id="outline-container-org48dbb95" class="outline-3">
+<h3 id="org48dbb95"><span class="section-number-3">5.11</span> <span class="todo TODO">TODO</span> Tools To Monitor And Maintain The Product</h3>
 <div class="outline-text-3" id="text-5-11">
 <ul class="org-ul">
 <li>Script to auto-update SSL cert</li>
-<li>Enable NGINX dashboard?</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org6e1c77f" class="outline-3">
-<h3 id="org6e1c77f"><span class="section-number-3">5.12</span> <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
+<div id="outline-container-orgcbfbcd6" class="outline-3">
+<h3 id="orgcbfbcd6"><span class="section-number-3">5.12</span> <span class="todo TODO">TODO</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
+<div class="outline-text-3" id="text-5-12">
+<ul class="org-ul">
+<li>oz graph of perplexity/rhyme quality</li>
+<li>tables (sortable?)</li>
+</ul>
 </div>
 </div>
-
+</div>
 
 <div id="outline-container-remaining-documentation" class="outline-2">
 <h2 id="remaining-documentation"><span class="section-number-2">6</span> D. Documentation</h2>
@@ -1760,16 +1895,16 @@ Create each of the following forms of documentation for the product you have dev
 </p>
 </div>
 
-<div id="outline-container-org4cb78c4" class="outline-3">
-<h3 id="org4cb78c4"><span class="section-number-3">6.1</span> Business Vision</h3>
+<div id="outline-container-org2cd21f7" class="outline-3">
+<h3 id="org2cd21f7"><span class="section-number-3">6.1</span> Business Vision</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Provide rhyming lyric suggestions optionally constrained by syllable count.
 </p>
 </div>
 
-<div id="outline-container-orgc2cb322" class="outline-4">
-<h4 id="orgc2cb322"><span class="section-number-4">6.1.1</span> Requirements</h4>
+<div id="outline-container-org0eb1e34" class="outline-4">
+<h4 id="org0eb1e34"><span class="section-number-4">6.1.1</span> Requirements</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Given a word or phrase, suggest rhymes (ranked by quality) (Trie)</li>
@@ -1784,8 +1919,8 @@ Provide rhyming lyric suggestions optionally constrained by syllable count.
 </div>
 </div>
 
-<div id="outline-container-org20edff8" class="outline-3">
-<h3 id="org20edff8"><span class="section-number-3">6.2</span> Data Sets</h3>
+<div id="outline-container-org3922897" class="outline-3">
+<h3 id="org3922897"><span class="section-number-3">6.2</span> Data Sets</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 See <code>resources/darklyrics-markov.tpt</code>
@@ -1793,8 +1928,8 @@ See <code>resources/darklyrics-markov.tpt</code>
 </div>
 </div>
 
-<div id="outline-container-org5be111b" class="outline-3">
-<h3 id="org5be111b"><span class="section-number-3">6.3</span> Data Analysis</h3>
+<div id="outline-container-org6d5a38a" class="outline-3">
+<h3 id="org6d5a38a"><span class="section-number-3">6.3</span> Data Analysis</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 See <code>src/com/owoga/darklyrics/core.clj</code>
@@ -1806,8 +1941,8 @@ See <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a
 </div>
 </div>
 
-<div id="outline-container-org63b0064" class="outline-3">
-<h3 id="org63b0064"><span class="section-number-3">6.4</span> Assessment</h3>
+<div id="outline-container-org4630c25" class="outline-3">
+<h3 id="org4630c25"><span class="section-number-3">6.4</span> Assessment</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 See visualization of rhyme suggestion in action.
@@ -1819,8 +1954,8 @@ See perplexity?
 </div>
 </div>
 
-<div id="outline-container-orgc008f9b" class="outline-3">
-<h3 id="orgc008f9b"><span class="section-number-3">6.5</span> Visualizations</h3>
+<div id="outline-container-org3ddf117" class="outline-3">
+<h3 id="org3ddf117"><span class="section-number-3">6.5</span> Visualizations</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 See visualization of smoothing technique.
@@ -1832,8 +1967,8 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-org2bb0650" class="outline-3">
-<h3 id="org2bb0650"><span class="section-number-3">6.6</span> Accuracy</h3>
+<div id="outline-container-orgd0a3ebf" class="outline-3">
+<h3 id="orgd0a3ebf"><span class="section-number-3">6.6</span> Accuracy</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 •  assessment of the product’s accuracy
@@ -1841,8 +1976,8 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-org378c3bd" class="outline-3">
-<h3 id="org378c3bd"><span class="section-number-3">6.7</span> Testing</h3>
+<div id="outline-container-org2de8289" class="outline-3">
+<h3 id="org2de8289"><span class="section-number-3">6.7</span> Testing</h3>
 <div class="outline-text-3" id="text-6-7">
 <p>
 •  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
@@ -1850,8 +1985,8 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-org4a20d75" class="outline-3">
-<h3 id="org4a20d75"><span class="section-number-3">6.8</span> Source</h3>
+<div id="outline-container-orgc938e4f" class="outline-3">
+<h3 id="orgc938e4f"><span class="section-number-3">6.8</span> Source</h3>
 <div class="outline-text-3" id="text-6-8">
 <p>
 •  source code and executable file(s)
@@ -1859,8 +1994,8 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-orgb705964" class="outline-3">
-<h3 id="orgb705964"><span class="section-number-3">6.9</span> Quick Start</h3>
+<div id="outline-container-org632e3c8" class="outline-3">
+<h3 id="org632e3c8"><span class="section-number-3">6.9</span> Quick Start</h3>
 <div class="outline-text-3" id="text-6-9">
 <p>
 •  a quick start guide summarizing the steps necessary to install and use the product
@@ -1869,8 +2004,8 @@ See wordcloud
 </div>
 </div>
 
-<div id="outline-container-orgdf25233" class="outline-2">
-<h2 id="orgdf25233"><span class="section-number-2">7</span> Notes</h2>
+<div id="outline-container-orge0f904e" class="outline-2">
+<h2 id="orge0f904e"><span class="section-number-2">7</span> Notes</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 http-kit doesn&rsquo;t support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.
@@ -1880,7 +2015,7 @@ http-kit doesn&rsquo;t support https so no need to bother with keystore stuff li
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Eric Ihli</p>
-<p class="date">Created: 2021-07-15 Thu 20:35</p>
+<p class="date">Created: 2021-07-20 Tue 16:38</p>
 </div>
 </body>
 </html>

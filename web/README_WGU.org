@@ -25,7 +25,6 @@ It's probably not necessary for you to replicate my development environment in o
 
 - [[https://www.docker.com/][Docker]]
 - [[https://clojure.org/releases/downloads][Clojure Version 1.10+]]
-- [[https://nodejs.org/en/download/][NodeJS]]
 - [[https://github.com/clojure-emacs/cider][Emacs and CIDER]]
 
 *** Steps
@@ -33,7 +32,8 @@ It's probably not necessary for you to replicate my development environment in o
 1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
    a. The ~run.sh~ scripts only need to run once. They initialize development data containers. Subsequent development can continue with ~docker start db && docker start kv~.
 2. Start a Clojure REPL in Emacs, evaluate the ~dev/user.clj~ namespace, and run ~(init)~
-3. Run ~npx shadow-cljs watch :frontend~ in the ~web/wgu-app~ directory to build the web interface.
+3. Visit ~http://localhost:8000/wgu~
+
 
 ** How To Run Software Locally
 
@@ -46,7 +46,7 @@ It's probably not necessary for you to replicate my development environment in o
 1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
    a. The ~run.sh~ scripts only need to run once. They initialize development data containers. Subsequent development can continue with ~docker start db && docker start kv~.
 2. The application's ~jar~ builds with a ~make~ run from the root directory. (See [[file:../Makefile][Makefile]]).
-3. Navigate to the root directory of this git repo and run ~java -jar darklimericks-dev.jar~
+3. Navigate to the root directory of this git repo and run ~java -jar darklimericks.jar~
 4. Visit http://localhost:8000/wgu
 
 * A. Letter Of Transmittal
@@ -94,9 +94,9 @@ This software will accomplish its primary objective if it makes its way into the
 
 Several secondary objectives are also desirable and reasonably expected. The architecture of the software lends itself to existing as several independently useful modules.
 
-For example, the Markov Model can be conveniently backed by a Trie data structure. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
+For example, the [[https://en.wikipedia.org/wiki/Hidden_Markov_model][Markov Model]] can be conveniently backed by a [[https://en.wikipedia.org/wiki/Trie][Trie data structure]]. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
 
-Another example is the package that turns phrases into phones. That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
+Another example is the package that turns phrases into phones (symbols of pronunciation). That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
 
 ** Development Methodology - Agile
 
@@ -126,9 +126,9 @@ These are my estimates for the time and cost of different aspects of initial dev
 | Total                   |   330 | $3,300 |
 
 
-** NO the impact of the solution on stakeholders
+** Stakeholder Impact
 
-This seems redundant or irrelevant. The only stakeholders in the project I'm describing would be the record labels or songwriters and the impact on them is described in the [[Benefits]] section above.
+The only stakeholders in the project will be the record labels or songwriters. I describe the only impact to them in the [[Benefits]] section above.
 
 ** Ethical And Legal Considerations
 
@@ -199,7 +199,11 @@ Much of data science is exploratory and taking an iterative Agile approach can t
 
 ** Deliverables
 
-Three aspects of this project are available as open source repositories on Github.
+- Supporting libraries source code
+- Application source code
+- Deployed application
+
+The supporting libraries of this project are available as open source repositories on Github.
 
 [[https://github.com/eihli/clj-tightly-packed-trie][Tightly Packed Trie]]
 
@@ -212,8 +216,6 @@ The trained data model and web interface has been deployed at the following addr
 [[https://darklimericks.com/wgu][Web GUI and Documentation]]
 
 ** Implementation Plan And Anticipations
-
-the plan for implementation of your data product, including the anticipated outcomes from this development
 
 I'll start by writing and releasing the supporting libraries and packages: Tries, Syllabification/Phonetics, Rhyming.
 
@@ -488,13 +490,94 @@ All Trie code is hosted in the git repo located at [[https://github.com/eihli/cl
                (get (.children- trie) (first k))))))
 #+end_src
 
-** TODO Data Visualization Functionalities For Data Exploration And Inspection
+** Data Visualization Functionalities For Data Exploration And Inspection
 
-- graph of phrase complexity on one axis and rhyme quality on another axis.
+The functionality to explore and visualize data is baked into the Trie data structure.
 
-** TODO Implementation Of Interactive Queries
+By simply viewing the Trie in a Clojure REPL, you can inspect the Trie's structure.
 
-Interactive query capability at [[https://darklimericks.com/wgu]].
+#+begin_example
+  (let [initialized-trie (->> (trie/make-trie "dog" "dog" "dot" "dot" "do" "do"))]
+    initialized-trie)
+    ;; => {(\d \o \g) "dog", (\d \o \t) "dot", (\d \o) "do", (\d) nil}
+#+end_example
+
+This functionality is provided by the implementations of the ~Associative~ and ~IPersistentMap~ interfaces.
+
+#+begin_src clojure
+clojure.lang.Associative
+(assoc [trie opath ovalue]
+  (if (empty? opath)
+    (IntKeyTrie. key ovalue children-)
+    (IntKeyTrie. key value (update
+                      children-
+                      (first opath)
+                      (fnil assoc (IntKeyTrie. (first opath) nil (fast-sorted-map)))
+                      (rest opath)
+                      ovalue))))
+(entryAt [trie key]
+  (clojure.lang.MapEntry. key (get trie key)))
+(containsKey [trie key]
+  (boolean (get trie key)))
+
+clojure.lang.IPersistentMap
+(assocEx [trie key val]
+  (if (contains? trie key)
+    (throw (Exception. (format "Value already exists at key %s." key)))
+    (assoc trie key val)))
+(without [trie key]
+  (-without trie key))
+#+end_src
+
+The Hidden Markov Model data structure doesn't lend itself to any useful graphical type of visualization or exploration.
+
+** Implementation Of Interactive Queries
+
+*** Generate Rhyming Lyrics
+
+This interactive query will return a list of rhyming phrases to any word or phrase you enter.
+
+For example, the phrase ~don't bother me~ returns the following results.
+
+| Rhyme          | Quality | Lyric                                                                        |           Perplexity |
+| forsee         |       5 | i'm not one of us forsee                                                     |   -0.150812027039802 |
+| wholeheartedly |       5 | purification has replaced wholeheartedly                                     | -0.23227389702753784 |
+| merci          |       5 | domine, non merci                                                            |  -0.2567394520839273 |
+| oversea        |       5 | i let's torch oversea                                                        |  -0.3940312599117676 |
+| me             |       4 | that is found in me                                                          | -0.12708613143793374 |
+| thee           |       4 | you ask thee                                                                 | -0.20919974848757947 |
+| free           |       4 | direct from me free                                                          | -0.29056603191271085 |
+| harmony        |       3 | it's time to go, this harmony                                                | -0.06634608923365708 |
+| society        |       3 | mutilation rejected by society                                               | -0.10624747249791901 |
+| prophecy       |       3 | take us to the brink of disaster dreamer just a savage prophecy              | -0.13097443386137644 |
+| honesty        |       3 | for you my threw all that can be the power not honesty                       |  -0.2423380760939454 |
+| constantly     |       3 | i thrust my sword into the dragon's annihilation that constantly             |  -0.2474276676860057 |
+| reality        |       2 | smack of reality                                                             | -0.14811632033013192 |
+| eternity       |       2 | with trust in loneliness in eternity                                         |  -0.1507561510378151 |
+| misery         |       2 | reminiscing over misery                                                      | -0.29506597978960253 |
+
+The interactive query for the above can be found at https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me. Note that, since these lyrics are randomly generated, your results will vary.
+
+*** Complete Lyric Containing Suffix
+
+This interactive query will return a list of lyrics completing the given suffix with randomly generated prefixes.
+
+For example, let's say a songwriter liked the phrase ~rejected by society~ above, but they want to brainstorm different beginnings of that line.
+
+| Lyric                                                    |  OpenNLP Perplexity | Per-word OpenNLP Perplexity |
+| we have rejected by society                              | -0.6593112258099724 |        -0.03878301328293955 |
+| she rejected by society                                  | -1.0992937688019973 |        -0.07852098348585694 |
+| i was despised and rejected by society                   | -3.5925278871864497 |        -0.15619686466028043 |
+| the exiled and rejected by society                       | -3.6944350673672144 |        -0.21731970984513027 |
+| to smell the death mutilation rejected by society        |  -5.899263654566813 |         -0.2458026522736172 |
+| time goes yearning again only to be rejected by society  |  -2.764028722852962 |        -0.08375844614705946 |
+| you won't survive the mutilation rejected by society     | -2.5299544352623986 |        -0.09035551554508567 |
+| your rejected by society                                 | -1.4840658880458661 |        -0.10600470628899043 |
+| dividing lands, rejected by society                      | -2.2975947244849793 |        -0.12764415136027663 |
+| a voice summons all angry exiled and rejected by society |  -9.900290597751827 |        -0.17679090353128263 |
+| protect the rejected by society                          |  -4.210741684291847 |        -0.28071611228612314 |
+
+The interactive query for the above can be found at https://darklimericks.com/wgu/rhyming-lyric?rhyming-lyric-target=rejected+by+society. Note again that your results will vary.
 
 ** Implementation Of Machine Learning Methods
 
@@ -749,11 +832,13 @@ Provide rhyming lyric suggestions optionally constrained by syllable count.
 
 - [ ] Given a word or phrase, suggest rhymes (ranked by quality) (Trie)
 - [ ] Given a word or phrase, suggest lyric completion (Hidden Markov Model)
-  + [ ] Restrict suggestion by syllable count
+  + [ ] (Future iteration) Restrict suggestion by syllable count
   + [ ] Restrict suggestion by rhyme quality
-  + [ ] Show graph of suggestions with perplexity on one axis and rhyme quality on the other
+  + [ ] (Future iteration) Show graph of suggestions with perplexity on one axis and rhyme quality on the other
 
 ** Data Sets
+
+The dataset was obtained from http://darklyrics.com.
 
 See ~resources/darklyrics-markov.tpt~
 
@@ -773,7 +858,7 @@ See perplexity?
 
 See visualization of smoothing technique.
 
-See wordcloud
+See wordcloud?
 
 ** Accuracy
 
