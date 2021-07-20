@@ -10,7 +10,8 @@
             [com.owoga.phonetics.stress-manip :as stress-manip]
             [clojure.math.combinatorics :as combinatorics]
             [com.owoga.prhyme.nlp.core :as nlp]
-            [com.owoga.prhyme.data-transform :as data-transform]))
+            [com.owoga.prhyme.data-transform :as data-transform]
+            [com.owoga.trie :as trie]))
 
 (defn gen-artist []
   (->> [(rand-nth (seq dict/adjectives))
@@ -322,6 +323,7 @@
   )
 
 (defn rhymes-by-quality
+  "Returns rhyming word, pronunciation, rhyme quality, and n-gram frequency."
   [seed-phrase]
   (->> seed-phrase
        (prhyme/phrase->all-phones)
@@ -345,14 +347,62 @@
               [phones1 (sort-by (fn [[_ _ quality]]
                                   (- quality))
                                 words)]))
-       (mapcat second)
+       (reduce
+        (fn convert-to-hashmap [acc [pronunciation rhyming-words]]
+          (reduce (fn [acc [phones word rhyme-quality]]
+                    (assoc-in acc [pronunciation phones] {:word word :rhyme-quality rhyme-quality}))
+                  acc
+                  rhyming-words))
+        {})
+       #_#_#_#_(mapcat second)
        (sort-by #(- (nth % 2)))
        (take 20)
        (map second)))
 
 (comment
-  (rhymes-by-quality "bother me")
+  (rhymes-by-quality "boss hog")
 
+  )
+
+(defn add-frequency-to-rhymes
+  [rhymes trie database]
+  (reduce
+   (fn [acc [pronunciation rhyming-words]]
+     (reduce
+      (fn [acc [phones word]]
+        (assoc-in acc [pronunciation phones :freq] (second (get trie [(database (:word word))]))))
+      acc
+      rhyming-words))
+   rhymes
+   rhymes))
+
+(defn rhymes-with-quality-and-frequency
+  [phrase]
+  (-> (rhymes-by-quality phrase)
+      (add-frequency-to-rhymes models/markov-trie models/database)))
+
+(comment
+  (-> (rhymes-by-quality "boss hog")
+      (add-frequency-to-rhymes models/markov-trie models/database))
+
+  {("B" "AA1" "S" "HH" "AA1" "G")
+   {("D" "EH1" "M" "AH0" "G" "AA2" "G")
+    {:word "demagogue", :rhyme-quality 1, :freq 20},
+    ("B" "AE1" "K" "L" "AA2" "G") {:word "backlog", :rhyme-quality 2, :freq 1},
+    ("HH" "EH1" "JH" "HH" "AA2" "G")
+    {:word "hedgehog", :rhyme-quality 2, :freq 2},
+    ,,,
+    ("AA1" "G") {:word "og", :rhyme-quality 4, :freq 134},
+    ("P" "R" "OW1" "L" "AA0" "G")
+    {:word "prologue", :rhyme-quality 2, :freq 25}},
+   ("B" "AO1" "S" "HH" "AA1" "G")
+   {("D" "EH1" "M" "AH0" "G" "AA2" "G")
+    {:word "demagogue", :rhyme-quality 1, :freq 20},
+    ("B" "AE1" "K" "L" "AA2" "G") {:word "backlog", :rhyme-quality 2, :freq 1},
+    ("HH" "EH1" "JH" "HH" "AA2" "G")
+    {:word "hedgehog", :rhyme-quality 2, :freq 2},
+    ,,,
+    ("P" "R" "OW1" "L" "AA0" "G") {:word "prologue", :rhyme-quality 2, :freq 25}}}
   )
 
 (defn open-nlp-perplexity

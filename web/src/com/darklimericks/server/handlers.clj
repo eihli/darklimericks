@@ -23,7 +23,9 @@
 (defmethod ig/init-key ::handler [_ {:keys [router]}]
   (http/ring-handler
    router
-   (ring/create-default-handler)
+   (ring/routes
+    (ring/redirect-trailing-slash-handler)
+    (ring/create-default-handler))
    {:executor sieppari/executor}))
 
 (defn home-handler
@@ -298,3 +300,16 @@
               (views/show-rhyme-suggestion
                request
                suggestions))})))
+
+(defn rhymes-with-quality-and-frequency [db cache]
+  (fn [request]
+    (let [target (-> request :params :rhyme-target)]
+      {:status 200
+       :headers {"Content-Type" "text/html; charset=utf-8"}
+       :body (views/wrap-with-js
+              {:db db
+               :request request
+               :opts {}}
+              (views/rhymes-with-quality-and-frequency
+               request
+               (linguistics/rhymes-with-quality-and-frequency target)))})))

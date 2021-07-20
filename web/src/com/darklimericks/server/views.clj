@@ -277,23 +277,59 @@
            [:div line])]]))])
 
 (defn wgu
-  [request]
+  [request {:keys [rhymes rhyming-lyrics lyrics]}]
   [:div
    [:h1 "WGU Capstone"]
-   (form/form-to
-    [:post (util/route-name->path
-            request
-            :com.darklimericks.server.router/wgu)]
-    (form/label
-     "rhyme-target"
-     "Target word or phrase for which to find rhyme suggestions")
-    " "
-    (form/text-field
-     {:placeholder "instead of war on poverty"}
-     "rhyme-target")
-    (form/submit-button
-     {:class "ml2"}
-     "Show rhyme suggestions"))
+   [:div
+    [:h2 "Generate Rhyme"]
+    (form/form-to
+     [:post (util/route-name->path
+             request
+             :com.darklimericks.server.router/wgu)]
+     (form/label
+      "rhyme-target"
+      "Target word or phrase for which to find rhyme suggestions")
+     " "
+     (form/text-field
+      {:placeholder "instead of war on poverty"}
+      "rhyme-target")
+     (form/submit-button
+      {:class "ml2"}
+      "Show rhyme suggestions"))
+    (when rhymes
+      rhymes)]
+   [:div
+    [:h2 "Generate Rhyming Lyric"]
+    (form/form-to
+     [:post (util/route-name->path
+             request
+             :com.darklimericks.server.router/wgu)]
+     (form/label
+      "rhyming-lyric-target"
+      "Target word or phrase for which to find a rhyming lyric")
+     " "
+     (form/text-field
+      {:placeholder "instead of war on poverty"}
+      "rhyming-lyric-target")
+     (form/submit-button
+      {:class "ml2"}
+      "Show rhyming lyrics suggestions"))]
+   [:div
+    [:h2 "Generate Lyrics"]
+    (form/form-to
+     [:post (util/route-name->path
+             request
+             :com.darklimericks.server.router/wgu)]
+     (form/label
+      "lyric-target"
+      "Seed word or phrase from which to generate lyric")
+     " "
+     (form/text-field
+      {:placeholder "instead of war on poverty"}
+      "lyric-target")
+     (form/submit-button
+      {:class "ml2"}
+      "Show lyrics suggestions"))]
    [:div#myChart]
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
@@ -301,13 +337,17 @@
 (defn lyric-suggestions
   [request suggestions]
   [:div
-   (wgu request)
-   (for [suggestion suggestions]
-     [:div suggestion])])
+   (wgu request {:rhymes (for [suggestion suggestions]
+                           [:div suggestion])})])
 
 (defn show-rhyme-suggestion
   [request suggestions]
   [:div
-   (wgu request)
-   (for [[suggestion p1 freq _ p2 quality] suggestions]
-     [:div (string/join " - " [suggestion freq p1 p2])])])
+   (wgu
+    request
+    {:rhymes
+     (for [[suggestion p1 freq _ p2 quality] suggestions]
+       [:div (string/join " - " [suggestion freq p1 p2])])})])
+
+(defn rhymes-with-quality-and-frequency
+  [])

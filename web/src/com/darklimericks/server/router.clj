@@ -35,9 +35,13 @@
                    :get {:handler (handlers/artist-get-handler db)}}]]
                 ["/assets/*" handlers/file-handler]
                 ["/wgu"
-                 {:name ::wgu
-                  :get {:handler (handlers/wgu db cache)}
-                  :post {:handler (handlers/lyric-suggestions db cache)}}]
+                 [""
+                  {:name ::wgu
+                   :get {:handler (handlers/wgu db cache)}
+                   :post {:handler (handlers/lyric-suggestions db cache)}}]
+                 ["/rhyme"
+                  {:name ::rhyme
+                   :get {:handler (handlers/lyric-suggestions db cache)}}]]
                 ["/.well-known/*" (ring/create-file-handler
                                    {:root "resources/public/.well-known"})]]]
     (timbre/info "Starting router.")
