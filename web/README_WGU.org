@@ -728,10 +728,11 @@ With this precaution in place, attackers will not be able to snoop the content t
 ** TODO Tools To Monitor And Maintain The Product
 
 - Script to auto-update SSL cert
-- Enable NGINX dashboard?
 
 ** TODO A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
 
+- oz graph of perplexity/rhyme quality
+- tables (sortable?)
 
 * D. Documentation
 :PROPERTIES:
