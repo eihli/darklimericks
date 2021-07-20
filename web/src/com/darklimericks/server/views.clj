@@ -285,7 +285,12 @@
   [:div
    [:h1 "WGU Capstone"]
    [:div
+
     [:h2 "Generate Rhyme"]
+    [:div
+     [:p.tl "Use the input field below to enter a word or phrase and view a list
+of words that rhyme. Rhyming words will be sorted by a quality score that represents
+how well the rhyme matches your target."]]
     (form/form-to
      [:get (util/route-name->path
             request
@@ -302,8 +307,16 @@
       "Show rhyme suggestions"))
     (when rhymes
       rhymes)]
+
    [:div
     [:h2 "Generate Rhyming Lyric"]
+    [:p.tl "Use the input field below to enter a word or phrase and view a list
+of phrases that rhyme. Phrases will be generated from a 4-gram Hidden Markov Model.
+Not all of the phrases will make sense. But they will be useful for brainstorming and
+they will all end with a word that rhymes with your target word or phrase."]
+    [:p.tl "One way to use this input field is to find a rhyming phrase that you like and
+then copy and paste that rhyming phrase into the Generate Lyric From Seed field
+to generate many lines that all end with that specific phrase."]
     (form/form-to
      [:get (util/route-name->path
              request
@@ -320,25 +333,37 @@
       "Generate lyric from seed word or phrase"))
     (when lyrics-from-seed
       lyrics-from-seed)]
+
    [:div
     [:h2 "Generate Lyric From Seed"]
+    [:p.tl "Use the input field below to enter a word or phrase and view a list of
+phrases that end with that word or phrase. Phrases will be generated from a
+4-gram Hidden Mrakov Model. This option is useful if you know exactly what word
+you want your lyric to end with but want help brainstorming the beginning of the
+lyric."]
+    [:p.tl "A good way to use this field is to first use the Generate Rhyming Lyric
+field above to find a rhyming phrase that you like, then use this field to generate
+prefixes to that rhyming phrase."]
     (form/form-to
      [:get (util/route-name->path
              request
              :com.darklimericks.server.router/rhyming-lyric)]
      (form/label
       "rhyming-lyric-target"
-      "Target word or phrase for which to find a rhyming lyric")
+      "Target word or phrase for which to generate prefixes")
      " "
      (form/text-field
       {:placeholder "instead of war on poverty"}
       "rhyming-lyric-target")
      (form/submit-button
       {:class "ml2"}
-      "Show rhyming lyrics suggestions"))
+      "Generate lyrics ending with seed word or phrase"))
     (when rhyming-lyrics
       rhyming-lyrics)]
    [:div#myChart]
+   [:br]
+   [:br]
+   [:br]
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
 

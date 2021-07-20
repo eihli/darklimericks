@@ -264,7 +264,7 @@
             {:db db
              :request request
              :opts {}}
-            (views/wgu request))}))
+            (views/wgu request {}))}))
 
 (defn rhyming-lyric [db cache]
   (fn [request]
