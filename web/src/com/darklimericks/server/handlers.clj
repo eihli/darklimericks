@@ -313,3 +313,6 @@
               (views/rhymes-with-quality-and-frequency
                request
                (linguistics/rhymes-with-quality-and-frequency target)))})))
+
+(comment
+  (linguistics/rhymes-with-quality-and-frequency "poverty"))

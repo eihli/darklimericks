@@ -41,7 +41,7 @@
                    :post {:handler (handlers/lyric-suggestions db cache)}}]
                  ["/rhyme"
                   {:name ::rhyme
-                   :get {:handler (handlers/lyric-suggestions db cache)}}]]
+                   :get {:handler (handlers/rhymes-with-quality-and-frequency db cache)}}]]
                 ["/.well-known/*" (ring/create-file-handler
                                    {:root "resources/public/.well-known"})]]]
     (timbre/info "Starting router.")

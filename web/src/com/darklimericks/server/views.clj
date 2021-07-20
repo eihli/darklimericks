@@ -4,7 +4,8 @@
             [clojure.string :as string]
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.db.artists :as db.artists]
-            [com.darklimericks.server.util :as util]))
+            [com.darklimericks.server.util :as util]
+            [com.darklimericks.server.models :as models]))
 
 (defn wrapper
   ([db request opts & body]
@@ -283,9 +284,9 @@
    [:div
     [:h2 "Generate Rhyme"]
     (form/form-to
-     [:post (util/route-name->path
-             request
-             :com.darklimericks.server.router/wgu)]
+     [:get (util/route-name->path
+            request
+            :com.darklimericks.server.router/rhyme)]
      (form/label
       "rhyme-target"
       "Target word or phrase for which to find rhyme suggestions")
@@ -350,4 +351,30 @@
        [:div (string/join " - " [suggestion freq p1 p2])])})])
 
 (defn rhymes-with-quality-and-frequency
-  [])
+  [request suggestions]
+  (let [rhymes (->> (for [[pronunciation rhymes] suggestions]
+                      (for [[phones rhyme] rhymes]
+                        rhyme))
+                    flatten
+                    distinct)
+        grouped-by-quality (group-by :rhyme-quality rhymes)
+        top-20-by-quality (reduce
+                           (fn [acc [_ rhymes]]
+                             (into acc (take 20 (sort-by
+                                                 (comp - :freq)
+                                                 rhymes))))
+                           []
+                           grouped-by-quality)
+        top-20-rhyme (take 60 (sort-by
+                               (juxt (comp - :rhyme-quality)
+                                     (comp - :freq))
+                               top-20-by-quality))]
+    [:div
+     (wgu
+      request
+      {:rhymes
+       [:div
+        [:table {:style "margin: auto;"}
+         [:tr [:th "Rhyme"] [:th "Pronunciation"] [:th "Quality"] [:th "Frequency"]]
+         (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme]
+           [:tr [:td word] [:td (String/join "-" pronunciation)] [:td rhyme-quality] [:td freq]])]]})]))

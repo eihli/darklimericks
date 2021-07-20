@@ -350,14 +350,12 @@
        (reduce
         (fn convert-to-hashmap [acc [pronunciation rhyming-words]]
           (reduce (fn [acc [phones word rhyme-quality]]
-                    (assoc-in acc [pronunciation phones] {:word word :rhyme-quality rhyme-quality}))
+                    (assoc-in acc [pronunciation phones] {:word word
+                                                          :rhyme-quality rhyme-quality
+                                                          :pronunciation phones}))
                   acc
                   rhyming-words))
-        {})
-       #_#_#_#_(mapcat second)
-       (sort-by #(- (nth % 2)))
-       (take 20)
-       (map second)))
+        {})))
 
 (comment
   (rhymes-by-quality "boss hog")
