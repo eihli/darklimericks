@@ -359,7 +359,6 @@
 
 (comment
   (rhymes-by-quality "boss hog")
-
   )
 
 (defn add-frequency-to-rhymes
@@ -413,8 +412,7 @@
        (string/join " ")
        (nlp/most-likely-parse)
        ((fn [[line perplexity]]
-          [line (/ perplexity (count (string/split line #" ")))]))
-       second))
+          [line perplexity (/ perplexity (count (string/split line #" ")))]))))
 
 (defn lyric-suggestions [seed-phrase trie database]
   (let [realize-seed (fn [seed]
@@ -431,6 +429,12 @@
                                  seed
                                  (partial remove (fn [child]
                                                    (= (.key child) (database prhyme/EOS)))))))))))
+
+(comment
+  (->> "democracy </s>"
+       (#(lyric-suggestions % models/markov-trie models/database)))
+
+  )
 
 (defn phrase->quality-of-rhyme
   "Gets the quality of rhyme of the thie highest quality pronunciation of all
@@ -449,9 +453,32 @@
          first)))
 
 (defn wgu-lyric-suggestions
+  "Returns lyrics rhyming with a seed phrase.
+
+  Groups rhymes by quality then orders each grouping by frequency.
+  Selects top 5 (Up to 20 total) from each grouping to generate lyrics.
+
+  Returns the [seed, [lyric, [it's parse, open-nlp perplexity, open-nlp per-word perplexity]]]
+  sorted by the per-word perplexity."
   [phrase]
-  (let [rhymes (rhymes-by-quality phrase)
-        seeds (map vector rhymes (repeat "</s>"))
+  (let [rhymes (->> (for [[phones1 rhymes] (rhymes-with-quality-and-frequency phrase)]
+                      (for [[phones2 rhyme] rhymes]
+                        rhyme))
+                    flatten
+                    distinct)
+        grouped-by-quality (group-by :rhyme-quality rhymes)
+        top-20-by-quality (reduce
+                           (fn [acc [_ rhymes]]
+                             (into acc (take 5 (sort-by
+                                                (comp - :freq)
+                                                rhymes))))
+                           []
+                           grouped-by-quality)
+        top-20-rhyme (take 20 (sort-by
+                               (juxt (comp - :rhyme-quality)
+                                     (comp - :freq))
+                               top-20-by-quality))
+        seeds (map vector (map :word top-20-rhyme) (repeat "</s>"))
         lyrics (map #(lyric-suggestions
                       (string/join " " %)
                       models/markov-trie
@@ -459,10 +486,14 @@
                     seeds)]
     (->> lyrics
          (map (juxt identity open-nlp-perplexity))
-         (sort-by (comp - second)))))
+         (map vector top-20-rhyme)
+         ;; per-word perplexity
+         (sort-by (juxt
+                   (comp - :rhyme-quality first)
+                   (comp - last second second))))))
 
 (comment
-  (wgu-lyric-suggestions "technology")
+  (take 5 (wgu-lyric-suggestions "technology"))
 
   (phrase->quality-of-rhyme "boss hog" "brain fog")
 
@@ -477,6 +508,7 @@
          (map (juxt identity open-nlp-perplexity))
          (sort-by (comp - second))))
 
+  (open-nlp-perplexity "bother me")
   (->> #(lyric-suggestions "bother me </s>" models/markov-trie models/database)
        repeatedly
        (take 5)

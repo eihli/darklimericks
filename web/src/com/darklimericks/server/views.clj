@@ -5,7 +5,10 @@
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.db.artists :as db.artists]
             [com.darklimericks.server.util :as util]
-            [com.darklimericks.server.models :as models]))
+            [com.darklimericks.server.models :as models]
+            [com.owoga.prhyme.core :as prhyme]
+            [com.owoga.corpus.markov :as markov]
+            [com.darklimericks.linguistics.core :as linguistics]))
 
 (defn wrapper
   ([db request opts & body]
@@ -278,7 +281,7 @@
            [:div line])]]))])
 
 (defn wgu
-  [request {:keys [rhymes rhyming-lyrics lyrics]}]
+  [request {:keys [rhymes rhyming-lyrics lyrics-from-seed]}]
   [:div
    [:h1 "WGU Capstone"]
    [:div
@@ -302,9 +305,27 @@
    [:div
     [:h2 "Generate Rhyming Lyric"]
     (form/form-to
-     [:post (util/route-name->path
+     [:get (util/route-name->path
              request
-             :com.darklimericks.server.router/wgu)]
+             :com.darklimericks.server.router/lyric-from-seed)]
+     (form/label
+      "lyric-from-seed"
+      "Target word or phrase for which to find a rhyming lyric")
+     " "
+     (form/text-field
+      {:placeholder "instead of war on poverty"}
+      "seed")
+     (form/submit-button
+      {:class "ml2"}
+      "Generate lyric from seed word or phrase"))
+    (when lyrics-from-seed
+      lyrics-from-seed)]
+   [:div
+    [:h2 "Generate Lyric From Seed"]
+    (form/form-to
+     [:get (util/route-name->path
+             request
+             :com.darklimericks.server.router/rhyming-lyric)]
      (form/label
       "rhyming-lyric-target"
       "Target word or phrase for which to find a rhyming lyric")
@@ -314,23 +335,9 @@
       "rhyming-lyric-target")
      (form/submit-button
       {:class "ml2"}
-      "Show rhyming lyrics suggestions"))]
-   [:div
-    [:h2 "Generate Lyrics"]
-    (form/form-to
-     [:post (util/route-name->path
-             request
-             :com.darklimericks.server.router/wgu)]
-     (form/label
-      "lyric-target"
-      "Seed word or phrase from which to generate lyric")
-     " "
-     (form/text-field
-      {:placeholder "instead of war on poverty"}
-      "lyric-target")
-     (form/submit-button
-      {:class "ml2"}
-      "Show lyrics suggestions"))]
+      "Show rhyming lyrics suggestions"))
+    (when rhyming-lyrics
+      rhyming-lyrics)]
    [:div#myChart]
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
@@ -338,8 +345,23 @@
 (defn lyric-suggestions
   [request suggestions]
   [:div
-   (wgu request {:rhymes (for [suggestion suggestions]
-                           [:div suggestion])})])
+   (wgu
+    request
+    {:rhyming-lyrics
+     [:table {:style "margin: auto;"}
+      [:tr
+       [:th "Lyric"]
+       [:th "OpenNLP Perplexity"]
+       [:th "Per-word OpenNLP Perplexity"]]
+      (let [suggestions
+            (for [suggestion suggestions]
+              (cons suggestion (linguistics/open-nlp-perplexity suggestion)))]
+        (for [[suggestion parse perplexity per-word-perplexity]
+              (sort-by (comp - last) suggestions)]
+          [:tr
+           [:td suggestion]
+           [:td perplexity]
+           [:td per-word-perplexity]]))]})])
 
 (defn show-rhyme-suggestion
   [request suggestions]
@@ -369,12 +391,28 @@
                                (juxt (comp - :rhyme-quality)
                                      (comp - :freq))
                                top-20-by-quality))]
-    [:div
-     (wgu
-      request
-      {:rhymes
-       [:div
-        [:table {:style "margin: auto;"}
-         [:tr [:th "Rhyme"] [:th "Pronunciation"] [:th "Quality"] [:th "Frequency"]]
-         (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme]
-           [:tr [:td word] [:td (String/join "-" pronunciation)] [:td rhyme-quality] [:td freq]])]]})]))
+    (wgu
+     request
+     {:rhymes
+      [:div
+       [:table {:style "margin: auto;"}
+        [:tr [:th "Rhyme"] [:th "Pronunciation"] [:th "Quality"] [:th "Frequency"]]
+        (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme]
+          [:tr [:td word] [:td (String/join "-" pronunciation)] [:td rhyme-quality] [:td freq]])]]})))
+
+(defn lyrics-from-seed
+  [request seed]
+  (let [suggestions (linguistics/wgu-lyric-suggestions
+                     (-> request :params :seed))]
+    (wgu
+     request
+     {:lyrics-from-seed
+      [:div
+       [:table {:style "margin: autoh"}
+        [:tr [:th "Rhyme"] [:th "Quality"] [:th "Lyric"] [:th "Perplexity"]]
+        (for [[seed [line [parse perp per-word-perp]]] suggestions]
+          [:tr
+           [:td (:word seed)]
+           [:td (:rhyme-quality seed)]
+           [:td line]
+           [:td per-word-perp]])]]})))

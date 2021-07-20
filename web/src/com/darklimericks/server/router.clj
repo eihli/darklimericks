@@ -38,10 +38,16 @@
                  [""
                   {:name ::wgu
                    :get {:handler (handlers/wgu db cache)}
-                   :post {:handler (handlers/lyric-suggestions db cache)}}]
+                   :post {:handler (handlers/rhyming-lyric db cache)}}]
                  ["/rhyme"
                   {:name ::rhyme
-                   :get {:handler (handlers/rhymes-with-quality-and-frequency db cache)}}]]
+                   :get {:handler (handlers/rhymes-with-quality-and-frequency db cache)}}]
+                 ["/rhyming-lyric"
+                  {:name ::rhyming-lyric
+                   :get {:handler (handlers/rhyming-lyric db cache)}}]
+                 ["/lyric-from-seed"
+                  {:name ::lyric-from-seed
+                   :get {:handler (handlers/lyrics-from-seed db cache)}}]]
                 ["/.well-known/*" (ring/create-file-handler
                                    {:root "resources/public/.well-known"})]]]
     (timbre/info "Starting router.")

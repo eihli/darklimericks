@@ -266,16 +266,17 @@
              :opts {}}
             (views/wgu request))}))
 
-(defn lyric-suggestions [db cache]
+(defn rhyming-lyric [db cache]
   (fn [request]
+    (println (-> request :params :rhyming-lyric-target))
     (let [suggestions
           (repeatedly
-           5
+           10
            #(linguistics/lyric-suggestions
-             (-> request :params :rhyme-target)
+             (str (-> request :params :rhyming-lyric-target) " </s>")
              models/markov-trie
              models/database))]
-      {:status 201
+      {:status 200
        :headers {"Content-Type" "text/html; charset=utf-8"}
        :body (views/wrap-with-js
               {:db db
@@ -316,3 +317,16 @@
 
 (comment
   (linguistics/rhymes-with-quality-and-frequency "poverty"))
+
+(defn lyrics-from-seed [db cache]
+  (fn [request]
+    (let [target (-> request :params :seed)]
+      {:status 200
+       :headers {"Content-Type" "text/html; charset=utf-8"}
+       :body (views/wrap-with-js
+              {:db db
+               :request request
+               :opts {}}
+              (views/lyrics-from-seed
+               request
+               (linguistics/wgu-lyric-suggestions target)))})))
