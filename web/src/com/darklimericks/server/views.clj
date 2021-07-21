@@ -1,6 +1,7 @@
 (ns com.darklimericks.server.views
   (:require [hiccup.form :as form]
             [hiccup.page :as page]
+            [oz.core :as oz]
             [clojure.string :as string]
             [com.darklimericks.db.albums :as db.albums]
             [com.darklimericks.db.artists :as db.artists]
@@ -97,7 +98,9 @@
       css :css
       :or {title "DarkLimericks"
            css ["/assets/tachyons.css"]
-           js ["/assets/wgu/main.js"]}
+           js ["/assets/vega.js"
+               "/assets/vega-lite.js"
+               "/assets/vega-embed.js" ]}
       :as opts} :opts}
     & body]
    (println (keys request))
@@ -287,6 +290,8 @@
    [:div
 
     [:h2 "Generate Rhyme"]
+    (when rhymes
+      rhymes)
     [:div
      [:p.tl "Use the input field below to enter a word or phrase and view a list
 of words that rhyme. Rhyming words will be sorted by a quality score that represents
@@ -304,9 +309,7 @@ how well the rhyme matches your target."]]
       "rhyme-target")
      (form/submit-button
       {:class "ml2"}
-      "Show rhyme suggestions"))
-    (when rhymes
-      rhymes)]
+      "Show rhyme suggestions"))]
 
    [:div
     [:h2 "Generate Rhyming Lyric"]
@@ -319,8 +322,8 @@ then copy and paste that rhyming phrase into the Generate Lyric From Seed field
 to generate many lines that all end with that specific phrase."]
     (form/form-to
      [:get (util/route-name->path
-             request
-             :com.darklimericks.server.router/lyric-from-seed)]
+            request
+            :com.darklimericks.server.router/lyric-from-seed)]
      (form/label
       "lyric-from-seed"
       "Target word or phrase for which to find a rhyming lyric")
@@ -346,8 +349,8 @@ field above to find a rhyming phrase that you like, then use this field to gener
 prefixes to that rhyming phrase."]
     (form/form-to
      [:get (util/route-name->path
-             request
-             :com.darklimericks.server.router/rhyming-lyric)]
+            request
+            :com.darklimericks.server.router/rhyming-lyric)]
      (form/label
       "rhyming-lyric-target"
       "Target word or phrase for which to generate prefixes")
@@ -363,6 +366,12 @@ prefixes to that rhyming phrase."]
    [:div#myChart]
    [:br]
    [:br]
+   (oz/embed-for-html
+    [:vega
+     {:data {:values [{:a 1 :b 2} {:a 3 :b 5} {:a 4 :b 2}]}
+      :mark :point
+      :encoding {:x {:field :a}
+                 :y {:field :b}}}])
    [:br]
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
@@ -420,6 +429,20 @@ prefixes to that rhyming phrase."]
      request
      {:rhymes
       [:div
+       (oz/embed-for-html
+        [:vega-lite
+
+         {:name :rhyme-quality-popularity
+          :mark {:type :point :tooltip {:content :rhyme-quality-popularity}}
+          :encoding {:x {:field :freq :scale {:nice true :type :log}}
+                     :y {:field :quality :sort :descending}}
+          :data {:values
+                 (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme
+                       i (range 1)]
+                   {:word word
+                    :quality rhyme-quality
+                    :freq freq
+                    :index i})}}])
        [:table {:style "margin: auto;"}
         [:tr [:th "Rhyme"] [:th "Pronunciation"] [:th "Quality"] [:th "Frequency"]]
         (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme]

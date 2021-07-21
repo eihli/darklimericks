@@ -1,6 +1,7 @@
 (ns user
   (:require [clojure.string :as string]
             [clojure.tools.deps.alpha.repl :refer [add-lib]]
+            [oz.core :as oz]
             [clojure.tools.namespace.repl :refer [set-refresh-dirs]]
             [integrant.repl :as repl]
             [taoensso.carmine :as car]
@@ -149,3 +150,15 @@
     "/wgu/foo.html"))
 
   )
+
+(comment
+  (require '[oz.core :as oz])
+  (oz/embed-for-html
+   [:vega-lite
+    {:data {:values [{:a 1 :b 2} {:a 3 :b 5} {:a 4 :b 2}]}
+     :mark :point
+     :encoding {:x {:field :a}
+                :y {:field :b}}}])
+
+
+  :done-comment)
