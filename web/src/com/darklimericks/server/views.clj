@@ -421,7 +421,8 @@ prefixes to that rhyming phrase."]
      request
      {:rhymes
       [:div
-       [:h2 (format "Visualization 1 - Rhymes for: \"%s\"" (-> request :params :rhyme-target))]
+       [:h1 ("Rhymes for \"%S\"" (-> request))]
+       [:h2 "Visualization 1 - Word by rhyme quality/frequency"]
        [:p.tl "Hover over a point in the graph below to see the word. The higher the word
 on the Y axis, the higher the rhyme quality. The further right the word on the X axis, the
 more common the word."]
