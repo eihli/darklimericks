@@ -100,10 +100,9 @@
            css ["/assets/tachyons.css"]
            js ["/assets/vega.js"
                "/assets/vega-lite.js"
-               "/assets/vega-embed.js" ]}
+               "/assets/vega-embed.js"]}
       :as opts} :opts}
     & body]
-   (println (keys request))
    (let [num-albums (db.albums/num-albums db)
          num-artists (db.artists/num-artists db)]
      (page/html5
@@ -178,8 +177,6 @@
            num-albums
            num-artists)]
          [:a.washed-yellow.pl1 {:href "#"} "LINKS"]]]]))))
-
-
 
 (defn home [db request recent-albums artists-by-album]
   (wrapper
@@ -290,8 +287,6 @@
    [:div
 
     [:h2 "Generate Rhyme"]
-    (when rhymes
-      rhymes)
     [:div
      [:p.tl "Use the input field below to enter a word or phrase and view a list
 of words that rhyme. Rhyming words will be sorted by a quality score that represents
@@ -309,7 +304,10 @@ how well the rhyme matches your target."]]
       "rhyme-target")
      (form/submit-button
       {:class "ml2"}
-      "Show rhyme suggestions"))]
+      "Show rhyme suggestions"))
+    [:br]
+    (when rhymes
+      rhymes)]
 
    [:div
     [:h2 "Generate Rhyming Lyric"]
@@ -366,12 +364,6 @@ prefixes to that rhyming phrase."]
    [:div#myChart]
    [:br]
    [:br]
-   (oz/embed-for-html
-    [:vega
-     {:data {:values [{:a 1 :b 2} {:a 3 :b 5} {:a 4 :b 2}]}
-      :mark :point
-      :encoding {:x {:field :a}
-                 :y {:field :b}}}])
    [:br]
    [:iframe {:src "/assets/README_WGU.htm"
              :style "background-color: white; width: 100%; height: 760px;"}]])
@@ -429,20 +421,90 @@ prefixes to that rhyming phrase."]
      request
      {:rhymes
       [:div
+       [:h2 (format "Visualization 1 - Rhymes for: \"%s\"" (-> request :params :rhyme-target))]
+       [:p.tl "Hover over a point in the graph below to see the word. The higher the word
+on the Y axis, the higher the rhyme quality. The further right the word on the X axis, the
+more common the word."]
        (oz/embed-for-html
         [:vega-lite
-
          {:name :rhyme-quality-popularity
+          :width 480
+          :height 360
           :mark {:type :point :tooltip {:content :rhyme-quality-popularity}}
           :encoding {:x {:field :freq :scale {:nice true :type :log}}
                      :y {:field :quality :sort :descending}}
           :data {:values
-                 (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme
-                       i (range 1)]
-                   {:word word
-                    :quality rhyme-quality
-                    :freq freq
-                    :index i})}}])
+                 (doall
+                  (for [[i {:keys [word pronunciation rhyme-quality freq]}]
+                        (map vector (range) top-20-rhyme)]
+                    {:word word
+                     :quality rhyme-quality
+                     :freq freq
+                     :rank (inc i)}))}}])
+
+       [:h2 "Visualization 2 - Rhyme cloud"]
+       [:p.tl "The bigger the word, the better the combination of rhyme quality
+       and popularity (frequency word appears in training set.."]
+       (oz/embed-for-html
+        [:vega
+         {"$schema" "https://vega.github.io/schema/vega/v5.json",
+          :name :wordcloud,
+          :width 480,
+          :height 360,
+          :padding 0,
+          :autosize :none,
+          :signals [{:name :wordPadding, :value 1,
+                     :bind {:input :range, :min 0, :max 5, :step 1}},
+                    {:name :fontSizeRange0, :value 8,
+                     :bind {:input :range, :min 8, :max 42, :step 1}},
+                    {:name :fontSizeRange1, :value 24,
+                     :bind {:input :range, :min 8, :max 42, :step 1}},
+                    {:name :rotate, :value 45,
+                     :bind {:input :select, :options [0, 30, 45, 60, 90]}}],
+
+          :data [{:name :table,
+                  :values (doall
+                           (for [[rank {:keys [word pronunciation rhyme-quality freq]}]
+                                 (map vector (range) top-20-rhyme)]
+                             {:word word
+                              :quality rhyme-quality
+                              :freq freq
+                              :rank (inc rank)
+                              :score (- (count top-20-rhyme) rank)})),
+                  :transform [{:type :formula, :as :rotate,
+                               :expr "[-rotate, 0, rotate][~~(random() * 3)]"},
+                              {:type :wordcloud,
+                               :size [{:signal :width}, {:signal :height}],
+                               :text {:field :word},
+                               :font "Helvetica Neue, Arial",
+                               :fontSize {:field :score},
+                               :fontWeight "normal",
+                               :fontSizeRange [8 36],
+                               :padding 1,
+                               :rotate {:field :rotate}}]}]
+
+          :scales [{:name :color,
+                    :type :ordinal,
+                    :range ["#d5a928", "#652c90", "#939597"]}],
+
+          :marks [{:type :text,
+                   :from {:data :table},
+                   :encode {:enter {:text {:field :word},
+                                    :align {:value :center},
+                                    :baseline {:value :alphabetic},
+                                    :fill {:scale :color, :field :word},
+                                    :font {:value "Helvetica Neue, Arial"},
+                                    :fontWeight {:field :weight}},
+                            :update {:x {:field :x},
+                                     :y {:field :y},
+                                     :angle {:field :angle},
+                                     :fontSize {:field :fontSize},
+                                     :fillOpacity {:value 1}},
+                            :hover {:fillOpacity {:value 0.5}}}}]}])
+
+       [:h2 "Visualization 3 - Rhyme table"]
+       [:p.tl "Rhymes ranked by their rhyme quality then by their frequency.
+Words may appear twice if they have multiple pronunciations."]
        [:table {:style "margin: auto;"}
         [:tr [:th "Rhyme"] [:th "Pronunciation"] [:th "Quality"] [:th "Frequency"]]
         (for [{:keys [word pronunciation rhyme-quality freq]} top-20-rhyme]
