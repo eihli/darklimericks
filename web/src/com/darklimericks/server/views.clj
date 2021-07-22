@@ -318,6 +318,7 @@ they will all end with a word that rhymes with your target word or phrase."]
     [:p.tl "One way to use this input field is to find a rhyming phrase that you like and
 then copy and paste that rhyming phrase into the Generate Lyric From Seed field
 to generate many lines that all end with that specific phrase."]
+    [:p.tl "Note: this request is computationally expensive and may take some time to complete."]
     (form/form-to
      [:get (util/route-name->path
             request
@@ -345,6 +346,7 @@ lyric."]
     [:p.tl "A good way to use this field is to first use the Generate Rhyming Lyric
 field above to find a rhyming phrase that you like, then use this field to generate
 prefixes to that rhyming phrase."]
+    [:p.tl "Note: this request is computationally expensive and may take some time to complete."]
     (form/form-to
      [:get (util/route-name->path
             request
