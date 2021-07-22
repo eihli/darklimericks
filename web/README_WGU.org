@@ -34,7 +34,6 @@ It's probably not necessary for you to replicate my development environment in o
 2. Start a Clojure REPL in Emacs, evaluate the ~dev/user.clj~ namespace, and run ~(init)~
 3. Visit ~http://localhost:8000/wgu~
 
-
 ** How To Run Software Locally
 
 *** Requirements
@@ -124,7 +123,6 @@ These are my estimates for the time and cost of different aspects of initial dev
 | Testing                 |    20 | $200   |
 | Quality Assurance       |    20 | $200   |
 | Total                   |   330 | $3,300 |
-
 
 ** Stakeholder Impact
 
@@ -449,7 +447,6 @@ words can be compared: "Foo" is the same as "foo".
    (map (partial map second))
    (map (partial mapv string/lower-case))))
 #+end_src
-
 
 ** Data Exploration And Preparation
 
@@ -872,30 +869,165 @@ For example, there is natural language processing code at [[https://github.com/e
 
 ** Assessment
 
-See visualization of rhyme suggestion in action.
 
 ** Visualizations
 
-See visualization of smoothing technique.
+[[file:resources/images/rhyme-scatterplot.png]]
 
-See wordcloud?
+[[file:resources/images/wordcloud.png]]
+
+[[file:resources/images/rhyme-table.png]]
 
 ** Accuracy
 
-•  assessment of the product’s accuracy
+It's difficult to objectively test the models accuracy since the goal of "brainstorm new lyric" is such a subjective goal. A valid test of that goal will require many human subjects to subjectively evaluate their performance while using the tool compared to their performance without the tool.
+
+If we allow ourselves the assumption that the close a generated phrase is to a valid english sentence then the better the generated phrase is at helping a songwriter brainstorm, then one objective assessment measure can be the percentage of generated lyrics that are valid English sentences.
+
+*** Percentage Of Generated Lines That Are Valid English Sentences
+
+We can use [[https://opennlp.apache.org/][Apache OpenNLP]] to parse sentences into a grammar structure conforming to the parts of speech specified by the [[https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html][University of Pennsylvania's Treebank Project]].
+
+If OpenNLP parses a line of text into a "simple declarative clause" from the Treebank Tag Set, as described [[https://catalog.ldc.upenn.edu/docs/LDC95T7/cl93.html][here]], then we consider it a valid sentence.
+
+Using this technique on a (small) sample of 100 generated sentences reveals that ~47 are valid.
+
+This is just one of many possible assessment techniques we could use. It's simple but could be expanded to include valid phrases other than Treebank's clauses. For the purpose of having a measurement by which to compare changes to the algorithm, this suffices.
+
+#+begin_src clojure :session main :eval no-export :results output
+(require '[com.darklimericks.linguistics.core :as linguistics]
+         '[com.owoga.prhyme.nlp.core :as nlp])
+
+;; wgu-lyric-suggestion returns 20 suggestions. Each suggestion is a vector of
+;; the rhyming word/quality/frequency and the sentence/parse. This function
+;; returns just the sentences. The sentences can be further filtered using
+;; OpenNLP to only those that are grammatically valid english sentences.
+
+(defn sample-of-20
+  []
+  (->> "technology"
+       linguistics/wgu-lyric-suggestions
+       (map (comp first second))))
+
+(defn average-valid-of-100-suggestions []
+  (let [generated-suggestions (apply concat (repeatedly 5 sample-of-20))
+        valid-english (filter nlp/valid-sentence? generated-suggestions)]
+    (/ (count valid-english) 100)))
+
+(println (average-valid-of-100-suggestions))
+#+end_src
+
+#+RESULTS:
+: 47/100
+
+Where ~nlp/valid-sentence?~ is defined as follows.
+
+#+begin_src clojure
+(defn valid-sentence?
+  "Tokenizes and parses the phrase using OpenNLP models from
+  http://opennlp.sourceforge.net/models-1.5/
+
+  If the parse tree has a clause as the top-level tag, then
+  we consider it a valid English sentence."
+  [phrase]
+  (->> phrase
+       tokenize
+       (string/join " ")
+       vector
+       parse
+       first
+       tb/make-tree
+       :chunk
+       first
+       :tag
+       tb2/clauses
+       boolean))
+#+end_src
 
 ** Testing
 
-•  the results from the data product testing, revisions, and optimization based on the provided plans, including screenshots
+My language of choice for this project encourages a programming technique or paradigm known as REPL-driven development. REPL stands for Read-Eval-Print-Loop. This is a way to write and test code in real-time without a compilation step. Individual code chunks can be evaluated inside an editor, resulting in rapid feedback.
 
-** Source
+Therefore, many "tests" exist as comments immediately following the code under test. For example:
 
-•  source code and executable file(s)
+#+begin_src clojure :eval no
+(defn perfect-rhyme
+  [phones]
+  (->> phones
+       reverse
+       (util/take-through stress-manip/primary-stress?)
+       first
+       reverse
+       (#(cons (first %)
+               (stress-manip/remove-any-stress-signifiers (rest %))))))
+
+(comment
+  (perfect-rhyme (first (phonetics/get-phones "technology")))
+  ;; => ("AA1" "L" "AH" "JH" "IY")
+  )
+#+end_src
+
+The code inside that comment can be evaluated with a simple keystroke while
+inside an editor. It serves as both a test and a form of documentation, as you
+can see the input and the expected output.
+
+Supporting libraries have a more robust test suite, since their purpose is to be used more widely across other projects with contributions accepted from anyone.
+
+Here is an example of the test suite for the code related to syllabification: [[https://github.com/eihli/phonetics/blob/main/test/com/owoga/phonetics/syllabify_test.clj]].
+
+** Source Code
+
+*** Tightly Packed Trie
+
+This is the data structure that backs the Hidden Markov Model.
+
+https://github.com/eihli/clj-tightly-packed-trie
+
+*** Phonetics
+
+This is the helper library that syllabifies and manipulates words, phones, and syllables.
+
+https://github.com/eihli/phonetics
+
+*** Rhyming
+
+This library contains code for analyzing rhymes, sentence structure, and manipulating corpuses.
+
+https://github.com/eihli/prhyme
+
+*** Web Server And User Interface
+
+This application is not publicly available. I'll upload it with submission of the project.
 
 ** Quick Start
 
-•  a quick start guide summarizing the steps necessary to install and use the product
+*** How To Initialize Development Environment
 
-* Notes
+**** Required Software
 
-http-kit doesn't support https so no need to bother with keystore stuff like you would with jetty. Just proxy from haproxy.
+- [[https://www.docker.com/][Docker]]
+- [[https://clojure.org/releases/downloads][Clojure Version 1.10+]]
+- [[https://github.com/clojure-emacs/cider][Emacs and CIDER]]
+
+**** Steps
+
+1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
+   a. The ~run.sh~ scripts only need to run once. They initialize development data containers. Subsequent development can continue with ~docker start db && docker start kv~.
+2. Start a Clojure REPL in Emacs, evaluate the ~dev/user.clj~ namespace, and run ~(init)~
+3. Visit ~http://localhost:8000/wgu~
+
+*** How To Run Software Locally
+
+**** Requirements
+
+- [[https://www.java.com/download/ie_manual.jsp][Java]]
+- [[https://www.docker.com/][Docker]]
+
+**** Steps
+
+1. Run ~./db/run.sh && ./kv/run.sh~ to start the docker containers for the database and key-value store.
+   a. The ~run.sh~ scripts only need to run once. They initialize development data containers. Subsequent development can continue with ~docker start db && docker start kv~.
+2. The application's ~jar~ builds with a ~make~ run from the root directory. (See [[file:../Makefile][Makefile]]).
+3. Navigate to the root directory of this git repo and run ~java -jar darklimericks.jar~
+4. Visit http://localhost:8000/wgu
+
