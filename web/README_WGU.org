@@ -845,29 +845,34 @@ Provide rhyming lyric suggestions optionally constrained by syllable count.
 
 *** Requirements
 
-- [ ] Given a word or phrase, suggest rhymes (ranked by quality) (Trie)
-- [ ] Given a word or phrase, suggest lyric completion (Hidden Markov Model)
+- [X] Given a word or phrase, suggest rhymes (ranked by quality) (Trie)
+- [-] Given a word or phrase, suggest lyric completion (Hidden Markov Model)
   + [ ] (Future iteration) Restrict suggestion by syllable count
-  + [ ] Restrict suggestion by rhyme quality
+  + [X] Sort suggestions by frequency of occurrence in training corpus
+  + [X] Sort suggestions by rhyme quality
   + [ ] (Future iteration) Show graph of suggestions with perplexity on one axis and rhyme quality on the other
 
 ** Data Sets
 
-The dataset was obtained from http://darklyrics.com.
+I obtained the dataset from http://darklyrics.com.
+
+The code that I used to download all of the lyrics is at [[https://github.com/eihli/prhyme/blob/master/src/com/owoga/corpus/darklyrics.clj]].
+
+In the interest of being nice to the owners of http://darklyrics.com, I'm keeping private the files containing the lyrics.
+
+The trained data model is available.
 
 See ~resources/darklyrics-markov.tpt~
 
 ** Data Analysis
 
-See ~src/com/owoga/darklyrics/core.clj~
+I wrote code to perform certain types of data analysis, but I didn't find it useful to meet the business requirements of this project.
 
-See https://github.com/eihli/prhyme
+For example, there is natural language processing code at [[https://github.com/eihli/prhyme/blob/master/src/com/owoga/prhyme/nlp/core.clj]] that parses a line into a grammar tree. I wrote several functions to manipulate and aggregate information about the grammar trees that compose the corpus. But I didn't use any of that information in creation of the n-gram Hidden Markov Model nor in the user display. For tasks related to brainstorming rhyming lyrics, that extra information lacked significant value.
 
 ** Assessment
 
 See visualization of rhyme suggestion in action.
-
-See perplexity?
 
 ** Visualizations
 

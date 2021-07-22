@@ -9,4 +9,5 @@ docker run \
     --sysctl net.ipv4.ip_unprivileged_port_start=0 \
     --mount type=bind,source=$FULLCHAIN_PEM,target=/etc/ssl/cert.pem \
     --mount type=bind,source=$(pwd)/haproxy.cfg,target=/usr/local/etc/haproxy/haproxy.cfg \
-    --rm -it haproxy
+    --name haproxy \
+    -d --rm -it haproxy
