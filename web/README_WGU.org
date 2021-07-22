@@ -812,10 +812,25 @@ With this precaution in place, attackers will not be able to snoop the content t
 
 - Script to auto-update SSL cert
 
-** TODO A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
+** A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
 
-- oz graph of perplexity/rhyme quality
-- tables (sortable?)
+You can access an example of the user interface at https://darklimericks.com/wgu.
+
+You'll see 3 input fields.
+
+The first input field is for a word or phrase for which you wish to find a rhyme. Submitting that field will return three visualizations to help you pick a rhyme.
+
+The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurrs in the training corpus on the X axis.
+
+[[file:resources/images/wgu-vis.png]]
+
+The second visualization is a word cloud where the size of each word is based on the frequency with which the word appears in the training corpus.
+
+[[file:resources/images/wgu-vis-cloud.png]]
+
+The third visualization is a table that lists all of the rhymes, their pronunciations, the rhyme quality, and the frequency. The table is sorted first by the rhyme quality then by the frequency.
+
+[[file:resources/images/wgu-vis-table.png]]
 
 * D. Documentation
 :PROPERTIES:
