@@ -4,3 +4,7 @@
 /kv/data
 /web/resources/public/wgu/cljs-runtime/
 /web/resources/public/cljs-runtime/
+cert.pem
+key.pem
+darklimericks.jar
+.well-known

@@ -5,7 +5,7 @@ FULLCHAIN_PEM="${FULLCHAIN_PEM:-/etc/letsencrypt/live/darklimericks.com/fullchai
 
 docker run \
     --add-host darklimericks:$HOST_IP \
-    -p 80:80 -p 443:443 \
+    -p 80:80 -p 443:443 -p 8404:8404 \
     --sysctl net.ipv4.ip_unprivileged_port_start=0 \
     --mount type=bind,source=$FULLCHAIN_PEM,target=/etc/ssl/cert.pem \
     --mount type=bind,source=$(pwd)/haproxy.cfg,target=/usr/local/etc/haproxy/haproxy.cfg \

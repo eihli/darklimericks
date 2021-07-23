@@ -1,0 +1,7 @@
+#+TITLE: Ssl
+
+
+
+#+begin_src sh
+certbot certonly -d darklimericks.com --webroot=/root/darklimericks/web/resources/public
+#+end_src

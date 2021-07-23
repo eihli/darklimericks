@@ -536,22 +536,22 @@ This interactive query will return a list of rhyming phrases to any word or phra
 
 For example, the phrase ~don't bother me~ returns the following results.
 
-| Rhyme          | Quality | Lyric                                                                        |           Perplexity |
-| forsee         |       5 | i'm not one of us forsee                                                     |   -0.150812027039802 |
-| wholeheartedly |       5 | purification has replaced wholeheartedly                                     | -0.23227389702753784 |
-| merci          |       5 | domine, non merci                                                            |  -0.2567394520839273 |
-| oversea        |       5 | i let's torch oversea                                                        |  -0.3940312599117676 |
-| me             |       4 | that is found in me                                                          | -0.12708613143793374 |
-| thee           |       4 | you ask thee                                                                 | -0.20919974848757947 |
-| free           |       4 | direct from me free                                                          | -0.29056603191271085 |
-| harmony        |       3 | it's time to go, this harmony                                                | -0.06634608923365708 |
-| society        |       3 | mutilation rejected by society                                               | -0.10624747249791901 |
-| prophecy       |       3 | take us to the brink of disaster dreamer just a savage prophecy              | -0.13097443386137644 |
-| honesty        |       3 | for you my threw all that can be the power not honesty                       |  -0.2423380760939454 |
-| constantly     |       3 | i thrust my sword into the dragon's annihilation that constantly             |  -0.2474276676860057 |
-| reality        |       2 | smack of reality                                                             | -0.14811632033013192 |
-| eternity       |       2 | with trust in loneliness in eternity                                         |  -0.1507561510378151 |
-| misery         |       2 | reminiscing over misery                                                      | -0.29506597978960253 |
+| Rhyme          | Quality | Lyric                                                            |           Perplexity |
+| forsee         |       5 | i'm not one of us forsee                                         |   -0.150812027039802 |
+| wholeheartedly |       5 | purification has replaced wholeheartedly                         | -0.23227389702753784 |
+| merci          |       5 | domine, non merci                                                |  -0.2567394520839273 |
+| oversea        |       5 | i let's torch oversea                                            |  -0.3940312599117676 |
+| me             |       4 | that is found in me                                              | -0.12708613143793374 |
+| thee           |       4 | you ask thee                                                     | -0.20919974848757947 |
+| free           |       4 | direct from me free                                              | -0.29056603191271085 |
+| harmony        |       3 | it's time to go, this harmony                                    | -0.06634608923365708 |
+| society        |       3 | mutilation rejected by society                                   | -0.10624747249791901 |
+| prophecy       |       3 | take us to the brink of disaster dreamer just a savage prophecy  | -0.13097443386137644 |
+| honesty        |       3 | for you my threw all that can be the power not honesty           |  -0.2423380760939454 |
+| constantly     |       3 | i thrust my sword into the dragon's annihilation that constantly |  -0.2474276676860057 |
+| reality        |       2 | smack of reality                                                 | -0.14811632033013192 |
+| eternity       |       2 | with trust in loneliness in eternity                             |  -0.1507561510378151 |
+| misery         |       2 | reminiscing over misery                                          | -0.29506597978960253 |
 
 The interactive query for the above can be found at https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me. Note that, since these lyrics are randomly generated, your results will vary.
 
@@ -805,9 +805,17 @@ Security certificates are generated using Let's Encrypt and an Nginx web server 
 
 With this precaution in place, attackers will not be able to snoop the content that songwriters are sending to or receiving from the servers.
 
-** TODO Tools To Monitor And Maintain The Product
+** Tools To Monitor And Maintain The Product
 
-- Script to auto-update SSL cert
+By having the application server behind an HAProxy load balancer, we can take advantage of the built-in HAProxy stats page for monitoring amount of traffic and health of the application servers.
+
+[[file:resources/public/images/stats.png]]
+
+http://darklimericks.com:8404/stats
+
+That page is behind basic authentication with username: admin and password: admin.
+
+The server also includes the ~certbot~ script for updating and maintaining the SSL certificates issued by Let's Encrypt.
 
 ** A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types
 
@@ -819,15 +827,15 @@ The first input field is for a word or phrase for which you wish to find a rhyme
 
 The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurrs in the training corpus on the X axis.
 
-[[file:resources/images/wgu-vis.png]]
+[[file:resources/public/images/wgu-vis.png]]
 
 The second visualization is a word cloud where the size of each word is based on the frequency with which the word appears in the training corpus.
 
-[[file:resources/images/wgu-vis-cloud.png]]
+[[file:resources/public/images/wgu-vis-cloud.png]]
 
 The third visualization is a table that lists all of the rhymes, their pronunciations, the rhyme quality, and the frequency. The table is sorted first by the rhyme quality then by the frequency.
 
-[[file:resources/images/wgu-vis-table.png]]
+[[file:resources/public/images/wgu-vis-table.png]]
 
 * D. Documentation
 :PROPERTIES:
@@ -872,11 +880,11 @@ For example, there is natural language processing code at [[https://github.com/e
 
 ** Visualizations
 
-[[file:resources/images/rhyme-scatterplot.png]]
+[[file:resources/public/images/rhyme-scatterplot.png]]
 
-[[file:resources/images/wordcloud.png]]
+[[file:resources/public/images/wordcloud.png]]
 
-[[file:resources/images/rhyme-table.png]]
+[[file:resources/public/images/rhyme-table.png]]
 
 ** Accuracy
 
