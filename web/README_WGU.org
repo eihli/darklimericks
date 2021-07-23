@@ -809,7 +809,7 @@ With this precaution in place, attackers will not be able to snoop the content t
 
 By having the application server behind an HAProxy load balancer, we can take advantage of the built-in HAProxy stats page for monitoring amount of traffic and health of the application servers.
 
-[[file:resources/public/images/stats.png]]
+[[file:assets/images/stats.png]]
 
 http://darklimericks.com:8404/stats
 
@@ -827,15 +827,15 @@ The first input field is for a word or phrase for which you wish to find a rhyme
 
 The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurrs in the training corpus on the X axis.
 
-[[file:resources/public/images/wgu-vis.png]]
+[[file:assets/images/wgu-vis.png]]
 
 The second visualization is a word cloud where the size of each word is based on the frequency with which the word appears in the training corpus.
 
-[[file:resources/public/images/wgu-vis-cloud.png]]
+[[file:assets/images/wgu-vis-cloud.png]]
 
 The third visualization is a table that lists all of the rhymes, their pronunciations, the rhyme quality, and the frequency. The table is sorted first by the rhyme quality then by the frequency.
 
-[[file:resources/public/images/wgu-vis-table.png]]
+[[file:assets/images/wgu-vis-table.png]]
 
 * D. Documentation
 :PROPERTIES:
@@ -875,16 +875,61 @@ I wrote code to perform certain types of data analysis, but I didn't find it use
 
 For example, there is natural language processing code at [[https://github.com/eihli/prhyme/blob/master/src/com/owoga/prhyme/nlp/core.clj]] that parses a line into a grammar tree. I wrote several functions to manipulate and aggregate information about the grammar trees that compose the corpus. But I didn't use any of that information in creation of the n-gram Hidden Markov Model nor in the user display. For tasks related to brainstorming rhyming lyrics, that extra information lacked significant value.
 
-** Assessment
+** Assessment Of Hypothesis
 
+I'll use an example output to subjectively assess the results of the project.
+
+Below are some of the lyrics suggested to rhyme with the word "technologies".
+
+| Rhyme        | Quality | Lyric                                                         |           Perplexity |
+| technologies |       8 | you will tear the skin from the nuclear technologies          | -0.04695091652785746 |
+| pathologies  |       7 | there's no hope for body's pathologies                        | -0.09800371561934312 |
+| apologies    |       7 | swimming in a grey world dying it's time for apologies        | -0.14781111654643642 |
+| chronologies |       7 | damn god damn the seed lurks in chronologies                  | -0.20912909334441387 |
+| anomalies    |       6 | yesterday was born i encounter the anomalies                  | -0.19578505194217627 |
+| atrocities   |       6 | there's no return and and the pimp your atrocities            | -0.21516240668167685 |
+| ideologies   |       6 | entrenched ideologies                                         | -0.27407234083849513 |
+| monopolies   |       6 | monopolies                                                    |  -0.8472654185540912 |
+| qualities    |       5 | with such qualities                                           |  -0.0793752454750395 |
+| policies     |       5 | stop looking at insurance policies                            | -0.11580898408112054 |
+| colonies     |       5 | betwixt my heels, through the tears you collapse the colonies |  -0.1610184959356118 |
+| harmonies    |       5 | broken harmonies                                              | -0.18655087962492334 |
+| prophecies   |       5 | seek the truth prophecies                                     | -0.24506696021938001 |
+| festivities  |       4 | you have touching the festivities                             | -0.09271388814221376 |
+| delicacies   |       4 | grey that consumes what it never was sun and the delicacies   | -0.14553081854920977 |
+| anybody's    |       4 | your eyes, will remain violent the anybody's                  | -0.17560987263626957 |
+| extremities  |       4 | i am missing extremities                                      | -0.30386279996641197 |
+| casualties   |       3 | feed the casualties                                           | -0.23600199637494926 |
+
+Do these lyrics provide benefit to the brainstorming process?
+
+The lines "make sense" to varying degrees.
+
+The "pathologies" line, for example, contains a sensible 2-gram of "body's pathologies". The model has learned that the possessive form of "body" is a reasonable prefix to the word "pathologies".
+
+| pathologies | 7 | there's no hope for body's pathologies | -0.09800371561934312 |
+
+And the beginning of that line contains a phrase, "there's no hope", that fits perfectly with the genre/context of the training set (dark heavy metal).
+
+It's clear that the training worked. The output is relevant to the genre and grammatically reasonable.
+
+There's also a wide variety in the output, which is beneficial for
+brainstorming. Suggestions range from clean and clear rhymes, like
+"technologies" and "pathologies", to more abstract rhymes like "technologies"
+and "anybody's", which some artists can creatively manipulate effectively.
+
+I assess this version of the product proves viable and there's exciting
+possibilities for improvements by integrating with making suggestions that meet
+certain stress patterns, preferring phrases that contain synonyms or antonyms,
+and more.
 
 ** Visualizations
 
-[[file:resources/public/images/rhyme-scatterplot.png]]
+[[file:assets/images/rhyme-scatterplot.png]]
 
-[[file:resources/public/images/wordcloud.png]]
+[[file:assets/images/wordcloud.png]]
 
-[[file:resources/public/images/rhyme-table.png]]
+[[file:assets/images/rhyme-table.png]]
 
 ** Accuracy
 
@@ -902,7 +947,7 @@ Using this technique on a (small) sample of 100 generated sentences reveals that
 
 This is just one of many possible assessment techniques we could use. It's simple but could be expanded to include valid phrases other than Treebank's clauses. For the purpose of having a measurement by which to compare changes to the algorithm, this suffices.
 
-#+begin_src clojure :session main :eval no-export :results output
+#+begin_src clojure :session main :eval no-export :results output :exports both
 (require '[com.darklimericks.linguistics.core :as linguistics]
          '[com.owoga.prhyme.nlp.core :as nlp])
 
@@ -923,6 +968,7 @@ This is just one of many possible assessment techniques we could use. It's simpl
     (/ (count valid-english) 100)))
 
 (println (average-valid-of-100-suggestions))
+;; 47/100
 #+end_src
 
 #+RESULTS:
