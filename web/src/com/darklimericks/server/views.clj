@@ -283,7 +283,7 @@
 (defn wgu
   [request {:keys [rhymes rhyming-lyrics lyrics-from-seed]}]
   [:div
-   [:h1 "WGU Capstone"]
+   [:h1 "RhymeStorm™"]
    [:div
 
     [:h2 "Generate Rhyme"]
