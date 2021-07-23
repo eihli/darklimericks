@@ -1097,7 +1097,6 @@ This application is not publicly available. I'll upload it with submission of th
 3. Navigate to the root directory of this git repo and run ~java -jar darklimericks.jar~
 4. Visit http://localhost:8000/wgu
 
-
 * Citations
 
 Wikimedia Foundation. (2021, July 16). Markov Model. Wikipedia.
