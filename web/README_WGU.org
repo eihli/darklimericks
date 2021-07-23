@@ -93,7 +93,7 @@ This software will accomplish its primary objective if it makes its way into the
 
 Several secondary objectives are also desirable and reasonably expected. The architecture of the software lends itself to existing as several independently useful modules.
 
-For example, the [[https://en.wikipedia.org/wiki/Hidden_Markov_model][Markov Model]] can be conveniently backed by a [[https://en.wikipedia.org/wiki/Trie][Trie data structure]]. This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
+For example, the [[https://en.wikipedia.org/wiki/Hidden_Markov_model][Markov Model]] (Markov Model 2021) can be conveniently backed by a [[https://en.wikipedia.org/wiki/Trie][Trie data structure]] (Trie 2021). This Trie data structure can be released as its own software package and used any application that benefits from prefix matching.
 
 Another example is the package that turns phrases into phones (symbols of pronunciation). That package can find use for a number of natural language processing and natural language generation tasks, aside from the task required by this particular project.
 
@@ -130,9 +130,9 @@ The only stakeholders in the project will be the record labels or songwriters. I
 
 ** Ethical And Legal Considerations
 
-Web scraping, the method used to obtain the initial dataset from http://darklyrics.com, is protected given the ruling in [[https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn]].
+Web scraping, the method used to obtain the initial dataset from http://darklyrics.com, is protected given the ruling in [[https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn]] (HiQ Labs v. LinkedIn 2021).
 
-The use of publicly available data in generative works is less clear. But Microsoft's lawyers deemed it sound given their recent release of Github CoPilot ([[https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code]]).
+The use of publicly available data in generative works is less clear. But Microsoft's lawyers deemed it sound given their recent release of Github CoPilot (Gershgorn, 2021).
 
 ** Expertise
 
@@ -187,7 +187,7 @@ Each new model can be uploaded to the web server and users can select which mode
 
 RhymeStorm™ development will proceed with an iterative Agile methodology. It will be composed of several independent modules that can be worked on independently, in parallel, and iteratively.
 
-The Trie data structure that will be used as a backing to the Hidden Markov Model can be worked on in isolation from any other aspect of the project. The first iteration can use a simple hash-map as a backing store. The second iteration can improve memory efficiency by using a ByteBuffer as a [[https://aclanthology.org/W09-1505.pdf][Tightly Packed Trie]]. Future iterations can continue to improve performance metrics.
+The Trie data structure that will be used as a backing to the Hidden Markov Model can be worked on in isolation from any other aspect of the project. The first iteration can use a simple hash-map as a backing store. The second iteration can improve memory efficiency by using a ByteBuffer as a [[https://aclanthology.org/W09-1505.pdf][Tightly Packed Trie]] (Germann et al., 2009) Future iterations can continue to improve performance metrics.
 
 The web server can be implemented initially without security measures like HTTPS and performance measures like load balancing. Future iterations can add these features as they become necessary.
 
@@ -344,6 +344,8 @@ In the example below, we provide a seed suffix of "bother me" and ask the softwa
 The dataset currently in use was generated from the publicly available lyrics at http://darklyrics.com.
 
 Further datasets will need to be provided by the end-user.
+
+The trained dataset is available as a resource in this repository at ~web/resources/models/~.
 
 ** Decision Support Functionality
 
@@ -651,7 +653,7 @@ The code sample below demonstrates training a Hidden Markov Model on a set of ly
 
 It also performs compaction and serialization. Song lyrics are typically provided as text files. Reading files on a hard drive is an expensive process, but we can perform that expensive training process only once and save the resulting Markov Model in a more memory-efficient format.
 
-#+begin_src clojure :session main :results output pp
+#+begin_src clojure :session main :results output pp :cache yes :eval no-export
 (require '[com.owoga.corpus.markov :as markov]
          '[taoensso.nippy :as nippy]
          '[com.owoga.prhyme.data-transform :as data-transform]
@@ -712,7 +714,7 @@ It also performs compaction and serialization. Song lyrics are typically provide
          [(string/join " " (map database ngram-ids)) freq]))))
 #+end_src
 
-#+RESULTS:
+#+RESULTS[4ee2ce5a73756ffbd11253187af68b4a3e6cd324]:
 #+begin_example
 Froze /tmp/markov-trie-4-gram-backwards.bin
 Froze /tmp/markov-database-4-gram-backwards.bin
@@ -738,6 +740,7 @@ Successfully loaded trie and database.
 
 #+end_example
 
+
 ** Functionalities To Evaluate The Accuracy Of The Data Product
 
 Since creative brainstorming is the goal, "accuracy" is subjective.
@@ -747,13 +750,14 @@ We can, however, measure and compare language generation algorithms against how 
 #+begin_src clojure :session main :exports both :results output pp
 (require '[taoensso.nippy :as nippy]
          '[com.owoga.tightly-packed-trie :as tpt]
-         '[com.owoga.corpus.markov :as markov])
+         '[com.owoga.corpus.markov :as markov]
+         '[clojure.java.io :as io])
 
-(def database (nippy/thaw-from-file "/home/eihli/.models/markov-database-4-gram-backwards.bin"))
+(def database (nippy/thaw-from-file (io/resource "models/markov-database-4-gram-backwards.bin")))
 
 (def markov-tight-trie
   (tpt/load-tightly-packed-trie-from-file
-   "/home/eihli/.models/markov-tightly-packed-trie-4-gram-backwards.bin"
+   (io/resource "models/markov-tightly-packed-trie-4-gram-backwards.bin")
    (markov/decode-fn database)))
 
 (let [likely-phrase ["a" "hole" "</s>" "</s>"]
@@ -867,7 +871,7 @@ In the interest of being nice to the owners of http://darklyrics.com, I'm keepin
 
 The trained data model is available.
 
-See ~resources/darklyrics-markov.tpt~
+See ~web/resources/models/~
 
 ** Data Analysis
 
@@ -1085,3 +1089,23 @@ This application is not publicly available. I'll upload it with submission of th
 3. Navigate to the root directory of this git repo and run ~java -jar darklimericks.jar~
 4. Visit http://localhost:8000/wgu
 
+
+* Citations
+
+Wikimedia Foundation. (2021, July 16). Markov Model. Wikipedia.
+  https://en.wikipedia.org/wiki/Markov_model.
+
+Wikimedia Foundation. (2021, June 25). Trie. Wikipedia.
+  https://en.wikipedia.org/wiki/Trie.
+
+Wikimedia Foundation. (2021, June 15). HiQ Labs v. LinkedIn. Wikipedia.
+  https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn.
+
+Gershgorn, D. (2021, July 7). GitHub's automatic coding tool rests on untested
+  legal ground. The Verge.
+  https://www.theverge.com/2021/7/7/22561180/github-copilot-legal-copyright-fair-use-public-code.
+
+Ulrich Germann, Eric Joanis, and Samuel Larkin. 2009. Tightly packed tries: How
+  to fit large models into memory, and make them load fast, too. Proceedings of
+  the Workshop on Software Engineering, Testing, and Quality Assurance for Natural
+  Language (SETQA- NLP 2009), pages 31–39
