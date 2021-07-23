@@ -145,8 +145,6 @@ I've also been writing limericks my entire life and hold the International Limer
 :CUSTOM_ID: executive-summary
 :END:
 
-Write an executive summary directed to IT professionals that addresses each of the following requirements:
-
 ** Decision Support Opportunity
 
 Songwriters expend a lot of time and effort finding the perfect rhyming word or phrase. RhymeStorm™ is going to amplify user's creative abilities by searching its machine learning model for sensible and proven-successful words and phrases that meet the rhyme scheme and meter requirements requested by the user.
@@ -225,8 +223,6 @@ In anticipation of user growth, I'll be deploying the final product on DigitalOc
 
 ** Requirements Validation And Verification
 
-the methods for validating and verifying that the developed data product meets the requirements and subsequently the needs of the customers
-
 For the known requirements, I'll perform personally perform manual tests and quality assurance. This is a small enough project that one individual can thoroughly test all of the primary requirements.
 
 Since the project is broken down into isolated sub-projects, unit tests will be added to the sub-projects to make sure they meet their own goals and performance standards.
@@ -234,8 +230,6 @@ Since the project is broken down into isolated sub-projects, unit tests will be 
 The final website will integrate multiple technologies and the integrations won't be ideal for unit testing. But as mentioned, the user acceptance requirements are not major and can be manually ensured.
 
 ** Programming Environments And Costs
-
-the programming environments and any related costs, as well as the human resources that are necessary to execute each phase in the development of the data product
 
 One of the benefits of a Hidden Markov Model is its relative computational affordability when compared to other machine learning techniques, like Deep Neural Networks.
 
@@ -829,7 +823,7 @@ You'll see 3 input fields.
 
 The first input field is for a word or phrase for which you wish to find a rhyme. Submitting that field will return three visualizations to help you pick a rhyme.
 
-The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurrs in the training corpus on the X axis.
+The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurs in the training corpus on the X axis.
 
 [[file:images/wgu-vis.png]]
 
@@ -846,11 +840,15 @@ The third visualization is a table that lists all of the rhymes, their pronuncia
 :CUSTOM_ID: remaining-documentation
 :END:
 
-Create each of the following forms of documentation for the product you have developed:
-
 ** Business Vision
 
-Provide rhyming lyric suggestions optionally constrained by syllable count.
+Supercharge songwriter's abilities with automated rhyming lyric suggestions for brainstorming.
+
+Without the physical constraints imposed by paperpack rhyming dictionaries, and with the full power of machine learning training, RhymeStorm™ will find rhymes don't show up in typical rhyming dictionaries.
+
+Rhymes and lyric suggestions will further be honed to target specific genres based on the training data set.
+
+These two features combine with the speed of modern-day processing to provide rapid-fire rhyming suggestions never before seen.
 
 *** Requirements
 
@@ -929,9 +927,17 @@ and more.
 
 ** Visualizations
 
+RhymeStorm™ provides three visualizations to help songwriter's find the perfect lyric.
+
+The first visualization is a scatterplot comparing rhyme quality to frequency that the rhyming word or phrase appears in the training corpus.
+
 [[file:images/rhyme-scatterplot.png]]
 
+The second visualization is a word cloud where each word's size is in proportion to the frequency with which the word appears in the training corpus.
+
 [[file:images/wordcloud.png]]
+
+And the third visualization is a sorted table of rhyme suggestions. The rhymes are sorted first by quality and then by popularity.
 
 [[file:images/rhyme-table.png]]
 
@@ -1034,6 +1040,8 @@ Supporting libraries have a more robust test suite, since their purpose is to be
 Here is an example of the test suite for the code related to syllabification: [[https://github.com/eihli/phonetics/blob/main/test/com/owoga/phonetics/syllabify_test.clj]].
 
 ** Source Code
+
+I wrote three Clojure libraries and one Clojure application that combine to make RhymeStorm™.
 
 *** Tightly Packed Trie
 
