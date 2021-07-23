@@ -256,7 +256,7 @@ All code was written and all models were trained on a Lenovo T15G with an Intel 
 |      5 | 2021-08-14 | 2021-08-21 | Create Web Interface And Visualizations                       |
 |      6 | 2021-08-21 | 2021-09-07 | QA - Testing - Deploy And Release Web App                     |
 
-* C. RhymeStormg™ Capstone Requirements Documentation
+* C. RhymeStorm™ Capstone Requirements Documentation
 :PROPERTIES:
 :CUSTOM_ID: requirements-documentation
 :END:
