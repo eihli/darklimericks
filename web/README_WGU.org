@@ -809,7 +809,7 @@ With this precaution in place, attackers will not be able to snoop the content t
 
 By having the application server behind an HAProxy load balancer, we can take advantage of the built-in HAProxy stats page for monitoring amount of traffic and health of the application servers.
 
-[[file:assets/images/stats.png]]
+[[file:images/stats.png]]
 
 http://darklimericks.com:8404/stats
 
@@ -827,15 +827,15 @@ The first input field is for a word or phrase for which you wish to find a rhyme
 
 The first visualization is a scatter plot of rhyming words with the "quality" of the rhyme on the Y axis and the number of times that rhyming word/phrase occurrs in the training corpus on the X axis.
 
-[[file:assets/images/wgu-vis.png]]
+[[file:images/wgu-vis.png]]
 
 The second visualization is a word cloud where the size of each word is based on the frequency with which the word appears in the training corpus.
 
-[[file:assets/images/wgu-vis-cloud.png]]
+[[file:images/wgu-vis-cloud.png]]
 
 The third visualization is a table that lists all of the rhymes, their pronunciations, the rhyme quality, and the frequency. The table is sorted first by the rhyme quality then by the frequency.
 
-[[file:assets/images/wgu-vis-table.png]]
+[[file:images/wgu-vis-table.png]]
 
 * D. Documentation
 :PROPERTIES:
@@ -925,11 +925,11 @@ and more.
 
 ** Visualizations
 
-[[file:assets/images/rhyme-scatterplot.png]]
+[[file:images/rhyme-scatterplot.png]]
 
-[[file:assets/images/wordcloud.png]]
+[[file:images/wordcloud.png]]
 
-[[file:assets/images/rhyme-table.png]]
+[[file:images/rhyme-table.png]]
 
 ** Accuracy
 

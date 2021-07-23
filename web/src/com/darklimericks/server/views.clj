@@ -366,9 +366,7 @@ prefixes to that rhyming phrase."]
    [:div#myChart]
    [:br]
    [:br]
-   [:br]
-   [:iframe {:src "/assets/README_WGU.htm"
-             :style "background-color: white; width: 100%; height: 760px;"}]])
+   [:br]])
 
 (defn lyric-suggestions
   [request suggestions]
@@ -482,8 +480,8 @@ more common the word."]
                                :font "Helvetica Neue, Arial",
                                :fontSize {:field :score},
                                :fontWeight "normal",
-                               :fontSizeRange [8 36],
-                               :padding 1,
+                               :fontSizeRange [{:signal :fontSizeRange0} {:signal :fontSizeRange1}],
+                               :padding {:signal :wordPadding},
                                :rotate {:field :rotate}}]}]
 
           :scales [{:name :color,
