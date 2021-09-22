@@ -2,7 +2,7 @@
  {:min-level :debug}
 
  :com.darklimericks.server.core/server
- {:port 8000 :handler #ig/ref :com.darklimericks.server.handlers/handler}
+ {:port 8008 :handler #ig/ref :com.darklimericks.server.handlers/handler}
 
  :com.darklimericks.server.worker/limerick-gen
  {:kv #ig/ref :com.darklimericks.kv.core/connection
