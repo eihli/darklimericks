@@ -36,3 +36,21 @@ The world's largest metal limericks archive on the Web.
 Requires [[https://github.com/tachyons-css/tachyons/][Tachyons CSS]]. There is a symlink in ~web/resources/public~ to the pre-built ~tachyons.css~ and ~tachyons.min.css~ found in the repo.
 
 Build ~.jar~ with ~clojure -X:depstar uberjar :jar prhyme.jar~.
+
+* Deployment
+
+Since I'm developing this independently, it's not a very robust deployment system.
+
+It's nice to have some parts of the repo available on the server; the db/kv scripts for example.
+
+But obviously the album images and the data in the db/kv are going to be different between local and prod.
+
+You can use ~rsync~ with ~--exclude~ to only sync over the code bits.
+
+~rsync --exclude '*/data/*' --exclude '*/images/*' -aLP ./ root@darklimericks.com:/root/darklimericks/~
+
+Note the ~-L~ to follow symlinks. Locally, I'm symlinking tachyons.css.
+
+The other shortcut I'm taking is that images are stored and served relative to the path of the running application.
+
+That means you need to launch the jar file from the ~web~ directory.

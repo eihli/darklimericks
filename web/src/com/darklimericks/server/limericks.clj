@@ -139,9 +139,10 @@
         [artist-id album-id] album-artist
         album (albums/album db album-id)]
     (when (:new-album (meta album-artist))
-      (identicon/generate (-> (:album/name album)
-                              string/lower-case
-                              (string/replace #" " "-")) 128))
+      (let [icon (identicon/generate
+                  (-> (:album/name album)
+                      string/lower-case
+                      (string/replace #" " "-")) 128)]))
     (db.limericks/insert-user-limerick
      db
      session-id

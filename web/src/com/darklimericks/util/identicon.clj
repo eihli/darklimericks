@@ -106,18 +106,30 @@
 (defn generate
   "Make a new avatar."
   [identifier size]
-  (let
-    [tile-size (quot size tiles-per-side)
-     md5       (digest/md5 identifier)
-     icon      (BufferedImage. size size BufferedImage/TYPE_INT_RGB)
-     [r g b]   (get-color (first (to-numbers md5)))
-     color     (Color. r g b)
-     draw      (.createGraphics icon)]
+  (let [tile-size (quot size tiles-per-side)
+        md5       (digest/md5 identifier)
+        icon      (BufferedImage. size size BufferedImage/TYPE_INT_RGB)
+        [r g b]   (get-color (first (to-numbers md5)))
+        color     (Color. r g b)
+        draw      (.createGraphics icon)]
     (fill-background draw size)
     (.setColor draw color)
     (draw-it draw tile-size 0 (to-bools md5))
     (ImageIO/write icon "png" (File. (file-name identifier size)))
     file-name))
+
+(defn generate-sans-write
+  "Make a new avatar."
+  [identifier size]
+  (let [tile-size (quot size tiles-per-side)
+        md5       (digest/md5 identifier)
+        icon      (BufferedImage. size size BufferedImage/TYPE_INT_RGB)
+        [r g b]   (get-color (first (to-numbers md5)))
+        color     (Color. r g b)
+        draw      (.createGraphics icon)]
+    (fill-background draw size)
+    (.setColor draw color)
+    (draw-it draw tile-size 0 (to-bools md5))))
 
 (comment
   (generate "foobar-bazz" 128))

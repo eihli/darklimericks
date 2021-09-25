@@ -48,8 +48,8 @@
                            artists-by-album))})))
 
 (def resource-handler (ring/create-resource-handler {:allow-symlinks? true}))
-(def file-handler (ring/create-resource-handler {:allow-symlinks? true
-                                                 :root "public"}))
+(def file-handler (ring/create-file-handler {:allow-symlinks? true
+                                             :root "resources/public"}))
 
 (defn limerick-generation-post-handler
   [db cache]
