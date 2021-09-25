@@ -280,7 +280,7 @@
          (for [line (string/split (:limerick/text limerick) #"\n")]
            [:div line])]]))])
 
-(defn wgu
+(defn rhymestorm
   [request {:keys [rhymes rhyming-lyrics lyrics-from-seed]}]
   [:div
    [:h1 "RhymeStorm™"]
@@ -371,7 +371,7 @@ prefixes to that rhyming phrase."]
 (defn lyric-suggestions
   [request suggestions]
   [:div
-   (wgu
+   (rhymestorm
     request
     {:rhyming-lyrics
      [:table {:style "margin: auto;"}
@@ -392,7 +392,7 @@ prefixes to that rhyming phrase."]
 (defn show-rhyme-suggestion
   [request suggestions]
   [:div
-   (wgu
+   (rhymestorm
     request
     {:rhymes
      (for [[suggestion p1 freq _ p2 quality] suggestions]
@@ -417,7 +417,7 @@ prefixes to that rhyming phrase."]
                                (juxt (comp - :rhyme-quality)
                                      (comp - :freq))
                                top-20-by-quality))]
-    (wgu
+    (rhymestorm
      request
      {:rhymes
       [:div
@@ -513,9 +513,9 @@ Words may appear twice if they have multiple pronunciations."]
 
 (defn lyrics-from-seed
   [request seed]
-  (let [suggestions (linguistics/wgu-lyric-suggestions
+  (let [suggestions (linguistics/rhymestorm-lyric-suggestions
                      (-> request :params :seed))]
-    (wgu
+    (rhymestorm
      request
      {:lyrics-from-seed
       [:div

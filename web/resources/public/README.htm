@@ -6,7 +6,7 @@
 <!-- 2021-07-23 Fri 17:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RhymeStorm™ - WGU CSCI Capstone Project</title>
+<title>RhymeStorm™ - RHYMESTORM CSCI Capstone Project</title>
 <meta name="author" content="Eric Ihli" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -218,12 +218,12 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">RhymeStorm™ - WGU CSCI Capstone Project</h1>
+<h1 class="title">RhymeStorm™ - RHYMESTORM CSCI Capstone Project</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd38ae05">1. WGU Evaluator Notes</a></li>
+<li><a href="#orgd38ae05">1. RHYMESTORM Evaluator Notes</a></li>
 <li><a href="#orgc9caa35">2. Evaluation Technical Documentation</a>
 <ul>
 <li><a href="#org4f30257">2.1. How To Initialize Development Environment</a>
@@ -338,7 +338,7 @@
 </div>
 
 <div id="outline-container-orgd38ae05" class="outline-2">
-<h2 id="orgd38ae05"><span class="section-number-2">1</span> WGU Evaluator Notes</h2>
+<h2 id="orgd38ae05"><span class="section-number-2">1</span> RHYMESTORM Evaluator Notes</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Hello! I hope you enjoy your time with this evaluation!
@@ -353,7 +353,7 @@ The document you are reading now contains or points to each of the requirements 
 </p>
 
 <p>
-The section immediately following this contains notes on how to view and run the software locally. In addition, I&rsquo;m hosting a demo of the application at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a>.
+The section immediately following this contains notes on how to view and run the software locally. In addition, I&rsquo;m hosting a demo of the application at <a href="https://darklimericks.com/rhymestorm">https://darklimericks.com/rhymestorm</a>.
 </p>
 
 <p>
@@ -366,7 +366,7 @@ After I describe the steps to initialize a development environment, you&rsquo;ll
 <h2 id="orgc9caa35"><span class="section-number-2">2</span> Evaluation Technical Documentation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-It&rsquo;s probably not necessary for you to replicate my development environment in order to evaluate this project. You can access the deployed application at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a> and the libraries and supporting code that I wrote for this project at <a href="https://github.com/eihli/clj-tightly-packed-trie">https://github.com/eihli/clj-tightly-packed-trie</a>, <a href="https://github.com/eihli/syllabify">https://github.com/eihli/syllabify</a>, and <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>. The web server and web application is not hosted publicly but you will find it uploaded with my submission as a <code>.tar</code> archive.
+It&rsquo;s probably not necessary for you to replicate my development environment in order to evaluate this project. You can access the deployed application at <a href="https://darklimericks.com/rhymestorm">https://darklimericks.com/rhymestorm</a> and the libraries and supporting code that I wrote for this project at <a href="https://github.com/eihli/clj-tightly-packed-trie">https://github.com/eihli/clj-tightly-packed-trie</a>, <a href="https://github.com/eihli/syllabify">https://github.com/eihli/syllabify</a>, and <a href="https://github.com/eihli/prhyme">https://github.com/eihli/prhyme</a>. The web server and web application is not hosted publicly but you will find it uploaded with my submission as a <code>.tar</code> archive.
 </p>
 </div>
 
@@ -394,7 +394,7 @@ It&rsquo;s probably not necessary for you to replicate my development environmen
 <li>The <code>run.sh</code> scripts only need to run once. They initialize development data containers. Subsequent development can continue with <code>docker start db &amp;&amp; docker start kv</code>.</li>
 </ol></li>
 <li>Start a Clojure REPL in Emacs, evaluate the <code>dev/user.clj</code> namespace, and run <code>(init)</code></li>
-<li>Visit <code>http://localhost:8000/wgu</code></li>
+<li>Visit <code>http://localhost:8000/rhymestorm</code></li>
 </ol>
 </div>
 </div>
@@ -424,7 +424,7 @@ It&rsquo;s probably not necessary for you to replicate my development environmen
 </ol></li>
 <li>The application&rsquo;s <code>jar</code> builds with a <code>make</code> run from the root directory. (See <a href="../Makefile">Makefile</a>).</li>
 <li>Navigate to the root directory of this git repo and run <code>java -jar darklimericks.jar</code></li>
-<li>Visit <a href="http://localhost:8000/wgu">http://localhost:8000/wgu</a></li>
+<li>Visit <a href="http://localhost:8000/rhymestorm">http://localhost:8000/rhymestorm</a></li>
 </ol>
 </div>
 </div>
@@ -803,7 +803,7 @@ The trained data model and web interface has been deployed at the following addr
 </p>
 
 <p>
-<a href="https://darklimericks.com/wgu">Web GUI and Documentation</a>
+<a href="https://darklimericks.com/rhymestorm">Web GUI and Documentation</a>
 </p>
 </div>
 </div>
@@ -1680,7 +1680,7 @@ For example, the phrase <code>don't bother me</code> returns the following resul
 </table>
 
 <p>
-The interactive query for the above can be found at <a href="https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me">https://darklimericks.com/wgu/lyric-from-seed?seed=don%27t+bother+me</a>. Note that, since these lyrics are randomly generated, your results will vary.
+The interactive query for the above can be found at <a href="https://darklimericks.com/rhymestorm/lyric-from-seed?seed=don%27t+bother+me">https://darklimericks.com/rhymestorm/lyric-from-seed?seed=don%27t+bother+me</a>. Note that, since these lyrics are randomly generated, your results will vary.
 </p>
 </div>
 </div>
@@ -1782,7 +1782,7 @@ For example, let&rsquo;s say a songwriter liked the phrase <code>rejected by soc
 </table>
 
 <p>
-The interactive query for the above can be found at <a href="https://darklimericks.com/wgu/rhyming-lyric?rhyming-lyric-target=rejected+by+society">https://darklimericks.com/wgu/rhyming-lyric?rhyming-lyric-target=rejected+by+society</a>. Note again that your results will vary.
+The interactive query for the above can be found at <a href="https://darklimericks.com/rhymestorm/rhyming-lyric?rhyming-lyric-target=rejected+by+society">https://darklimericks.com/rhymestorm/rhyming-lyric?rhyming-lyric-target=rejected+by+society</a>. Note again that your results will vary.
 </p>
 </div>
 </div>
@@ -2073,7 +2073,7 @@ The server also includes the <code>certbot</code> script for updating and mainta
 <h3 id="orgc6266b7"><span class="section-number-3">5.12</span> A User-Friendly, Functional Dashboard That Includes At Least Three Visualization Types</h3>
 <div class="outline-text-3" id="text-5-12">
 <p>
-You can access an example of the user interface at <a href="https://darklimericks.com/wgu">https://darklimericks.com/wgu</a>.
+You can access an example of the user interface at <a href="https://darklimericks.com/rhymestorm">https://darklimericks.com/rhymestorm</a>.
 </p>
 
 <p>
@@ -2090,7 +2090,7 @@ The first visualization is a scatter plot of rhyming words with the &ldquo;quali
 
 
 <div id="org6aa1adf" class="figure">
-<p><img src="images/wgu-vis.png" alt="wgu-vis.png" />
+<p><img src="images/rhymestorm-vis.png" alt="rhymestorm-vis.png" />
 </p>
 </div>
 
@@ -2100,7 +2100,7 @@ The second visualization is a word cloud where the size of each word is based on
 
 
 <div id="org950c96a" class="figure">
-<p><img src="images/wgu-vis-cloud.png" alt="wgu-vis-cloud.png" />
+<p><img src="images/rhymestorm-vis-cloud.png" alt="rhymestorm-vis-cloud.png" />
 </p>
 </div>
 
@@ -2110,7 +2110,7 @@ The third visualization is a table that lists all of the rhymes, their pronuncia
 
 
 <div id="org215dc00" class="figure">
-<p><img src="images/wgu-vis-table.png" alt="wgu-vis-table.png" />
+<p><img src="images/rhymestorm-vis-table.png" alt="rhymestorm-vis-table.png" />
 </p>
 </div>
 </div>
@@ -2488,7 +2488,7 @@ This is just one of many possible assessment techniques we could use. It&rsquo;s
 <pre class="src src-clojure"><span style="color: #51afef;">(</span>require '<span style="color: #c678dd;">[</span>com.darklimericks.linguistics.core <span style="color: #a9a1e1;">:as</span> linguistics<span style="color: #c678dd;">]</span>
          '<span style="color: #c678dd;">[</span>com.owoga.prhyme.nlp.core <span style="color: #a9a1e1;">:as</span> nlp<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
 
-<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">wgu-lyric-suggestion returns 20 suggestions. Each suggestion is a vector of</span>
+<span style="color: #5B6268;">;; </span><span style="color: #5B6268;">rhymestorm-lyric-suggestion returns 20 suggestions. Each suggestion is a vector of</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">the rhyming word/quality/frequency and the sentence/parse. This function</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">returns just the sentences. The sentences can be further filtered using</span>
 <span style="color: #5B6268;">;; </span><span style="color: #5B6268;">OpenNLP to only those that are grammatically valid english sentences.</span>
@@ -2496,7 +2496,7 @@ This is just one of many possible assessment techniques we could use. It&rsquo;s
 <span style="color: #51afef;">(</span><span style="color: #51afef;">defn</span> <span style="color: #c678dd;">sample-of-20</span>
   <span style="color: #c678dd;">[]</span>
   <span style="color: #c678dd;">(</span><span style="color: #51afef;">-&gt;&gt;</span> <span style="color: #98be65;">"technology"</span>
-       <span style="color: #ECBE7B;">linguistics</span>/wgu-lyric-suggestions
+       <span style="color: #ECBE7B;">linguistics</span>/rhymestorm-lyric-suggestions
        <span style="color: #98be65;">(</span>map <span style="color: #a9a1e1;">(</span>comp first second<span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
 
 <span style="color: #51afef;">(</span><span style="color: #51afef;">defn</span> <span style="color: #c678dd;">average-valid-of-100-suggestions</span> <span style="color: #c678dd;">[]</span>
@@ -2673,7 +2673,7 @@ This application is not publicly available. I&rsquo;ll upload it with submission
 <li>The <code>run.sh</code> scripts only need to run once. They initialize development data containers. Subsequent development can continue with <code>docker start db &amp;&amp; docker start kv</code>.</li>
 </ol></li>
 <li>Start a Clojure REPL in Emacs, evaluate the <code>dev/user.clj</code> namespace, and run <code>(init)</code></li>
-<li>Visit <code>http://localhost:8000/wgu</code></li>
+<li>Visit <code>http://localhost:8000/rhymestorm</code></li>
 </ol>
 </div>
 </li>
@@ -2703,7 +2703,7 @@ This application is not publicly available. I&rsquo;ll upload it with submission
 </ol></li>
 <li>The application&rsquo;s <code>jar</code> builds with a <code>make</code> run from the root directory. (See <a href="../Makefile">Makefile</a>).</li>
 <li>Navigate to the root directory of this git repo and run <code>java -jar darklimericks.jar</code></li>
-<li>Visit <a href="http://localhost:8000/wgu">http://localhost:8000/wgu</a></li>
+<li>Visit <a href="http://localhost:8000/rhymestorm">http://localhost:8000/rhymestorm</a></li>
 </ol>
 </div>
 </li>

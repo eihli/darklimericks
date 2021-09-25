@@ -1,4 +1,4 @@
-(ns wgu.app
+(ns rhymestorm.app
   (:require ["chart.js/auto" :as chart]
             [oz.core :as oz]
             [reagent.dom :as rdom]

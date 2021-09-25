@@ -256,7 +256,7 @@
               {}
               (views/submit-limericks request []))})))
 
-(defn wgu [db cache]
+(defn rhymestorm [db cache]
   (fn [request]
     {:status 200
      :headers {"Content-Type" "text/html; charset=utf-8"}
@@ -264,7 +264,7 @@
             {:db db
              :request request
              :opts {}}
-            (views/wgu request {}))}))
+            (views/rhymestorm request {}))}))
 
 (defn rhyming-lyric [db cache]
   (fn [request]
@@ -329,4 +329,4 @@
                :opts {}}
               (views/lyrics-from-seed
                request
-               (linguistics/wgu-lyric-suggestions target)))})))
+               (linguistics/rhymestorm-lyric-suggestions target)))})))

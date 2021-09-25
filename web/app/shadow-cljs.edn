@@ -17,9 +17,9 @@
  :builds
  {:frontend
   {:target :browser
-   :output-dir "../resources/public/wgu/"
+   :output-dir "../resources/public/rhymestorm/"
    :assets-path "/assets/"
-   :modules {:main {:init-fn wgu.app/init}}
+   :modules {:main {:init-fn rhymestorm.app/init}}
    :devtools {:preloads [day8.re-frame-10x.preload]}
    :dev {:compiler-options
          {:closure-defines

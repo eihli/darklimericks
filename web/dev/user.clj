@@ -147,7 +147,7 @@
   (:template
    (reitit/match-by-path
     (-> state/system :com.darklimericks.server.router/router)
-    "/wgu/foo.html"))
+    "/rhymestorm/foo.html"))
 
   )
 

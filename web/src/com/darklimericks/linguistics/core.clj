@@ -452,7 +452,7 @@
          (sort-by (comp - second))
          first)))
 
-(defn wgu-lyric-suggestions
+(defn rhymestorm-lyric-suggestions
   "Returns lyrics rhyming with a seed phrase.
 
   Groups rhymes by quality then orders each grouping by frequency.
@@ -493,7 +493,7 @@
                    (comp - last second second))))))
 
 (comment
-  (take 5 (wgu-lyric-suggestions "technology"))
+  (take 5 (lyric-suggestions "technology"))
 
   (phrase->quality-of-rhyme "boss hog" "brain fog")
 

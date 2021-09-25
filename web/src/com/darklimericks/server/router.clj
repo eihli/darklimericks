@@ -34,10 +34,10 @@
                    :parameters {:path {:artist-id int?}}
                    :get {:handler (handlers/artist-get-handler db)}}]]
                 ["/assets/*" handlers/file-handler]
-                ["/wgu"
+                ["/rhymestorm"
                  [""
-                  {:name ::wgu
-                   :get {:handler (handlers/wgu db cache)}
+                  {:name ::rhymestorm
+                   :get {:handler (handlers/rhymestorm db cache)}
                    :post {:handler (handlers/rhyming-lyric db cache)}}]
                  ["/rhyme"
                   {:name ::rhyme
