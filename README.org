@@ -4,6 +4,10 @@ https://darklimericks.com
 
 The world's largest metal limericks archive on the Web.
 
+This is just meant to be a live demo of a Clojure phonetics library (https://github.com/eihli/phonetics) and a Hidden Markov Model use-case for a Tightly-packed Trie (https://github.com/eihli/clj-tightly-packed-trie).
+
+I also borrowed some functionality from a NLP/rhyme-related codebase that is not yet ready for release (https://github.com/eihli/prhyme).
+
 * How To Initialize Development Environment
 
 ** Required Software
