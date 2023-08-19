@@ -17,7 +17,9 @@ build: FORCE
 		darklimericks.jar -C -m com.darklimericks.server.core
 
 push: FORCE
-	rsync -aP web/darklimericks.jar root@165.227.16.47:/root/darklimericks/web/
+	rsync -aP web/darklimericks.jar root@darklimericks.com:/root/darklimericks/web/
+	rsync -P rotate-cert.sh root@darklimericks.com:/root/darklimericks/
+	rsync -P darklimericks.service root@darklimericks.com:/etc/systemd/system/
 
 certs:
 	ssh root@darklimericks.com \

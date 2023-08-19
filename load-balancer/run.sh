@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eoux
 
 HOST_IP=`ip -4 addr show scope global dev docker0 | grep inet | awk '{print \$2}' | cut -d / -f 1`
 FULLCHAIN_PEM="${FULLCHAIN_PEM:-/etc/letsencrypt/live/darklimericks.com/fullchain.pem}"

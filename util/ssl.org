@@ -1,7 +1,5 @@
 #+TITLE: Ssl
 
-
-
 #+begin_src sh
 certbot certonly -d darklimericks.com --webroot --webroot-path /root/darklimericks/web/resources/public --keep
 cat /etc/letsencrypt/archive/darklimericks.com/privkey.pem >> /etc/letsencrypt/archive/darklimericks.com/fullchain.pem

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run DarkLimericks web server
+
+[Service]
+WorkingDirectory=/root/darklimericks/web
+ExecStart=/usr/bin/java -Xmx3072m -jar darklimericks.jar
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
